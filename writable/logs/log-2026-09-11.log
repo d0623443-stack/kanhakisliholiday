@@ -1,0 +1,28 @@
+CRITICAL - 2026-09-11 11:46:59 --> CodeIgniter\Exceptions\CriticalError: The required PHP extension "sqlite3" is not loaded. Install and enable it to use "SQLite3" driver.
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\Database.php on line 186.
+ 1 SYSTEMPATH\Database\Database.php(59): CodeIgniter\Database\Database->checkDbExtension('SQLite3')
+ 2 SYSTEMPATH\Database\Config.php(82): CodeIgniter\Database\Database->load([...], 'tests')
+ 3 SYSTEMPATH\Model.php(152): CodeIgniter\Database\Config::connect('tests')
+ 4 ROOTPATH\scratch\verify_frontend_backend.php(18): CodeIgniter\Model->__construct()
+CRITICAL - 2026-09-11 11:47:32 --> ErrorException: Undefined array key "slide_order"
+[Method: CLI, Route: /]
+in ROOTPATH\scratch\verify_frontend_backend.php on line 40.
+ 1 ROOTPATH\scratch\verify_frontend_backend.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "slide_order"', 'C:\\xampp8.2\\htdocs\\kanhakisliholiday\\scratch\\verify_frontend_backend.php', 40)
+CRITICAL - 2026-09-11 14:45:51 --> TypeError: Cannot assign CodeIgniter\HTTP\CLIRequest to property CodeIgniter\Security\Security::$request of type CodeIgniter\HTTP\IncomingRequest
+[Method: CLI, Route: /]
+in SYSTEMPATH\Security\Security.php on line 210.
+ 1 SYSTEMPATH\Config\Services.php(657): CodeIgniter\Security\Security->__construct(Object(Config\Security))
+ 2 SYSTEMPATH\Config\BaseService.php(325): CodeIgniter\Config\Services::security(Object(Config\Security), false)
+ 3 SYSTEMPATH\Config\BaseService.php(264): CodeIgniter\Config\BaseService::__callStatic('security', [...])
+ 4 SYSTEMPATH\Config\Services.php(652): CodeIgniter\Config\BaseService::getSharedInstance('security', null)
+ 5 SYSTEMPATH\Config\BaseService.php(334): CodeIgniter\Config\Services::security()
+ 6 SYSTEMPATH\Config\BaseService.php(203): CodeIgniter\Config\BaseService::__callStatic('security', [])
+ 7 SYSTEMPATH\Common.php(1096): CodeIgniter\Config\BaseService::get('security')
+ 8 SYSTEMPATH\Common.php(278): service('security')
+ 9 SYSTEMPATH\Common.php(314): csrf_token()
+10 APPPATH\Views\admin\slider.php(52): csrf_field()
+11 SYSTEMPATH\View\View.php(240): include('C:\\xampp8.2\\htdocs\\kanhakisliholiday\\app\\Views\\admin\\slider.php')
+12 SYSTEMPATH\View\View.php(243): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+13 SYSTEMPATH\Common.php(1268): CodeIgniter\View\View->render('admin/slider', [], true)
+14 ROOTPATH\scratch\render_slider_view.php(27): view('admin/slider', [...])

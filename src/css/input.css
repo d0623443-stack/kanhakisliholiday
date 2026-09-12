@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #555D58;
+    background-color: #FBFAF6;
+  }
+
+  h1, h2, h3, h4, .font-serif-heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: #18201C;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background-color: #2D6248;
+    color: #F7F4EC;
+  }
+}
+
+@layer utilities {
+  /* Arched frame as seen in the reference tiger portrait */
+  .arch-frame {
+    border-radius: 190px 190px 0 0;
+  }
+
+  /* Polaroid style card */
+  .polaroid-shadow {
+    box-shadow: 0 12px 32px -4px rgba(19, 42, 33, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Vertical dotted line connector for safari story */
+  .timeline-dotted-line {
+    background-image: linear-gradient(to bottom, #214B38 33%, rgba(255,255,255,0) 0%);
+    background-position: left;
+    background-size: 2px 12px;
+    background-repeat: repeat-y;
+  }
+
+  /* Custom handwritten styling for reference's editorial notes */
+  .font-script {
+    font-family: 'Cormorant Garamond', cursive, serif;
+    font-style: italic;
+  }
+
+  /* Organic botanical etching blending & feathering for seamless integration */
+  .botanical-etching-blend {
+    mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(ellipse 92% 88% at 88% 88%, #000 45%, rgba(0,0,0,0.75) 68%, transparent 100%);
+    mask-image: radial-gradient(ellipse 92% 88% at 88% 88%, #000 45%, rgba(0,0,0,0.75) 68%, transparent 100%);
+  }
+
+  .cta-etching-blend {
+    mix-blend-mode: multiply;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 30%, #000 100%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.85) 30%, #000 100%);
+  }
+}
+
+@layer components {
+  /* Header Transition Base */
+  .header-wrapper {
+    transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .header-pill {
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .header-logo-badge {
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem; /* ~18.5px */
+    letter-spacing: 0.015em;
+    transition: color 0.3s ease, opacity 0.3s ease, transform 0.25s ease;
+  }
+
+  .nav-link:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Top-Down Dark Shadow overlay for menu contrast */
+  .header-top-shadow {
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #site-header.is-scrolled .header-top-shadow {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  /* Nav link text shadow when over transparent hero for effortless legibility */
+  .header-wrapper:not(.is-scrolled) .nav-link {
+    text-shadow: 0 1px 4px rgba(19, 42, 33, 0.8), 0 2px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  /* SCROLLED HEADER ARCHITECTURE */
+  /* Desktop Scrolled Floating Pill Navbar */
+  @media (min-width: 768px) {
+    #site-header.is-scrolled {
+      padding-top: 0.875rem !important;
+      padding-bottom: 0.875rem !important;
+      background-color: transparent !important;
+    }
+
+    #site-header.is-scrolled .header-pill {
+      max-width: 60rem; /* ~960px floating pill */
+      background-color: rgba(238, 233, 222, 0.96); /* Exact #EEE9DE from reference */
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(203, 196, 184, 0.65);
+      border-radius: 9999px;
+      box-shadow: 0 20px 35px -5px rgba(19, 42, 33, 0.16), 0 8px 16px -4px rgba(19, 42, 33, 0.08);
+      padding: 0.5rem 2.25rem;
+    }
+
+    #site-header.is-scrolled .header-nav-inner {
+      height: 5.5rem !important;
+    }
+
+    #site-header.is-scrolled .header-logo-container {
+      width: 5.5rem !important;
+      height: 5.5rem !important;
+    }
+
+    #site-header.is-scrolled .header-logo-badge {
+      width: 5.5rem !important; /* 88px, substantially increased from 3.75rem (60px) */
+      height: 5.5rem !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      filter: drop-shadow(0 4px 12px rgba(19, 42, 33, 0.22)) !important;
+    }
+
+    #site-header.is-scrolled .nav-link {
+      color: #555D58 !important;
+      opacity: 1 !important;
+    }
+
+    #site-header.is-scrolled .nav-link:hover {
+      color: #132A21 !important;
+    }
+
+    #site-header.is-scrolled .nav-link.is-active {
+      color: #18382B !important;
+      font-weight: 600 !important;
+    }
+
+    #site-header.is-scrolled .nav-link.is-active::after {
+      background-color: #18382B !important;
+      height: 2px !important;
+    }
+  }
+
+  /* Mobile Scrolled Full-Width Frosted Bar */
+  @media (max-width: 767px) {
+    #site-header.is-scrolled {
+      padding-top: 0.625rem !important;
+      padding-bottom: 0.625rem !important;
+      background-color: rgba(238, 233, 222, 0.97) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(203, 196, 184, 0.75);
+      box-shadow: 0 4px 20px -2px rgba(19, 42, 33, 0.12);
+    }
+
+    #site-header.is-scrolled .mobile-bar .mobile-brand-title {
+      color: #18382B !important;
+    }
+
+    #site-header.is-scrolled .mobile-bar .mobile-menu-btn {
+      color: #18382B !important;
+      border-color: rgba(24, 56, 43, 0.35) !important;
+    }
+
+    #site-header.is-scrolled .mobile-bar .mobile-logo {
+      filter: drop-shadow(0 2px 6px rgba(19, 42, 33, 0.2)) !important;
+    }
+  }
+}
+

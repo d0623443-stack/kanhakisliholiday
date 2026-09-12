@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="100%" height="auto" fill="#234B35">
+  <!-- Sky: Birds in Flight -->
+  <g opacity="0.6">
+    <path d="M 160 30 Q 166 22 173 29 Q 180 22 186 30 Q 180 33 173 31 Q 166 33 160 30 Z"/>
+    <path d="M 195 18 Q 200 11 206 17 Q 212 11 218 18 Q 212 21 206 19 Q 200 21 195 18 Z"/>
+    <path d="M 280 25 Q 284 19 289 25 Q 294 19 299 25 Q 294 28 289 26 Q 284 28 280 25 Z"/>
+  </g>
+
+  <!-- Distant Background Trees (Soft Atmosphere) -->
+  <g opacity="0.32">
+    <!-- Far Tree Left -->
+    <path d="M 45 150 L 48 105 Q 35 96 25 82 Q 10 86 2 72 Q -3 58 10 45 Q 28 35 48 42 Q 62 28 85 35 Q 102 45 98 63 Q 94 77 80 86 Q 72 95 58 105 L 61 150 Z"/>
+    <!-- Far Tree Center -->
+    <path d="M 200 150 L 203 100 Q 186 91 176 73 Q 168 55 186 41 Q 204 32 222 39 Q 240 27 262 36 Q 280 50 272 73 Q 262 91 240 100 L 212 150 Z"/>
+  </g>
+
+  <!-- Midground Sal Trees & Canopies -->
+  <g opacity="0.55">
+    <!-- Sal Tree Trunk & Full Canopy Left -->
+    <path d="M 110 150 L 113 90 Q 95 80 82 62 Q 78 44 96 30 Q 114 21 132 28 Q 150 14 172 21 Q 190 32 186 52 Q 182 68 164 80 Q 150 86 124 92 L 121 150 Z"/>
+    <path d="M 118 102 Q 128 93 142 90 M 116 114 Q 106 105 98 102" stroke="#234B35" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Canopy behind stag -->
+    <path d="M 350 150 L 353 95 Q 336 86 328 68 Q 323 50 341 39 Q 359 30 377 36 Q 393 24 413 33 Q 426 47 420 65 Q 413 80 393 89 L 363 150 Z"/>
+  </g>
+
+  <!-- Midground Grazing Swamp Deer / Doe (Visible and Distinct) -->
+  <g opacity="0.80">
+    <!-- Graceful grazing doe with head reaching down to meadow grass -->
+    <path d="
+      M 245 150 
+      L 247 122 C 248 116 251 110 255 106 
+      C 260 106 270 105 280 105 
+      C 290 105 298 107 302 111 
+      L 303 150 L 308 150 L 309 119 
+      C 312 115 316 112 318 106 
+      C 322 104 324 99 322 93 
+      C 318 87 310 85 300 85 
+      C 285 85 273 87 263 90 
+      C 257 86 253 80 248 74 
+      C 242 68 234 72 227 82 
+      C 221 89 214 99 207 108 
+      C 202 114 206 119 211 117 
+      C 217 115 224 108 230 100 
+      C 234 102 238 107 238 114 
+      L 237 150 L 242 150 L 243 120 
+      C 245 114 246 109 248 106 
+      Z
+    "/>
+    <!-- Doe Alert Ears -->
+    <path d="M 228 82 C 226 77 223 73 220 73 C 218 75 220 79 224 84 Z"/>
+    <path d="M 232 80 C 233 75 235 71 238 71 C 239 73 237 77 233 82 Z"/>
+  </g>
+
+  <!-- FOREGROUND: Proud Hardground Barasingha (Kanha Mascot Stag) -->
+  <!-- 100% Solid/Crisp Presence with Elaborate 12-Tined Antlers -->
+  <g opacity="0.95">
+    <!-- Antlers: Full 12-Tined Branching Crown (Deep Forest Green) -->
+    <g stroke="#234B35" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Main Left Beam (Sweeping back and arching high) -->
+      <path d="M 458 54 C 454 40 448 26 438 16 C 428 8 418 6 408 10"/>
+      <!-- Brow Tine (Sweeping forward above brow) -->
+      <path d="M 456 46 C 448 42 438 42 430 46"/>
+      <!-- Bez Tine -->
+      <path d="M 450 34 C 442 28 432 28 424 33"/>
+      <!-- Trez Tine -->
+      <path d="M 444 23 C 436 16 426 16 418 22"/>
+      <!-- Top Crown Tines -->
+      <path d="M 434 14 C 428 6 418 4 410 8"/>
+      <path d="M 422 9 C 418 0 408 -2 400 2"/>
+      <path d="M 414 9 C 410 -6 400 -8 392 -4"/>
+
+      <!-- Main Right Beam (Perspective depth) -->
+      <path d="M 464 54 C 468 38 478 24 492 14 C 502 7 514 6 524 12"/>
+      <!-- Right Brow Tine -->
+      <path d="M 468 46 C 478 41 488 42 496 46"/>
+      <!-- Right Bez Tine -->
+      <path d="M 476 34 C 486 28 498 28 506 34"/>
+      <!-- Right Trez Tine -->
+      <path d="M 484 22 C 494 15 506 16 514 22"/>
+      <!-- Right Crown Tines -->
+      <path d="M 496 13 C 504 4 516 3 524 9"/>
+      <path d="M 508 8 C 514 -2 526 -4 534 1"/>
+      <path d="M 518 9 C 524 -7 536 -9 544 -4"/>
+    </g>
+
+    <!-- Stag Muscular Body & Legs -->
+    <path d="
+      M 458 56 
+      C 455 52 450 48 445 46 C 443 48 443 53 448 58 
+      C 445 61 440 63 434 65 C 428 67 422 68 423 72 C 425 75 430 74 436 71
+      C 440 69 444 69 446 72
+      C 448 78 450 90 452 102
+      C 450 108 445 116 442 124
+      C 440 130 441 138 443 143
+      L 443 150 L 448 150 L 449 143
+      C 452 136 455 126 458 120
+      C 460 123 463 132 465 142
+      L 465 150 L 470 150 L 470 140
+      C 469 130 466 121 464 114
+      C 472 114 484 112 498 112
+      C 512 112 524 115 532 120
+      C 534 124 534 133 533 142
+      L 533 150 L 538 150 L 539 140
+      C 542 134 545 126 546 118
+      C 550 114 554 123 556 136
+      L 556 150 L 561 150 L 561 135
+      C 562 126 558 115 554 109
+      C 557 105 558 99 554 93
+      C 548 87 540 85 532 85
+      C 516 85 502 87 490 87
+      C 480 87 472 83 468 75
+      C 464 67 462 61 461 56
+      Z
+    "/>
+
+    <!-- Upright Alert Ears -->
+    <path d="M 454 54 C 448 52 442 48 438 44 C 440 42 446 44 452 50 Z"/>
+    <path d="M 464 54 C 469 51 476 46 480 42 C 480 44 476 48 468 52 Z"/>
+  </g>
+
+  <!-- Undulating Grassland Meadow Ground -->
+  <g opacity="0.85">
+    <path d="M 0 148 Q 150 144 300 147 Q 450 143 600 148 L 600 160 L 0 160 Z"/>
+    <!-- Wild Grass Tufts -->
+    <path d="M 130 146 Q 133 137 138 132 M 134 146 Q 140 139 147 136 M 132 146 Q 128 138 122 134" stroke="#234B35" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M 250 147 Q 254 138 261 133 M 253 147 Q 259 140 267 137 M 251 147 Q 246 139 239 136" stroke="#234B35" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M 370 146 Q 374 136 382 131 M 373 146 Q 380 138 389 135 M 371 146 Q 365 138 358 134" stroke="#234B35" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M 435 147 Q 439 137 448 132 M 438 147 Q 445 139 454 136 M 436 147 Q 430 138 422 134" stroke="#234B35" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M 550 148 Q 554 139 561 134 M 553 148 Q 560 141 568 137 M 551 148 Q 545 140 538 136" stroke="#234B35" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
