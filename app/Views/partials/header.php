@@ -1,12 +1,78 @@
 <?php
 $isTransparent = !empty($isTransparentHeader);
+$helplinePhone = get_site_setting('helpline_phone', '+91 94251 00000');
+$ownerPhone    = get_site_setting('owner_phone', '');
+$topEmail      = get_site_setting('notification_mail', 'stay@kanhakisliholiday.com');
+$topWa         = get_site_setting('whatsapp_number', '+91 94251 00000');
 ?>
 <header id="site-header" 
-        class="header-wrapper fixed top-0 left-0 right-0 z-40 w-full pt-3 pb-3 md:pt-5 md:pb-5 <?= $isTransparent ? 'bg-transparent text-warm-white' : 'bg-forest-950/90 text-warm-white backdrop-blur-md' ?>"
+        class="header-wrapper fixed top-0 left-0 right-0 z-40 w-full pt-2 pb-2 md:pt-2.5 md:pb-4 <?= $isTransparent ? 'bg-transparent text-warm-white' : 'bg-forest-950/90 text-warm-white backdrop-blur-md' ?>"
         data-transparent="<?= $isTransparent ? 'true' : 'false' ?>">
   
   <!-- Top-Down Dark Shadow overlay covering menu section for effortless legibility -->
-  <div class="header-top-shadow absolute top-0 left-0 right-0 h-44 md:h-60 bg-gradient-to-b from-forest-950/95 via-forest-950/65 to-transparent pointer-events-none -z-10"></div>
+  <div class="header-top-shadow absolute top-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-b from-forest-950/95 via-forest-950/70 to-transparent pointer-events-none -z-10"></div>
+
+  <!-- TOP TRANSPARENT CONTACT SECTION (Mobile & Email Bar) -->
+  <div class="header-top-bar w-full border-b border-white/15 pb-2 mb-2 sm:pb-2.5 sm:mb-3">
+    <div class="w-full max-w-site mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between text-xs sm:text-[13px] tracking-wide">
+      
+      <!-- Left: Mobile Numbers -->
+      <div class="flex items-center gap-2 sm:gap-2.5 min-w-0">
+        <!-- Single Phone Icon for contact numbers -->
+        <span class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[#D4B87C] shrink-0">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+        </span>
+        
+        <!-- Primary Mobile Number -->
+        <a href="tel:<?= preg_replace('/\s+/', '', $helplinePhone) ?>" 
+           class="text-warm-white hover:text-[#D4B87C] transition-colors font-sans font-semibold text-xs sm:text-sm shrink-0"
+           title="Call <?= esc($helplinePhone) ?>">
+          <?= esc($helplinePhone) ?>
+        </a>
+
+        <!-- Additional Mobile Number (if set) -->
+        <?php if (!empty($ownerPhone)): ?>
+          <span class="text-white/40 font-light select-none">/</span>
+          <a href="tel:<?= preg_replace('/\s+/', '', $ownerPhone) ?>" 
+             class="text-warm-white hover:text-[#D4B87C] transition-colors font-sans font-semibold text-xs sm:text-sm shrink-0"
+             title="Call <?= esc($ownerPhone) ?>">
+            <?= esc($ownerPhone) ?>
+          </a>
+        <?php endif; ?>
+      </div>
+
+      <!-- Right: Email & WhatsApp -->
+      <div class="flex items-center gap-3 sm:gap-4.5 shrink-0">
+        <!-- Inquiry Email -->
+        <a href="mailto:<?= esc($topEmail) ?>" 
+           class="inline-flex items-center gap-1.5 text-warm-white hover:text-[#D4B87C] transition-colors font-medium group"
+           title="Send Email Enquiry">
+          <span class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[#D4B87C] group-hover:bg-[#D4B87C]/20 transition-colors">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </span>
+          <span class="font-sans text-xs sm:text-sm truncate max-w-[170px] sm:max-w-none"><?= esc($topEmail) ?></span>
+        </a>
+
+        <!-- WhatsApp Chat Desk -->
+        <?php if (!empty($topWa)): ?>
+          <span class="text-white/25 hidden md:inline">&vert;</span>
+          <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $topWa) ?>?text=Hello%20Kanha%20Kisli%20Holiday,%20I%20am%20interested%20in%20safari%20booking" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="hidden md:inline-flex items-center gap-1.5 text-warm-white hover:text-[#25D366] transition-colors font-medium"
+             title="Chat with Safari Desk on WhatsApp">
+            <span class="w-2 h-2 rounded-full bg-[#25D366] animate-pulse"></span>
+            <span class="text-xs font-semibold">WhatsApp Desk</span>
+          </a>
+        <?php endif; ?>
+      </div>
+
+    </div>
+  </div>
 
   <div class="w-full max-w-site mx-auto px-4 sm:px-6 md:px-8 flex justify-center">
     
@@ -57,12 +123,6 @@ $isTransparent = !empty($isTransparentHeader);
           <a href="<?= base_url('contact') ?>" 
              class="nav-link relative py-1.5 <?= ($activeNav ?? '') === 'contact' ? 'is-active opacity-100 font-semibold after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-current' : 'opacity-85' ?>">
             Contact
-          </a>
-          <a href="<?= base_url('admin/login') ?>" 
-             title="Staff / Admin Portal"
-             class="nav-link relative py-1.5 opacity-75 hover:opacity-100 flex items-center gap-1 text-xs uppercase tracking-wider text-[#D4B87C] hover:text-warm-white">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-            <span>Admin</span>
           </a>
         </div>
       </nav>

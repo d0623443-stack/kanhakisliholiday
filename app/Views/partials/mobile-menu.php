@@ -66,6 +66,36 @@
     <!-- Bottom Contact Details -->
     <div class="pt-6 border-t border-forest-800/80 space-y-4">
       <div class="text-xs tracking-wider uppercase text-sage">Kanha National Park, MP</div>
+
+      <!-- Quick Contact Links in Drawer -->
+      <div class="space-y-2.5 text-xs">
+        <a href="tel:<?= preg_replace('/\s+/', '', get_site_setting('helpline_phone', '+91 94251 00000')) ?>" 
+           class="flex items-center gap-2.5 text-stone hover:text-warm-white transition-colors">
+          <span class="w-6 h-6 rounded-full bg-forest-900 border border-forest-700/60 flex items-center justify-center text-[#D4B87C] shrink-0">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </span>
+          <span class="font-sans font-medium text-warm-white"><?= esc(get_site_setting('helpline_phone', '+91 94251 00000')) ?></span>
+        </a>
+
+        <?php if (!empty($drawerOwner = get_site_setting('owner_phone', ''))): ?>
+          <a href="tel:<?= preg_replace('/\s+/', '', $drawerOwner) ?>" 
+             class="flex items-center gap-2.5 text-stone hover:text-warm-white transition-colors">
+            <span class="w-6 h-6 rounded-full bg-forest-900 border border-forest-700/60 flex items-center justify-center text-[#D4B87C] shrink-0">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </span>
+            <span class="font-sans font-medium text-warm-white"><?= esc($drawerOwner) ?></span>
+          </a>
+        <?php endif; ?>
+
+        <a href="mailto:<?= esc(get_site_setting('notification_mail', 'stay@kanhakisliholiday.com')) ?>" 
+           class="flex items-center gap-2.5 text-stone hover:text-warm-white transition-colors">
+          <span class="w-6 h-6 rounded-full bg-forest-900 border border-forest-700/60 flex items-center justify-center text-[#D4B87C] shrink-0">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </span>
+          <span class="font-sans text-xs text-warm-white truncate"><?= esc(get_site_setting('notification_mail', 'stay@kanhakisliholiday.com')) ?></span>
+        </a>
+      </div>
+
       <a href="<?= base_url('contact') ?>" 
          class="inline-flex items-center justify-center w-full px-5 py-3 rounded-full bg-forest-800 hover:bg-forest-700 text-warm-white font-medium text-sm transition-colors border border-forest-600/40">
         <span>Plan Your Safari</span>
@@ -73,15 +103,6 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
       </a>
-
-      <!-- Staff / Admin Portal Link -->
-      <div class="pt-2 text-center">
-        <a href="<?= base_url('admin/login') ?>" 
-           class="inline-flex items-center space-x-1.5 text-xs text-[#D4B87C] hover:text-warm-white transition-colors">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-          <span>Staff / Admin Portal</span>
-        </a>
-      </div>
     </div>
 
   </div>

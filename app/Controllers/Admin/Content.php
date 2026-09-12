@@ -40,16 +40,25 @@ class Content extends AdminBaseController
                 'step2_desc'      => 'From birds to deer, every sighting tells a story. Watch for the rare hardground barasingha found nowhere else in the world.',
                 'step3_title'     => 'Make it your journey',
                 'step3_desc'      => 'Talk to us about your safari plans. We assist with gate permits, gypsy arrangements, and seasoned naturalists.',
-                'stay_eyebrow'    => 'Stay Close to the Wild',
-                'stay_title'      => 'Rest between the adventures.',
-                'stay_desc'       => 'Thoughtful, unhurried hospitality designed to harmonize with the rhythm of the sal forest. Comfortable cottages, tranquil verandas, and warm evening gatherings after a day on the safari trail.',
+                'stay_eyebrow'           => 'Stay Close to the Wild',
+                'stay_title'             => 'Rest between the adventures.',
+                'stay_desc'              => 'Thoughtful, unhurried hospitality designed to harmonize with the rhythm of the sal forest. Comfortable cottages, tranquil verandas, and warm evening gatherings after a day on the safari trail.',
+                
+                // Home page dynamic section images
+                'about_primary_img'      => 'assets/images/safari-trail.jpg',
+                'about_secondary_img'    => 'assets/images/indian-roller.jpg',
+                'about_polaroid_caption' => 'Small moments. Big stories.',
+                'safari_tiger_img'       => 'assets/images/tiger-portrait.jpg',
+                'safari_etching_img'     => 'assets/images/kanha-meadow-wildlife-etching.png',
+                'stay_cottage_img'       => 'assets/images/forest-lodge.jpg',
+                'stay_interior_img'      => 'assets/images/lodge-interior.jpg',
             ],
             'safari' => [
                 // Hero Banner
                 'hero_bg_image'   => 'assets/images/tiger-kanha-reserve.jpg',
-                'hero_eyebrow'    => 'Official Safari Booking · Kanha Tiger Reserve',
+                'hero_eyebrow'    => 'Wilderness Safaris · Kanha Kisli',
                 'hero_title'      => 'Into the Heart of the Wild',
-                'hero_subtitle'   => 'Open 4x4 Gypsy safaris, certified naturalist guides, and seamless forest permit bookings across Kanha\'s legendary core and buffer zones.',
+                'hero_subtitle'   => 'Guided open 4x4 Gypsy drives across Kanha\'s legendary forest trails.',
 
                 // 4 Interactive Gallery Showcase Slides (Images & Captions)
                 'slide1_img'      => 'assets/images/tiger-kanha-reserve.jpg',
@@ -135,10 +144,12 @@ class Content extends AdminBaseController
             'contact' => [
                 'phone_primary'   => '+91 94251 00000',
                 'phone_secondary' => '+91 76422 00000',
+                'phone_owner'     => '+91 75667 89123',
                 'whatsapp'        => '+91 94251 00000',
                 'email'           => 'stay@kanhakisliholiday.com',
                 'address'         => 'Kanha Kisli Holiday, Near Khatia / Kisli Gate, Mandla District, Madhya Pradesh — 481768, India',
                 'hours'           => 'Daily: 08:00 AM – 08:00 PM IST',
+                'google_maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58728.89240410408!2d80.57500355!3d22.2858145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2a68393693e507%3A0xc3d5d7e48ce19cf5!2sKanha%20Tiger%20Reserve%2C%20Khatia%20Gate!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
             ],
         ];
 
@@ -197,6 +208,15 @@ class Content extends AdminBaseController
                 'stay_eyebrow'    => 'stay',
                 'stay_title'      => 'stay',
                 'stay_desc'       => 'stay',
+
+                // Home page dynamic section images
+                'about_primary_img'      => 'about',
+                'about_secondary_img'    => 'about',
+                'about_polaroid_caption' => 'about',
+                'safari_tiger_img'       => 'safari',
+                'safari_etching_img'     => 'safari',
+                'stay_cottage_img'       => 'stay',
+                'stay_interior_img'      => 'stay',
                 
                 // Safari page mappings
                 'hero_bg_image'   => 'hero',
@@ -267,26 +287,77 @@ class Content extends AdminBaseController
                 // Contact
                 'phone_primary'   => 'info',
                 'phone_secondary' => 'info',
+                'phone_owner'     => 'info',
                 'whatsapp'        => 'info',
                 'email'           => 'info',
                 'address'         => 'info',
                 'hours'           => 'info',
+                'google_maps_embed' => 'map',
             ];
 
             foreach ($postedContent as $pageKey => $fields) {
                 if (is_array($fields)) {
                     foreach ($fields as $contentKey => $val) {
                         $sectionKey = $sectionMap[$contentKey] ?? 'general';
+                        $trimmedVal = trim((string)$val);
+                        if ($contentKey === 'google_maps_embed') {
+                            $trimmedVal = parse_map_embed_url($trimmedVal);
+                        }
                         $this->contentModel->setContent(
                             $pageKey,
                             $sectionKey,
                             $contentKey,
-                            trim((string)$val)
+                            $trimmedVal
                         );
+
+                        // If owner phone was updated in content editor, sync to global site settings
+                        if ($contentKey === 'phone_owner' || $contentKey === 'phone_secondary') {
+                            $settingModel = new \App\Models\SettingModel();
+                            $settingModel->setSetting('owner_phone', $trimmedVal);
+                        } elseif ($contentKey === 'google_maps_embed') {
+                            $settingModel = new \App\Models\SettingModel();
+                            $settingModel->setSetting('google_maps_embed', $trimmedVal);
+                        }
                     }
                 }
             }
+        }
 
+        // Handle direct file uploads from file explorer dropzones
+        $uploadedFiles = [
+            'file_about_primary_img'   => ['page' => 'home', 'section' => 'about',  'key' => 'about_primary_img'],
+            'file_about_secondary_img' => ['page' => 'home', 'section' => 'about',  'key' => 'about_secondary_img'],
+            'file_safari_tiger_img'    => ['page' => 'home', 'section' => 'safari', 'key' => 'safari_tiger_img'],
+            'file_safari_etching_img'  => ['page' => 'home', 'section' => 'safari', 'key' => 'safari_etching_img'],
+            'file_stay_cottage_img'    => ['page' => 'home', 'section' => 'stay',   'key' => 'stay_cottage_img'],
+            'file_stay_interior_img'   => ['page' => 'home', 'section' => 'stay',   'key' => 'stay_interior_img'],
+            'file_safari_hero_bg'      => ['page' => 'safari', 'section' => 'hero', 'key' => 'hero_bg_image'],
+        ];
+
+        $hasUpload = false;
+        foreach ($uploadedFiles as $inputName => $meta) {
+            $file = $this->request->getFile($inputName);
+            if ($file && $file->isValid() && !$file->hasMoved()) {
+                $uploadDir = FCPATH . 'uploads/' . $meta['page'];
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                $ext = $file->guessExtension() ?: 'webp';
+                $newName = $meta['key'] . '_' . time() . '_' . bin2hex(random_bytes(3)) . '.' . $ext;
+                $file->move($uploadDir, $newName);
+                $imagePath = 'uploads/' . $meta['page'] . '/' . $newName;
+
+                $this->contentModel->setContent(
+                    $meta['page'],
+                    $meta['section'],
+                    $meta['key'],
+                    $imagePath
+                );
+                $hasUpload = true;
+            }
+        }
+
+        if (is_array($postedContent) || $hasUpload) {
             session()->setFlashdata('success', 'Site content updated successfully across all sections!');
         }
 

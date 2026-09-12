@@ -1,5 +1,5 @@
 <!-- Site Footer -->
-<footer class="relative bg-forest-950 text-ivory pt-32 sm:pt-40 md:pt-48 lg:pt-52 pb-12 sm:pb-16 overflow-hidden border-t border-forest-800">
+<footer class="relative bg-forest-950 text-ivory pt-32 sm:pt-40 md:pt-48 lg:pt-52 pb-24 sm:pb-24 md:pb-16 overflow-hidden border-t border-forest-800">
   
   <!-- Subtle Botanical Watermark Accent -->
   <div class="absolute bottom-0 right-0 w-64 md:w-96 pointer-events-none opacity-10 text-sage">
@@ -13,13 +13,15 @@
       
       <!-- Brand Column (5 cols) -->
       <div class="md:col-span-5 space-y-6">
-        <a href="<?= base_url('/') ?>" class="inline-flex items-center space-x-3.5 text-warm-white group">
+        <a href="<?= base_url('/') ?>" class="inline-flex items-center space-x-3 sm:space-x-3.5 text-warm-white group">
           <img src="<?= base_url('assets/images/logo.png') ?>" 
                alt="Kanha Kisli Holiday Logo" 
-               class="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-contain filter drop-shadow-md transition-transform duration-300 group-hover:scale-105" />
+               width="56" 
+               height="56" 
+               class="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-contain flex-shrink-0 filter drop-shadow-md transition-transform duration-300 group-hover:scale-105" />
           <div>
-            <span class="block font-serif text-2xl sm:text-[1.65rem] tracking-wider font-semibold text-warm-white">KANHA KISLI HOLIDAY</span>
-            <span class="block text-[11px] font-mono tracking-widest text-[#D4B87C] uppercase">Wilderness Resort &amp; Safaris</span>
+            <span class="block font-serif text-xl sm:text-2xl md:text-[1.65rem] tracking-wider font-semibold text-warm-white">KANHA KISLI HOLIDAY</span>
+            <span class="block text-[10px] sm:text-[11px] font-mono tracking-widest text-[#D4B87C] uppercase">Wilderness Resort &amp; Safaris</span>
           </div>
         </a>
 
@@ -107,14 +109,26 @@
           </div>
 
           <!-- Phone & Call -->
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 rounded-lg bg-forest-900/80 border border-forest-800 flex items-center justify-center text-sage shrink-0">
+          <div class="flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-forest-900/80 border border-forest-800 flex items-center justify-center text-sage shrink-0 mt-0.5">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
             </div>
-            <?php $footerPhone = get_site_setting('helpline_phone', '+91 94251 00000'); ?>
-            <a href="tel:<?= preg_replace('/\s+/', '', $footerPhone) ?>" class="text-warm-white hover:text-[#D4B87C] transition-colors font-medium"><?= esc($footerPhone) ?></a>
+            <div class="space-y-1">
+              <?php 
+                $footerPhone = get_site_setting('helpline_phone', '+91 94251 00000'); 
+                $footerOwnerPhone = get_site_setting('owner_phone', '');
+              ?>
+              <div>
+                <a href="tel:<?= preg_replace('/\s+/', '', $footerPhone) ?>" class="text-warm-white hover:text-[#D4B87C] transition-colors font-medium text-xs sm:text-sm"><?= esc($footerPhone) ?></a>
+              </div>
+              <?php if (!empty($footerOwnerPhone)): ?>
+              <div>
+                <a href="tel:<?= preg_replace('/\s+/', '', $footerOwnerPhone) ?>" class="text-warm-white hover:text-[#D4B87C] transition-colors font-medium text-xs sm:text-sm"><?= esc($footerOwnerPhone) ?></a>
+              </div>
+              <?php endif; ?>
+            </div>
           </div>
 
           <!-- WhatsApp Chat -->
@@ -128,11 +142,11 @@
             <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $footerWa) ?>" target="_blank" rel="noopener noreferrer" class="text-stone hover:text-warm-white transition-colors">Chat on WhatsApp</a>
           </div>
 
-          <!-- Enquiry Link -->
+          <!-- Contact Page Link -->
           <div class="pt-3">
             <a href="<?= base_url('contact') ?>" 
                class="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-forest-900 hover:bg-[#D4B87C] hover:text-forest-950 text-warm-white font-medium text-xs tracking-wider uppercase border border-forest-800 transition-all duration-200 shadow-sm group">
-              <span>Send Online Enquiry</span>
+              <span>Contact &amp; Location</span>
               <svg class="w-3.5 h-3.5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -153,11 +167,6 @@
         <a href="<?= base_url('contact') ?>" class="hover:text-warm-white transition-colors">Privacy Policy</a>
         <span class="text-forest-800">&middot;</span>
         <a href="<?= base_url('contact') ?>" class="hover:text-warm-white transition-colors">Safari Guidelines</a>
-        <span class="text-forest-800">&middot;</span>
-        <a href="<?= base_url('admin/login') ?>" class="hover:text-[#D4B87C] transition-colors inline-flex items-center gap-1 font-semibold text-[#D4B87C]/90">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-          <span>Admin Login</span>
-        </a>
       </div>
     </div>
 

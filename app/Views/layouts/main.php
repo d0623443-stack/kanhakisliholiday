@@ -62,6 +62,9 @@
   <!-- Global Footer Partial -->
   <?= $this->include('partials/footer') ?>
 
+  <!-- Global Mobile Fixed Call & WhatsApp Bottom CTA -->
+  <?= $this->include('partials/mobile-cta') ?>
+
   <!-- Main Client-Side JS -->
   <script src="<?= base_url('assets/js/main.js') ?>" defer></script>
 </body>

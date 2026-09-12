@@ -4,7 +4,7 @@
 
 <div class="space-y-8 max-w-7xl mx-auto">
   
-  <form method="POST" action="<?= base_url('admin/content/update') ?>" id="contentForm">
+  <form method="POST" action="<?= base_url('admin/content/update') ?>" id="contentForm" enctype="multipart/form-data">
     <?= csrf_field() ?>
     <input type="hidden" name="active_tab" id="activeTabInput" value="<?= esc($activeTab ?? 'home') ?>">
 
@@ -66,12 +66,37 @@
     <!-- TAB 1: HOME PAGE CONTENT -->
     <div id="tab-home" class="content-tab-pane space-y-6 <?= ($activeTab ?? 'home') === 'home' ? '' : 'hidden' ?>">
       
-      <!-- About Section Card -->
-      <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-5">
+      <!-- Quick Media Navigation Banner for Home Page -->
+      <div class="bg-forest-900/5 rounded-3xl border border-forest-900/15 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-start sm:items-center space-x-3.5">
+          <div class="w-10 h-10 rounded-2xl bg-forest-900 text-[#D4B87C] flex items-center justify-center shrink-0 shadow-xs">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-ink flex items-center gap-2">
+              <span>Homepage Media & Content Editor</span>
+              <span class="px-2 py-0.5 rounded-full bg-forest-900/10 text-forest-900 text-[10px] font-mono font-bold">Live Synced</span>
+            </h4>
+            <p class="text-xs text-muted mt-0.5">Edit copy and upload new photos for all homepage sections. Click any photo preview below to open your computer's file explorer.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="<?= base_url('admin/slider') ?>" class="inline-flex items-center px-4 py-2 rounded-full bg-forest-900 hover:bg-forest-800 text-warm-white text-xs font-semibold shadow-xs transition-all hover:-translate-y-0.5">
+            <svg class="w-3.5 h-3.5 mr-1.5 text-[#D4B87C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+            <span>Hero Slider Manager &rarr;</span>
+          </a>
+          <a href="<?= base_url('admin/gallery') ?>" class="inline-flex items-center px-4 py-2 rounded-full border border-stone/50 bg-white hover:bg-stone/20 text-ink text-xs font-semibold shadow-xs transition-all">
+            <span>Gallery Manager</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Section 2: About Kanha Kisli Holiday Card -->
+      <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-6">
         <div class="border-b border-stone/20 pb-3 flex items-center justify-between">
           <div>
             <h3 class="font-serif text-xl font-bold text-ink">Section: About Kanha Kisli Holiday</h3>
-            <p class="text-xs text-muted">The introductory overview section displayed immediately below the hero slider.</p>
+            <p class="text-xs text-muted">The introductory editorial overview section displayed immediately below the hero slider.</p>
           </div>
           <span class="text-xs font-mono text-sage">Home &middot; Section 2</span>
         </div>
@@ -92,23 +117,204 @@
           <textarea name="content[home][about_desc]" rows="3" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm leading-relaxed focus:ring-2 focus:ring-forest-700/30 outline-none"><?= esc($content['home']['about_desc']) ?></textarea>
         </div>
 
-        <!-- Feature Badges -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-          <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
-            <span class="font-semibold text-xs text-forest-800 uppercase tracking-wider block">Feature 1</span>
-            <input type="text" name="content[home][feature1_title]" value="<?= esc($content['home']['feature1_title']) ?>" placeholder="Title" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
-            <input type="text" name="content[home][feature1_desc]" value="<?= esc($content['home']['feature1_desc']) ?>" placeholder="Short description" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none">
+        <!-- Section 2 Visual Media Studio (Two-Column Interactive Studio) -->
+        <div class="border-t border-stone/20 pt-6 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-md bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold uppercase tracking-wider">Visual Studio</span>
+                <h4 class="font-serif text-lg font-bold text-ink">Section Photos &amp; Editorial Collage</h4>
+              </div>
+              <p class="text-xs text-muted mt-0.5">These 2 dynamic assets compose the asymmetric layered collage on the homepage. Drag &amp; drop files or click to replace.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-semibold">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Live Dynamic Sync</span>
+              </span>
+            </div>
           </div>
-          <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
-            <span class="font-semibold text-xs text-forest-800 uppercase tracking-wider block">Feature 2</span>
-            <input type="text" name="content[home][feature2_title]" value="<?= esc($content['home']['feature2_title']) ?>" placeholder="Title" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
-            <input type="text" name="content[home][feature2_desc]" value="<?= esc($content['home']['feature2_desc']) ?>" placeholder="Short description" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none">
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+            
+            <!-- Asset 1: Primary Forest Perspective (7 Cols) -->
+            <div class="lg:col-span-7 bg-ivory/80 rounded-2xl border border-stone/40 p-5 space-y-4 flex flex-col justify-between hover:border-[#D4B87C] transition-all shadow-xs group/card">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-forest-900 flex items-center gap-1.5">
+                    <span class="w-5 h-5 rounded-full bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold flex items-center justify-center">01</span>
+                    <span>Primary Landscape Photo</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-muted px-2 py-0.5 rounded bg-white border border-stone/30">1200&times;800 (16:10 or 4:3)</span>
+                </div>
+                <p class="text-[11px] text-muted">The main background forest trail canvas that sets the atmosphere.</p>
+              </div>
+
+              <!-- Clickable & Droppable Image Studio Box -->
+              <input type="file" 
+                     name="file_about_primary_img" 
+                     id="file-about-primary" 
+                     accept="image/*" 
+                     class="hidden" 
+                     onchange="previewHomeImage(this, 'preview-about-primary')">
+              <input type="hidden" 
+                     name="content[home][about_primary_img]" 
+                     value="<?= esc($content['home']['about_primary_img'] ?? 'assets/images/safari-trail.jpg') ?>">
+
+              <div id="dropzone-about-primary"
+                   onclick="document.getElementById('file-about-primary').click()" 
+                   class="relative w-full h-52 sm:h-60 rounded-xl overflow-hidden bg-forest-950/20 border-2 border-dashed border-stone/50 hover:border-[#D4B87C] cursor-pointer shadow-inner group transition-all">
+                <img id="preview-about-primary" 
+                     src="<?= (str_starts_with($content['home']['about_primary_img'] ?? '', 'http')) ? esc($content['home']['about_primary_img']) : base_url(esc($content['home']['about_primary_img'] ?? 'assets/images/safari-trail.jpg')) ?>" 
+                     alt="Primary landscape preview" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                
+                <!-- Floating Corner Badges -->
+                <div class="absolute top-3 left-3 bg-forest-950/70 backdrop-blur-xs text-warm-white text-[10px] font-mono px-2 py-0.5 rounded-md border border-white/15">
+                  Slot 01 · Wide Landscape
+                </div>
+
+                <!-- Hover Overlay -->
+                <div class="absolute inset-0 bg-forest-950/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-warm-white text-xs font-semibold gap-2 p-4 text-center">
+                  <div class="w-10 h-10 rounded-full bg-forest-900 border border-[#D4B87C] text-[#D4B87C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                  </div>
+                  <span class="font-bold text-sm text-warm-white">Drop Photo or Click to Browse</span>
+                  <span class="text-[11px] text-stone/90 font-normal">Opens file explorer · Supports JPG, WebP, PNG</span>
+                </div>
+              </div>
+
+              <!-- Metadata & Control Bar -->
+              <div class="pt-1 space-y-2">
+                <div class="flex items-center justify-between gap-3 text-xs">
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-muted block">Current Asset</span>
+                    <span class="font-mono text-[11px] text-ink block truncate font-medium" title="<?= esc($content['home']['about_primary_img'] ?? 'assets/images/safari-trail.jpg') ?>">
+                      <?= esc($content['home']['about_primary_img'] ?? 'assets/images/safari-trail.jpg') ?>
+                    </span>
+                  </div>
+                  <button type="button" 
+                          onclick="document.getElementById('file-about-primary').click()" 
+                          class="px-3.5 py-1.5 rounded-lg bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5 shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    <span>Change Photo</span>
+                  </button>
+                </div>
+                <div id="preview-about-primary-filename" class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md hidden"></div>
+              </div>
+            </div>
+
+            <!-- Asset 2: Overlapping Polaroid Wildlife Print (5 Cols) -->
+            <div class="lg:col-span-5 bg-ivory/80 rounded-2xl border border-stone/40 p-5 space-y-4 flex flex-col justify-between hover:border-[#D4B87C] transition-all shadow-xs group/card">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-forest-900 flex items-center gap-1.5">
+                    <span class="w-5 h-5 rounded-full bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold flex items-center justify-center">02</span>
+                    <span>Polaroid Wildlife Print</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-muted px-2 py-0.5 rounded bg-white border border-stone/30">Square or 4:3 (~800&times;800)</span>
+                </div>
+                <p class="text-[11px] text-muted">The foreground polaroid card with authentic handwritten caption.</p>
+              </div>
+
+              <!-- Clickable & Droppable Image Studio Box (Rendered as an Authentic Polaroid) -->
+              <input type="file" 
+                     name="file_about_secondary_img" 
+                     id="file-about-secondary" 
+                     accept="image/*" 
+                     class="hidden" 
+                     onchange="previewHomeImage(this, 'preview-about-secondary')">
+              <input type="hidden" 
+                     name="content[home][about_secondary_img]" 
+                     value="<?= esc($content['home']['about_secondary_img'] ?? 'assets/images/indian-roller.jpg') ?>">
+
+              <div class="py-1 flex justify-center">
+                <div id="dropzone-about-secondary"
+                     onclick="document.getElementById('file-about-secondary').click()" 
+                     class="w-56 bg-white p-3 pb-4 rounded-xl shadow-md border border-stone/30 cursor-pointer group hover:rotate-0 rotate-1 transition-all duration-300 relative">
+                  
+                  <!-- Subtle Washi Tape / Pin Decorator -->
+                  <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-10 h-3 bg-[#D4B87C]/35 rounded-xs border border-white/50 pointer-events-none"></div>
+
+                  <!-- Image Area Inside Polaroid -->
+                  <div class="w-full h-36 rounded-lg overflow-hidden bg-sand relative">
+                    <img id="preview-about-secondary" 
+                         src="<?= (str_starts_with($content['home']['about_secondary_img'] ?? '', 'http')) ? esc($content['home']['about_secondary_img']) : base_url(esc($content['home']['about_secondary_img'] ?? 'assets/images/indian-roller.jpg')) ?>" 
+                         alt="Polaroid photo preview" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    
+                    <div class="absolute inset-0 bg-forest-950/70 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-warm-white text-[11px] font-semibold gap-1 p-2 text-center">
+                      <svg class="w-5 h-5 text-[#D4B87C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                      <span>Click to Browse</span>
+                    </div>
+                  </div>
+
+                  <!-- Polaroid Handwritten Text Preview -->
+                  <div class="pt-2 text-center">
+                    <span id="preview-polaroid-note" class="font-script text-ink text-xs block truncate italic">
+                      <?= esc($content['home']['about_polaroid_caption'] ?? 'Small moments. Big stories.') ?>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Editable Caption & Control Bar -->
+              <div class="space-y-3 pt-1">
+                <div class="space-y-1">
+                  <label class="block text-[11px] font-semibold text-ink flex items-center justify-between">
+                    <span>Polaroid Handwritten Caption</span>
+                    <span class="text-[10px] text-muted font-normal">Shows in script font below photo</span>
+                  </label>
+                  <input type="text" 
+                         name="content[home][about_polaroid_caption]" 
+                         id="input-about-polaroid-caption"
+                         value="<?= esc($content['home']['about_polaroid_caption'] ?? 'Small moments. Big stories.') ?>" 
+                         oninput="document.getElementById('preview-polaroid-note').textContent = this.value || 'Small moments. Big stories.'"
+                         placeholder="e.g. Small moments. Big stories."
+                         class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-medium text-ink focus:ring-2 focus:ring-forest-700/30 outline-none">
+                </div>
+
+                <div class="flex items-center justify-between gap-3 text-xs pt-1 border-t border-stone/20">
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-muted block">Current Asset</span>
+                    <span class="font-mono text-[11px] text-ink block truncate font-medium" title="<?= esc($content['home']['about_secondary_img'] ?? 'assets/images/indian-roller.jpg') ?>">
+                      <?= esc($content['home']['about_secondary_img'] ?? 'assets/images/indian-roller.jpg') ?>
+                    </span>
+                  </div>
+                  <button type="button" 
+                          onclick="document.getElementById('file-about-secondary').click()" 
+                          class="px-3.5 py-1.5 rounded-lg bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5 shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    <span>Change Photo</span>
+                  </button>
+                </div>
+                <div id="preview-about-secondary-filename" class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md hidden"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Feature Badges -->
+        <div class="border-t border-stone/20 pt-4 space-y-3">
+          <label class="block text-xs font-semibold text-ink uppercase tracking-wider">Highlight Feature Badges</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
+              <span class="font-semibold text-xs text-forest-800 uppercase tracking-wider block">Feature 1</span>
+              <input type="text" name="content[home][feature1_title]" value="<?= esc($content['home']['feature1_title']) ?>" placeholder="Title" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+              <input type="text" name="content[home][feature1_desc]" value="<?= esc($content['home']['feature1_desc']) ?>" placeholder="Short description" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none">
+            </div>
+            <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
+              <span class="font-semibold text-xs text-forest-800 uppercase tracking-wider block">Feature 2</span>
+              <input type="text" name="content[home][feature2_title]" value="<?= esc($content['home']['feature2_title']) ?>" placeholder="Title" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+              <input type="text" name="content[home][feature2_desc]" value="<?= esc($content['home']['feature2_desc']) ?>" placeholder="Short description" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none">
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Safari Journey Timeline Card -->
-      <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-5">
+      <!-- Section 3: Safari Journey Timeline & Imagery Card -->
+      <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-6">
         <div class="border-b border-stone/20 pb-3 flex items-center justify-between">
           <div>
             <h3 class="font-serif text-xl font-bold text-ink">Section: Safari Experience & 3-Step Journey</h3>
@@ -133,36 +339,185 @@
           <input type="text" name="content[home][safari_quote]" value="<?= esc($content['home']['safari_quote']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none">
         </div>
 
-        <div class="space-y-3 pt-2">
-          <!-- Step 1 -->
-          <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
-            <div class="flex items-center space-x-2">
-              <span class="w-6 h-6 rounded-full bg-forest-900 text-warm-white text-[10px] font-mono flex items-center justify-center font-bold">01</span>
-              <input type="text" name="content[home][step1_title]" value="<?= esc($content['home']['step1_title']) ?>" class="flex-1 px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+        <!-- Section 3 Visual Media Studio (Tiger Arch & Botanical Etching) -->
+        <div class="border-t border-stone/20 pt-6 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-md bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold uppercase tracking-wider">Visual Studio</span>
+                <h4 class="font-serif text-lg font-bold text-ink">Section Imagery (Tiger Portrait &amp; Botanical Artwork)</h4>
+              </div>
+              <p class="text-xs text-muted mt-0.5">The signature arched wildlife portrait and the authentic background meadow lithograph engraving.</p>
             </div>
-            <textarea name="content[home][step1_desc]" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none"><?= esc($content['home']['step1_desc']) ?></textarea>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-semibold">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Live Dynamic Sync</span>
+              </span>
+            </div>
           </div>
-          <!-- Step 2 -->
-          <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
-            <div class="flex items-center space-x-2">
-              <span class="w-6 h-6 rounded-full bg-forest-900 text-warm-white text-[10px] font-mono flex items-center justify-center font-bold">02</span>
-              <input type="text" name="content[home][step2_title]" value="<?= esc($content['home']['step2_title']) ?>" class="flex-1 px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            
+            <!-- Asset 1: Royal Bengal Tiger in Architectural Arch Frame -->
+            <div class="bg-ivory/80 rounded-2xl border border-stone/40 p-5 space-y-4 flex flex-col justify-between hover:border-[#D4B87C] transition-all shadow-xs group/card">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-forest-900 flex items-center gap-1.5">
+                    <span class="w-5 h-5 rounded-full bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold flex items-center justify-center">01</span>
+                    <span>Royal Bengal Tiger (Arched Portrait)</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-muted px-2 py-0.5 rounded bg-white border border-stone/30">Portrait 3:4 (~600&times;900)</span>
+                </div>
+                <p class="text-[11px] text-muted">Renders inside the signature architectural arch frame with gold rim.</p>
+              </div>
+
+              <!-- Clickable & Droppable Image Studio Box (Simulating Real Arch) -->
+              <input type="file" 
+                     name="file_safari_tiger_img" 
+                     id="file-safari-tiger" 
+                     accept="image/*" 
+                     class="hidden" 
+                     onchange="previewHomeImage(this, 'preview-safari-tiger')">
+              <input type="hidden" 
+                     name="content[home][safari_tiger_img]" 
+                     value="<?= esc($content['home']['safari_tiger_img'] ?? 'assets/images/tiger-portrait.jpg') ?>">
+
+              <div class="py-2 flex items-center justify-center bg-sand/35 rounded-2xl border border-stone/30">
+                <div id="dropzone-safari-tiger"
+                     onclick="document.getElementById('file-safari-tiger').click()" 
+                     class="w-36 sm:w-44 h-52 sm:h-60 rounded-t-[3.5rem] rounded-b-xl overflow-hidden border-4 border-warm-white shadow-xl ring-1 ring-[#D4B87C]/50 cursor-pointer relative group transition-transform duration-300 hover:scale-[1.02]">
+                  <img id="preview-safari-tiger" 
+                       src="<?= (str_starts_with($content['home']['safari_tiger_img'] ?? '', 'http')) ? esc($content['home']['safari_tiger_img']) : base_url(esc($content['home']['safari_tiger_img'] ?? 'assets/images/tiger-portrait.jpg')) ?>" 
+                       alt="Tiger portrait preview" 
+                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  
+                  <div class="absolute inset-0 bg-forest-950/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-warm-white text-xs font-semibold gap-1.5 p-3 text-center">
+                    <svg class="w-6 h-6 text-[#D4B87C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                    <span>Click or Drop New Photo</span>
+                    <span class="text-[10px] text-stone/90 font-normal">Vertical portrait</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metadata & Control Bar -->
+              <div class="pt-1 space-y-2">
+                <div class="flex items-center justify-between gap-3 text-xs">
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-muted block">Current Asset</span>
+                    <span class="font-mono text-[11px] text-ink block truncate font-medium" title="<?= esc($content['home']['safari_tiger_img'] ?? 'assets/images/tiger-portrait.jpg') ?>">
+                      <?= esc($content['home']['safari_tiger_img'] ?? 'assets/images/tiger-portrait.jpg') ?>
+                    </span>
+                  </div>
+                  <button type="button" 
+                          onclick="document.getElementById('file-safari-tiger').click()" 
+                          class="px-3.5 py-1.5 rounded-lg bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5 shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    <span>Change Photo</span>
+                  </button>
+                </div>
+                <div id="preview-safari-tiger-filename" class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md hidden"></div>
+              </div>
             </div>
-            <textarea name="content[home][step2_desc]" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none"><?= esc($content['home']['step2_desc']) ?></textarea>
+
+            <!-- Asset 2: Background Botanical Wildlife Etching Artwork -->
+            <div class="bg-ivory/80 rounded-2xl border border-stone/40 p-5 space-y-4 flex flex-col justify-between hover:border-[#D4B87C] transition-all shadow-xs group/card">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-forest-900 flex items-center gap-1.5">
+                    <span class="w-5 h-5 rounded-full bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold flex items-center justify-center">02</span>
+                    <span>Background Wildlife Etching</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-muted px-2 py-0.5 rounded bg-white border border-stone/30">Transparent PNG (~1200&times;800)</span>
+                </div>
+                <p class="text-[11px] text-muted">Subtle vintage lithograph engraving of Sal tree and Barasingha deer.</p>
+              </div>
+
+              <!-- Clickable & Droppable Image Studio Box (Parchment Artwork Canvas) -->
+              <input type="file" 
+                     name="file_safari_etching_img" 
+                     id="file-safari-etching" 
+                     accept="image/*" 
+                     class="hidden" 
+                     onchange="previewHomeImage(this, 'preview-safari-etching')">
+              <input type="hidden" 
+                     name="content[home][safari_etching_img]" 
+                     value="<?= esc($content['home']['safari_etching_img'] ?? 'assets/images/kanha-meadow-wildlife-etching.png') ?>">
+
+              <div class="py-2 flex items-center justify-center bg-[#F4EFE6] rounded-2xl border border-stone/40 shadow-inner">
+                <div id="dropzone-safari-etching"
+                     onclick="document.getElementById('file-safari-etching').click()" 
+                     class="w-full h-52 sm:h-60 rounded-xl overflow-hidden cursor-pointer relative group flex items-center justify-center p-4">
+                  <img id="preview-safari-etching" 
+                       src="<?= (str_starts_with($content['home']['safari_etching_img'] ?? '', 'http')) ? esc($content['home']['safari_etching_img']) : base_url(esc($content['home']['safari_etching_img'] ?? 'assets/images/kanha-meadow-wildlife-etching.png')) ?>" 
+                       alt="Wildlife etching artwork preview" 
+                       class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                  
+                  <div class="absolute inset-0 bg-forest-950/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-warm-white text-xs font-semibold gap-1.5 p-3 text-center">
+                    <svg class="w-6 h-6 text-[#D4B87C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                    <span>Click or Drop New Artwork</span>
+                    <span class="text-[10px] text-stone/90 font-normal">Transparent PNG recommended</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metadata & Control Bar -->
+              <div class="pt-1 space-y-2">
+                <div class="flex items-center justify-between gap-3 text-xs">
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-muted block">Current Asset</span>
+                    <span class="font-mono text-[11px] text-ink block truncate font-medium" title="<?= esc($content['home']['safari_etching_img'] ?? 'assets/images/kanha-meadow-wildlife-etching.png') ?>">
+                      <?= esc($content['home']['safari_etching_img'] ?? 'assets/images/kanha-meadow-wildlife-etching.png') ?>
+                    </span>
+                  </div>
+                  <button type="button" 
+                          onclick="document.getElementById('file-safari-etching').click()" 
+                          class="px-3.5 py-1.5 rounded-lg bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5 shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    <span>Change Artwork</span>
+                  </button>
+                </div>
+                <div id="preview-safari-etching-filename" class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md hidden"></div>
+              </div>
+            </div>
+
           </div>
-          <!-- Step 3 -->
-          <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
-            <div class="flex items-center space-x-2">
-              <span class="w-6 h-6 rounded-full bg-forest-900 text-warm-white text-[10px] font-mono flex items-center justify-center font-bold">03</span>
-              <input type="text" name="content[home][step3_title]" value="<?= esc($content['home']['step3_title']) ?>" class="flex-1 px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+        </div>
+
+        <!-- 3-Step Timeline Copy -->
+        <div class="border-t border-stone/20 pt-4 space-y-3">
+          <label class="block text-xs font-semibold text-ink uppercase tracking-wider">Numbered 3-Step Trail Journey</label>
+          <div class="space-y-3">
+            <!-- Step 1 -->
+            <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-6 h-6 rounded-full bg-forest-900 text-warm-white text-[10px] font-mono flex items-center justify-center font-bold">01</span>
+                <input type="text" name="content[home][step1_title]" value="<?= esc($content['home']['step1_title']) ?>" class="flex-1 px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+              </div>
+              <textarea name="content[home][step1_desc]" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none"><?= esc($content['home']['step1_desc']) ?></textarea>
             </div>
-            <textarea name="content[home][step3_desc]" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none"><?= esc($content['home']['step3_desc']) ?></textarea>
+            <!-- Step 2 -->
+            <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-6 h-6 rounded-full bg-forest-900 text-warm-white text-[10px] font-mono flex items-center justify-center font-bold">02</span>
+                <input type="text" name="content[home][step2_title]" value="<?= esc($content['home']['step2_title']) ?>" class="flex-1 px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+              </div>
+              <textarea name="content[home][step2_desc]" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none"><?= esc($content['home']['step2_desc']) ?></textarea>
+            </div>
+            <!-- Step 3 -->
+            <div class="p-4 rounded-2xl bg-ivory/60 border border-stone/30 space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-6 h-6 rounded-full bg-forest-900 text-warm-white text-[10px] font-mono flex items-center justify-center font-bold">03</span>
+                <input type="text" name="content[home][step3_title]" value="<?= esc($content['home']['step3_title']) ?>" class="flex-1 px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs font-semibold focus:ring-1 focus:ring-forest-700 outline-none">
+              </div>
+              <textarea name="content[home][step3_desc]" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-stone/50 bg-white text-xs focus:ring-1 focus:ring-forest-700 outline-none"><?= esc($content['home']['step3_desc']) ?></textarea>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Home Stay Preview Section Card -->
-      <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-5">
+      <!-- Section 4: Home Stay Preview / Accommodation Featurette Card -->
+      <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-6">
         <div class="border-b border-stone/20 pb-3 flex items-center justify-between">
           <div>
             <h3 class="font-serif text-xl font-bold text-ink">Section: Accommodation Featurette</h3>
@@ -186,6 +541,160 @@
           <label class="block text-xs font-semibold text-ink">Description</label>
           <textarea name="content[home][stay_desc]" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none"><?= esc($content['home']['stay_desc']) ?></textarea>
         </div>
+
+        <!-- Section 4 Visual Media Studio (Cottage & Veranda Photos) -->
+        <div class="border-t border-stone/20 pt-6 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-md bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold uppercase tracking-wider">Visual Studio</span>
+                <h4 class="font-serif text-lg font-bold text-ink">Section Photos &amp; Architectural Spread</h4>
+              </div>
+              <p class="text-xs text-muted mt-0.5">The primary forest cottage exterior architecture canvas and peaceful veranda living photo.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-semibold">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Live Dynamic Sync</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+            
+            <!-- Asset 1: Main Cottage Exterior Architecture (7 Cols) -->
+            <div class="lg:col-span-7 bg-ivory/80 rounded-2xl border border-stone/40 p-5 space-y-4 flex flex-col justify-between hover:border-[#D4B87C] transition-all shadow-xs group/card">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-forest-900 flex items-center gap-1.5">
+                    <span class="w-5 h-5 rounded-full bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold flex items-center justify-center">01</span>
+                    <span>Cottage Exterior Architecture</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-muted px-2 py-0.5 rounded bg-white border border-stone/30">1200&times;800 (16:10)</span>
+                </div>
+                <p class="text-[11px] text-muted">Primary lodging photograph showcasing resort architecture amongst the sal trees.</p>
+              </div>
+
+              <!-- Clickable & Droppable Image Studio Box -->
+              <input type="file" 
+                     name="file_stay_cottage_img" 
+                     id="file-stay-cottage" 
+                     accept="image/*" 
+                     class="hidden" 
+                     onchange="previewHomeImage(this, 'preview-stay-cottage')">
+              <input type="hidden" 
+                     name="content[home][stay_cottage_img]" 
+                     value="<?= esc($content['home']['stay_cottage_img'] ?? 'assets/images/forest-lodge.jpg') ?>">
+
+              <div id="dropzone-stay-cottage"
+                   onclick="document.getElementById('file-stay-cottage').click()" 
+                   class="relative w-full h-52 sm:h-60 rounded-xl overflow-hidden bg-forest-950/20 border-2 border-dashed border-stone/50 hover:border-[#D4B87C] cursor-pointer shadow-inner group transition-all">
+                <img id="preview-stay-cottage" 
+                     src="<?= (str_starts_with($content['home']['stay_cottage_img'] ?? '', 'http')) ? esc($content['home']['stay_cottage_img']) : base_url(esc($content['home']['stay_cottage_img'] ?? 'assets/images/forest-lodge.jpg')) ?>" 
+                     alt="Cottage exterior preview" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                
+                <div class="absolute top-3 left-3 bg-forest-950/70 backdrop-blur-xs text-warm-white text-[10px] font-mono px-2 py-0.5 rounded-md border border-white/15">
+                  Slot 01 · Main Architecture
+                </div>
+
+                <div class="absolute inset-0 bg-forest-950/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-warm-white text-xs font-semibold gap-2 p-4 text-center">
+                  <div class="w-10 h-10 rounded-full bg-forest-900 border border-[#D4B87C] text-[#D4B87C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                  </div>
+                  <span class="font-bold text-sm text-warm-white">Drop Photo or Click to Browse</span>
+                  <span class="text-[11px] text-stone/90 font-normal">Opens file explorer · Supports JPG, WebP, PNG</span>
+                </div>
+              </div>
+
+              <!-- Metadata & Control Bar -->
+              <div class="pt-1 space-y-2">
+                <div class="flex items-center justify-between gap-3 text-xs">
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-muted block">Current Asset</span>
+                    <span class="font-mono text-[11px] text-ink block truncate font-medium" title="<?= esc($content['home']['stay_cottage_img'] ?? 'assets/images/forest-lodge.jpg') ?>">
+                      <?= esc($content['home']['stay_cottage_img'] ?? 'assets/images/forest-lodge.jpg') ?>
+                    </span>
+                  </div>
+                  <button type="button" 
+                          onclick="document.getElementById('file-stay-cottage').click()" 
+                          class="px-3.5 py-1.5 rounded-lg bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5 shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    <span>Change Photo</span>
+                  </button>
+                </div>
+                <div id="preview-stay-cottage-filename" class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md hidden"></div>
+              </div>
+            </div>
+
+            <!-- Asset 2: Veranda & Interior Comfort Detail (5 Cols) -->
+            <div class="lg:col-span-5 bg-ivory/80 rounded-2xl border border-stone/40 p-5 space-y-4 flex flex-col justify-between hover:border-[#D4B87C] transition-all shadow-xs group/card">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-forest-900 flex items-center gap-1.5">
+                    <span class="w-5 h-5 rounded-full bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold flex items-center justify-center">02</span>
+                    <span>Veranda &amp; Interior Comfort</span>
+                  </span>
+                  <span class="text-[10px] font-mono text-muted px-2 py-0.5 rounded bg-white border border-stone/30">800&times;600 (4:3)</span>
+                </div>
+                <p class="text-[11px] text-muted">Detail perspective of the peaceful private veranda and room amenities.</p>
+              </div>
+
+              <!-- Clickable & Droppable Image Studio Box -->
+              <input type="file" 
+                     name="file_stay_interior_img" 
+                     id="file-stay-interior" 
+                     accept="image/*" 
+                     class="hidden" 
+                     onchange="previewHomeImage(this, 'preview-stay-interior')">
+              <input type="hidden" 
+                     name="content[home][stay_interior_img]" 
+                     value="<?= esc($content['home']['stay_interior_img'] ?? 'assets/images/lodge-interior.jpg') ?>">
+
+              <div id="dropzone-stay-interior"
+                   onclick="document.getElementById('file-stay-interior').click()" 
+                   class="relative w-full h-52 sm:h-60 rounded-xl overflow-hidden bg-forest-950/20 border-2 border-dashed border-stone/50 hover:border-[#D4B87C] cursor-pointer shadow-inner group transition-all">
+                <img id="preview-stay-interior" 
+                     src="<?= (str_starts_with($content['home']['stay_interior_img'] ?? '', 'http')) ? esc($content['home']['stay_interior_img']) : base_url(esc($content['home']['stay_interior_img'] ?? 'assets/images/lodge-interior.jpg')) ?>" 
+                     alt="Veranda and interior preview" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                
+                <div class="absolute top-3 left-3 bg-forest-950/70 backdrop-blur-xs text-warm-white text-[10px] font-mono px-2 py-0.5 rounded-md border border-white/15">
+                  Slot 02 · Veranda Living
+                </div>
+
+                <div class="absolute inset-0 bg-forest-950/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-warm-white text-xs font-semibold gap-2 p-4 text-center">
+                  <div class="w-10 h-10 rounded-full bg-forest-900 border border-[#D4B87C] text-[#D4B87C] flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                  </div>
+                  <span class="font-bold text-sm text-warm-white">Drop Photo or Click to Browse</span>
+                  <span class="text-[11px] text-stone/90 font-normal">Opens file explorer · Supports JPG, WebP, PNG</span>
+                </div>
+              </div>
+
+              <!-- Metadata & Control Bar -->
+              <div class="pt-1 space-y-2">
+                <div class="flex items-center justify-between gap-3 text-xs">
+                  <div class="min-w-0 flex-1">
+                    <span class="text-[10px] uppercase tracking-wider font-semibold text-muted block">Current Asset</span>
+                    <span class="font-mono text-[11px] text-ink block truncate font-medium" title="<?= esc($content['home']['stay_interior_img'] ?? 'assets/images/lodge-interior.jpg') ?>">
+                      <?= esc($content['home']['stay_interior_img'] ?? 'assets/images/lodge-interior.jpg') ?>
+                    </span>
+                  </div>
+                  <button type="button" 
+                          onclick="document.getElementById('file-stay-interior').click()" 
+                          class="px-3.5 py-1.5 rounded-lg bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs cursor-pointer inline-flex items-center gap-1.5 shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    <span>Change Photo</span>
+                  </button>
+                </div>
+                <div id="preview-stay-interior-filename" class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md hidden"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -220,13 +729,96 @@
           <textarea name="content[safari][hero_subtitle]" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none"><?= esc($content['safari']['hero_subtitle'] ?? '') ?></textarea>
         </div>
 
-        <div class="space-y-1">
-          <label class="block text-xs font-semibold text-ink">Hero Background Image Asset Path</label>
-          <div class="flex items-center gap-3">
-            <div class="w-16 h-12 rounded-lg bg-forest-950 overflow-hidden border border-stone/30 shrink-0">
-              <img src="<?= base_url(esc($content['safari']['hero_bg_image'] ?? 'assets/images/tiger-kanha-reserve.jpg')) ?>" class="w-full h-full object-cover">
+        <!-- Hero Background Banner Studio Card -->
+        <div class="space-y-3 pt-2">
+          <div class="rounded-2xl bg-white border border-stone/40 hover:border-[#D4B87C] transition-all p-5 sm:p-6 shadow-xs space-y-4">
+            
+            <!-- Card Header: Title, Live Status & Specs -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-stone/20">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-forest-900 text-[#D4B87C] flex items-center justify-center shrink-0 shadow-xs">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-ink flex items-center gap-2">
+                    <span>Hero Panoramic Background Photo</span>
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-semibold">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span>Live on Safari Gateway</span>
+                    </span>
+                  </h4>
+                  <p class="text-[11px] text-muted">The primary full-bleed panoramic backdrop rendered behind the main headline on the Safari page.</p>
+                </div>
+              </div>
+              
+              <div class="shrink-0">
+                <span class="inline-block text-[10px] font-mono text-muted bg-ivory border border-stone/30 px-2.5 py-1 rounded-md">
+                  Recommended: 1920 &times; 1080px &middot; 16:9 or 21:9
+                </span>
+              </div>
             </div>
-            <input type="text" name="content[safari][hero_bg_image]" value="<?= esc($content['safari']['hero_bg_image'] ?? 'assets/images/tiger-kanha-reserve.jpg') ?>" class="flex-1 px-3.5 py-2 rounded-xl border border-stone/50 bg-white text-xs font-mono">
+
+            <!-- Hidden Inputs for Form Submission and File Trigger -->
+            <input type="file" 
+                   name="file_safari_hero_bg" 
+                   id="file-safari-hero-bg" 
+                   accept="image/*" 
+                   class="hidden" 
+                   onchange="previewHomeImage(this, 'preview-safari-hero-bg')">
+            <input type="hidden" 
+                   name="content[safari][hero_bg_image]" 
+                   value="<?= esc($content['safari']['hero_bg_image'] ?? 'assets/images/tiger-kanha-reserve.jpg') ?>">
+
+            <!-- Full-Width Panoramic Banner Canvas (Spacious, Cinematic Aspect Ratio) -->
+            <div id="dropzone-safari-hero-bg"
+                 onclick="document.getElementById('file-safari-hero-bg').click()" 
+                 class="relative w-full h-64 sm:h-72 lg:h-80 rounded-xl overflow-hidden bg-forest-950/20 border-2 border-dashed border-stone/40 hover:border-[#D4B87C] cursor-pointer group shadow-inner transition-all">
+              
+              <!-- Banner Image Preview -->
+              <img id="preview-safari-hero-bg" 
+                   src="<?= (str_starts_with($content['safari']['hero_bg_image'] ?? '', 'http')) ? esc($content['safari']['hero_bg_image']) : base_url(esc($content['safari']['hero_bg_image'] ?? 'assets/images/tiger-kanha-reserve.jpg')) ?>" 
+                   alt="Safari Hero Background Preview" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+              
+              <!-- Floating Corner Badge -->
+              <div class="absolute top-3 left-3 bg-forest-950/80 backdrop-blur-sm text-[#D4B87C] text-[11px] font-mono px-3 py-1 rounded-md border border-white/10 shadow-sm flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#D4B87C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Safari Hero Canvas</span>
+              </div>
+
+              <!-- Interactive Glassmorphic Hover Overlay -->
+              <div class="absolute inset-0 bg-forest-950/75 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-warm-white gap-2 p-6 text-center">
+                <div class="w-12 h-12 rounded-full bg-forest-900 border-2 border-[#D4B87C] text-[#D4B87C] flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                </div>
+                <div class="space-y-0.5">
+                  <p class="font-serif text-base font-bold text-warm-white">Drop New Hero Photo or Click to Browse</p>
+                  <p class="text-xs text-stone font-normal">Opens your computer's file explorer &middot; Supports JPG, WebP, PNG</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Metadata & Action Bar -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+              <div class="space-y-0.5 min-w-0 flex-1">
+                <span class="text-[10px] uppercase tracking-wider font-semibold text-muted block">Current Active Asset</span>
+                <span class="font-mono text-xs text-ink font-medium truncate block max-w-lg" title="<?= esc($content['safari']['hero_bg_image'] ?? 'assets/images/tiger-kanha-reserve.jpg') ?>">
+                  <?= esc($content['safari']['hero_bg_image'] ?? 'assets/images/tiger-kanha-reserve.jpg') ?>
+                </span>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <div id="preview-safari-hero-bg-filename" class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-lg hidden"></div>
+                
+                <button type="button" 
+                        onclick="document.getElementById('file-safari-hero-bg').click()" 
+                        class="px-4 py-2 rounded-xl bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs hover:shadow cursor-pointer inline-flex items-center gap-2 whitespace-nowrap">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                  <span>Change Hero Photo</span>
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -241,7 +833,7 @@
                 <?= count($safariSlides) ?> Slides
               </span>
             </div>
-            <p class="text-xs text-muted mt-0.5">The main interactive 4x4 Gypsy & wildlife photo slider on the Safari page. Click any slide to edit or upload a new photo from your computer.</p>
+            <p class="text-xs text-muted mt-0.5">The main interactive 4x4 Gypsy &amp; wildlife photo slider on the Safari page. Click any slide to edit or upload a new photo from your computer.</p>
           </div>
           
           <button type="button" 
@@ -255,11 +847,11 @@
         <!-- Slides Grid: 2 Slides in One Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           <?php foreach ($safariSlides as $idx => $sslide): ?>
-            <div class="p-5 rounded-2xl bg-ivory/80 border border-stone/30 relative group hover:border-[#D4B87C] hover:shadow-md transition-all flex flex-col justify-between space-y-4">
+            <div class="p-5 rounded-2xl bg-white border border-stone/30 relative group hover:border-[#D4B87C] hover:shadow-md transition-all flex flex-col justify-between space-y-4">
               
               <div class="space-y-3.5">
                 <!-- Top Header: Slide Order, Status Toggle & Delete -->
-                <div class="flex items-center justify-between border-b border-stone/20 pb-3">
+                <div class="flex items-center justify-between border-b border-stone/15 pb-3">
                   <div class="flex items-center gap-2">
                     <span class="w-6 h-6 rounded-full bg-forest-900 text-[#D4B87C] text-[11px] font-mono font-bold flex items-center justify-center shadow-xs">
                       0<?= esc($sslide['order_num'] ?? ($idx + 1)) ?>
@@ -272,7 +864,7 @@
                     <button type="button" 
                             onclick="toggleSafariSlide(<?= $sslide['id'] ?>)" 
                             title="Click to toggle active/inactive" 
-                            class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold cursor-pointer <?= ($sslide['status'] ?? 'active') === 'active' ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-stone/20 text-stone hover:bg-stone/30' ?>">
+                            class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold cursor-pointer transition-colors <?= ($sslide['status'] ?? 'active') === 'active' ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-stone/20 text-stone hover:bg-stone/30' ?>">
                       <?= ($sslide['status'] ?? 'active') === 'active' ? 'Active' : 'Hidden' ?>
                     </button>
 
@@ -288,32 +880,33 @@
                   </div>
                 </div>
 
-                <!-- Slide Content: Landscape Image + Metadata -->
-                <div class="flex flex-col sm:flex-row gap-4 items-start">
-                  <!-- Clickable Image Thumbnail that opens Edit Modal with photo preview -->
-                  <div class="relative w-full sm:w-48 h-36 rounded-xl overflow-hidden bg-forest-950/20 border border-stone/30 cursor-pointer shadow-xs shrink-0 group/img" 
-                       onclick="openEditSafariSlideModal(<?= htmlspecialchars(json_encode($sslide), ENT_QUOTES, 'UTF-8') ?>)">
-                    <img src="<?= (str_starts_with($sslide['image'], 'http://') || str_starts_with($sslide['image'], 'https://')) ? esc($sslide['image']) : base_url(esc($sslide['image'])) ?>" 
-                         alt="<?= esc($sslide['caption']) ?>" 
-                         class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300">
-                    <div class="absolute inset-0 bg-forest-950/50 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center text-warm-white text-[11px] font-semibold gap-1 text-center px-2">
-                      <svg class="w-3.5 h-3.5 text-[#D4B87C] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-                      <span>Click to Edit / Upload</span>
-                    </div>
+                <!-- Slide Landscape Photo Showcase Canvas -->
+                <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden bg-forest-950/20 border border-stone/30 cursor-pointer shadow-xs group/img" 
+                     onclick="openEditSafariSlideModal(<?= htmlspecialchars(json_encode($sslide), ENT_QUOTES, 'UTF-8') ?>)">
+                  <img src="<?= (str_starts_with($sslide['image'], 'http://') || str_starts_with($sslide['image'], 'https://')) ? esc($sslide['image']) : base_url(esc($sslide['image'])) ?>" 
+                       alt="<?= esc($sslide['caption']) ?>" 
+                       class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500">
+                  
+                  <!-- Pinned Tag Badge -->
+                  <div class="absolute top-2.5 left-2.5 bg-forest-950/80 backdrop-blur-xs text-[#D4B87C] text-[10px] font-mono px-2.5 py-0.5 rounded-md border border-white/10 truncate max-w-[80%]">
+                    <?= esc($sslide['tag'] ?: 'Safari Slide') ?>
                   </div>
 
-                  <!-- Tag & Caption Title & Image Info -->
-                  <div class="space-y-2 min-w-0 flex-1">
-                    <span class="inline-block text-[10px] font-mono uppercase tracking-wider text-forest-700 bg-forest-900/10 px-2.5 py-0.5 rounded font-semibold truncate max-w-full">
-                      <?= esc($sslide['tag'] ?: 'Safari Slide') ?>
-                    </span>
-                    <h4 class="text-sm font-bold text-ink line-clamp-2 leading-snug" title="<?= esc($sslide['caption']) ?>">
-                      <?= esc($sslide['caption']) ?>
-                    </h4>
-                    <p class="text-[11px] text-muted font-mono truncate" title="<?= esc($sslide['image']) ?>">
-                      <?= esc($sslide['image']) ?>
-                    </p>
+                  <!-- Hover Overlay -->
+                  <div class="absolute inset-0 bg-forest-950/60 backdrop-blur-xs opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center text-warm-white text-xs font-semibold gap-1.5 text-center px-4">
+                    <svg class="w-4 h-4 text-[#D4B87C] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    <span>Click to Edit Slide &amp; Replace Photo</span>
                   </div>
+                </div>
+
+                <!-- Caption Title & Image Info -->
+                <div class="space-y-1 pt-1">
+                  <h4 class="text-sm font-bold text-ink line-clamp-2 leading-snug" title="<?= esc($sslide['caption']) ?>">
+                    <?= esc($sslide['caption']) ?>
+                  </h4>
+                  <p class="text-[11px] text-muted font-mono truncate" title="<?= esc($sslide['image']) ?>">
+                    <?= esc($sslide['image']) ?>
+                  </p>
                 </div>
               </div>
 
@@ -321,9 +914,9 @@
               <div class="pt-3 border-t border-stone/20">
                 <button type="button" 
                         onclick="openEditSafariSlideModal(<?= htmlspecialchars(json_encode($sslide), ENT_QUOTES, 'UTF-8') ?>)" 
-                        class="w-full py-2 rounded-xl bg-forest-900/10 hover:bg-forest-900 hover:text-warm-white text-forest-900 text-xs font-semibold transition-colors cursor-pointer text-center flex items-center justify-center gap-1.5">
-                  <svg class="w-3.5 h-3.5 text-[#D4B87C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-                  <span>Edit Slide & Upload Image</span>
+                        class="w-full py-2.5 rounded-xl bg-forest-900 hover:bg-forest-800 text-[#D4B87C] hover:text-warm-white text-xs font-semibold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                  <span>Edit Slide &amp; Replace Photo</span>
                 </button>
               </div>
 
@@ -623,16 +1216,27 @@
           <div class="space-y-1">
             <label class="block text-xs font-semibold text-ink">Primary Safari Phone</label>
             <input type="text" name="content[contact][phone_primary]" value="<?= esc($content['contact']['phone_primary']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
+            <span class="text-[11px] text-muted">Primary helpline for guest safari inquiries</span>
           </div>
           <div class="space-y-1">
-            <label class="block text-xs font-semibold text-ink">Secondary Phone</label>
+            <div class="flex items-center justify-between">
+              <label class="block text-xs font-semibold text-ink">Website Owner Mobile Number (Direct)</label>
+              <span class="px-2 py-0.5 rounded-full bg-forest-900 text-[#D4B87C] text-[10px] font-mono font-bold">Owner Direct</span>
+            </div>
+            <input type="text" name="content[contact][phone_owner]" value="<?= esc($content['contact']['phone_owner'] ?? $content['contact']['phone_secondary'] ?? '+91 75667 89123') ?>" placeholder="e.g. +91 98260 12345" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
+            <span class="text-[11px] text-muted">Direct mobile number of the website owner / managing director</span>
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs font-semibold text-ink">Secondary Safari Phone (Optional)</label>
             <input type="text" name="content[contact][phone_secondary]" value="<?= esc($content['contact']['phone_secondary']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
+            <span class="text-[11px] text-muted">Secondary backup desk line</span>
           </div>
           <div class="space-y-1">
             <label class="block text-xs font-semibold text-ink">WhatsApp Desk Number</label>
             <input type="text" name="content[contact][whatsapp]" value="<?= esc($content['contact']['whatsapp']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
+            <span class="text-[11px] text-muted">For instant 1-click WhatsApp assistance</span>
           </div>
-          <div class="space-y-1">
+          <div class="space-y-1 sm:col-span-2">
             <label class="block text-xs font-semibold text-ink">Inquiry Email</label>
             <input type="email" name="content[contact][email]" value="<?= esc($content['contact']['email']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none">
           </div>
@@ -646,6 +1250,20 @@
         <div class="space-y-1 pt-2">
           <label class="block text-xs font-semibold text-ink">Official Resort Postal Address & Landmark</label>
           <textarea name="content[contact][address]" rows="2" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none"><?= esc($content['contact']['address']) ?></textarea>
+        </div>
+
+        <div class="space-y-1 pt-2">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-semibold text-ink">Google Maps Embed Link (Iframe / URL)</label>
+            <?php if (!empty($content['contact']['google_maps_embed'])): ?>
+              <a href="<?= esc(parse_map_embed_url($content['contact']['google_maps_embed'])) ?>" target="_blank" rel="noopener noreferrer" class="text-[11px] text-forest-700 hover:underline inline-flex items-center">
+                <span>Preview Map</span>
+                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            <?php endif; ?>
+          </div>
+          <textarea name="content[contact][google_maps_embed]" rows="3" placeholder="Paste Google Maps embed URL (https://www.google.com/maps/embed?pb=...) or entire iframe tag" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-xs font-mono focus:ring-2 focus:ring-forest-700/30 outline-none leading-relaxed"><?= esc($content['contact']['google_maps_embed'] ?? '') ?></textarea>
+          <span class="text-[11px] text-muted">Paste your Google Maps embed URL or the full &lt;iframe&gt; code copied from Google Maps Share &gt; Embed a map. Dynamically loaded on the Contact page.</span>
         </div>
 
       </div>
@@ -877,6 +1495,62 @@
     f.action = '<?= base_url('admin/safari-slides/toggle') ?>/' + id;
     f.submit();
   }
+
+  function previewHomeImage(input, previewId) {
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const previewImg = document.getElementById(previewId);
+      if (previewImg) {
+        previewImg.src = URL.createObjectURL(file);
+      }
+      const filenameDiv = document.getElementById(previewId + '-filename');
+      if (filenameDiv) {
+        filenameDiv.innerHTML = '<span class="inline-flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Selected: <strong>' + file.name + '</strong> (' + (file.size / 1024).toFixed(1) + ' KB) &mdash; Ready to Save</span></span>';
+        filenameDiv.classList.remove('hidden');
+      }
+    }
+  }
+
+  function setupDropzone(dropzoneId, inputId, previewId) {
+    const dz = document.getElementById(dropzoneId);
+    const inp = document.getElementById(inputId);
+    if (!dz || !inp) return;
+
+    ['dragenter', 'dragover'].forEach(name => {
+      dz.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dz.classList.add('border-[#D4B87C]', 'ring-4', 'ring-[#D4B87C]/30', 'scale-[1.01]');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dz.addEventListener(name, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dz.classList.remove('border-[#D4B87C]', 'ring-4', 'ring-[#D4B87C]/30', 'scale-[1.01]');
+      }, false);
+    });
+
+    dz.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files && files.length > 0) {
+        inp.files = files;
+        previewHomeImage(inp, previewId);
+      }
+    }, false);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setupDropzone('dropzone-about-primary', 'file-about-primary', 'preview-about-primary');
+    setupDropzone('dropzone-about-secondary', 'file-about-secondary', 'preview-about-secondary');
+    setupDropzone('dropzone-safari-tiger', 'file-safari-tiger', 'preview-safari-tiger');
+    setupDropzone('dropzone-safari-etching', 'file-safari-etching', 'preview-safari-etching');
+    setupDropzone('dropzone-stay-cottage', 'file-stay-cottage', 'preview-stay-cottage');
+    setupDropzone('dropzone-stay-interior', 'file-stay-interior', 'preview-stay-interior');
+    setupDropzone('dropzone-safari-hero-bg', 'file-safari-hero-bg', 'preview-safari-hero-bg');
+  });
 </script>
 
 <?= $this->endSection() ?>

@@ -19,7 +19,7 @@ class Safari extends BaseController
         $safariSlides = $safariSlideModel->getActiveSlides();
 
         $data = [
-            'metaTitle'           => 'Kanha Safari Booking & Zones — 4x4 Gypsy Drives & Wildlife Trails',
+            'metaTitle'           => 'Kanha Safari Booking & Zones — Kanha Kisli Holiday',
             'metaDescription'     => 'Book your official Kanha National Park 4x4 Gypsy safari. Check live permit quotas for Kanha, Kisli, Mukki and Sarhi zones with certified naturalists.',
             'activeNav'           => 'safari',
             'isTransparentHeader' => true,

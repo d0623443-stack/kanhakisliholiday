@@ -171,4 +171,23 @@ if (! function_exists('get_site_setting')) {
     }
 }
 
+if (! function_exists('parse_map_embed_url')) {
+    /**
+     * Extracts a clean embed src URL whether the user provided a full iframe tag or a direct URL.
+     */
+    function parse_map_embed_url(?string $input, string $default = ''): string
+    {
+        if (empty($input)) {
+            return $default;
+        }
+        $trimmed = trim($input);
+        // If user pasted an entire <iframe ... src="..." ...> tag
+        if (preg_match('/<iframe\b[^>]*\bsrc=["\']([^"\']+)["\']/i', $trimmed, $matches)) {
+            return htmlspecialchars_decode($matches[1]);
+        }
+        // Direct URL or already parsed
+        return htmlspecialchars_decode($trimmed);
+    }
+}
+
 

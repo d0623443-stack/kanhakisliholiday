@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <!-- INNER HERO (Breadcrumb Banner) -->
-<section class="relative bg-forest-950 text-warm-white min-h-[430px] sm:min-h-[470px] md:min-h-[520px] lg:min-h-[550px] flex items-center justify-center pt-40 sm:pt-44 md:pt-52 pb-16 md:pb-24 overflow-hidden">
+<section class="relative bg-forest-950 text-warm-white flex flex-col justify-start items-center pt-32 sm:pt-40 md:pt-52 lg:pt-56 pb-16 md:pb-24 overflow-hidden">
   <div class="absolute inset-0 z-0">
     <img src="<?= base_url('assets/images/tiger-portrait.jpg') ?>" 
          alt="Kanha wildlife" 

@@ -2,6 +2,17 @@
 
 <?= $this->section('content') ?>
 
+<?php
+// Helper to resolve local assets or uploaded image paths with fallback
+$resolveImg = function(?string $path, string $fallback): string {
+    $img = !empty($path) ? trim($path) : $fallback;
+    if (str_starts_with($img, 'http://') || str_starts_with($img, 'https://')) {
+        return $img;
+    }
+    return base_url($img);
+};
+?>
+
 <!-- SECTION 1: HERO SLIDER -->
 <section id="hero-slider" class="relative w-full min-h-[580px] sm:min-h-[660px] md:min-h-screen bg-forest-950 text-warm-white overflow-hidden flex items-center select-none" aria-label="Hero Showcase">
   
@@ -202,21 +213,33 @@
         <div class="relative w-full max-w-lg lg:max-w-none">
           
           <!-- Primary Image: Safari Forest Perspective -->
-          <div class="w-full sm:w-4/5 lg:w-3/4 h-56 sm:h-72 md:h-[400px] rounded-2xl overflow-hidden shadow-xl border border-stone/30">
-            <img src="<?= base_url('assets/images/safari-trail.jpg') ?>" 
+          <div class="relative w-full sm:w-4/5 lg:w-3/4 h-64 sm:h-80 md:h-[420px] rounded-3xl overflow-hidden shadow-2xl border border-stone/30 group">
+            <img src="<?= $resolveImg($content['about_primary_img'] ?? null, 'assets/images/safari-trail.jpg') ?>" 
                  alt="Sunbeams filtering through ancient sal trees in Kanha" 
-                 class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" />
+                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+            <!-- Luxury Gold Corner Accent Lines -->
+            <div class="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-[#D4B87C]/80 pointer-events-none"></div>
+            <div class="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-[#D4B87C]/80 pointer-events-none"></div>
+            <!-- Subtle Vignette -->
+            <div class="absolute inset-0 bg-gradient-to-t from-forest-950/60 via-transparent to-transparent pointer-events-none"></div>
+            <!-- Reserve Location Badge -->
+            <div class="absolute bottom-4 left-4 z-10 bg-forest-950/85 backdrop-blur-md border border-[#D4B87C]/40 text-warm-white px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-2 shadow-lg">
+              <span class="w-2 h-2 rounded-full bg-[#D4B87C] animate-pulse"></span>
+              <span class="font-serif tracking-wide text-xs">Kanha Tiger Reserve · Sal Forest Trail</span>
+            </div>
           </div>
 
           <!-- Secondary Overlapping Image: Polaroid Print of Indian Roller Bird -->
-          <div class="w-48 sm:w-60 md:w-72 bg-warm-white p-2.5 sm:p-3.5 pb-4 sm:pb-6 rounded-lg polaroid-shadow border border-stone/40 -mt-14 sm:-mt-20 ml-auto mr-2 sm:mr-6 lg:-ml-12 lg:-mt-16 transform rotate-2 hover:rotate-0 transition-transform duration-500 z-10 relative">
-            <div class="w-full h-36 sm:h-44 md:h-52 rounded overflow-hidden bg-sand">
-              <img src="<?= base_url('assets/images/indian-roller.jpg') ?>" 
+          <div class="w-52 sm:w-64 md:w-76 bg-warm-white p-3 sm:p-4 pb-5 sm:pb-7 rounded-2xl polaroid-shadow border border-stone/30 -mt-24 sm:-mt-36 md:-mt-44 lg:-mt-44 ml-auto mr-2 sm:mr-6 lg:-ml-12 transform rotate-2 hover:rotate-0 transition-transform duration-500 z-10 relative group">
+            <!-- Washi tape / antique pin accent at top center -->
+            <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-12 h-3.5 bg-[#D4B87C]/40 backdrop-blur-xs rounded-xs border border-white/40 transform -rotate-1 pointer-events-none"></div>
+            <div class="w-full h-40 sm:h-48 md:h-56 rounded-xl overflow-hidden bg-sand">
+              <img src="<?= $resolveImg($content['about_secondary_img'] ?? null, 'assets/images/indian-roller.jpg') ?>" 
                    alt="Indian Roller bird perched on branch" 
-                   class="w-full h-full object-cover" />
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
-            <div class="pt-2 sm:pt-3 text-center">
-              <span class="font-script text-ink text-xs sm:text-sm md:text-base tracking-wide">Small moments. Big stories.</span>
+            <div class="pt-2.5 sm:pt-3.5 text-center">
+              <span class="font-script text-ink text-sm sm:text-base md:text-lg tracking-wide"><?= esc($content['about_polaroid_caption'] ?? 'Small moments. Big stories.') ?></span>
             </div>
           </div>
 
@@ -235,7 +258,7 @@
   
   <!-- Background Botanical Wildlife Etching: Ancient Sal Tree, Hardground Barasingha Stag & Doe in Meadow -->
   <div class="absolute bottom-0 right-0 w-[240px] sm:w-[340px] md:w-[440px] lg:w-[500px] xl:w-[540px] pointer-events-none select-none botanical-etching-blend opacity-35 md:opacity-45 transition-opacity duration-500 z-0">
-    <img src="<?= base_url('assets/images/kanha-meadow-wildlife-etching.png') ?>" 
+    <img src="<?= $resolveImg($content['safari_etching_img'] ?? null, 'assets/images/kanha-meadow-wildlife-etching.png') ?>" 
          alt="Vintage lithograph engraving of ancient Sal tree and Hardground Barasingha deer in Kanha meadow" 
          class="w-full h-auto object-contain pointer-events-none" />
   </div>
@@ -259,20 +282,27 @@
       <div class="lg:col-span-5 relative flex flex-col items-center">
         
         <!-- Botanical Leaf Branch Accent (Top Left) -->
-        <div class="absolute -top-6 -left-6 w-32 sm:w-40 pointer-events-none opacity-30 text-forest-700">
+        <div class="absolute -top-8 -left-8 w-36 sm:w-44 pointer-events-none opacity-25 text-forest-700">
           <img src="<?= base_url('assets/icons/leaf-branch.svg') ?>" alt="" class="w-full h-auto" />
         </div>
 
-        <!-- The Arch Frame Container -->
-        <div class="relative w-full max-w-[280px] sm:max-w-sm arch-frame overflow-hidden shadow-2xl border-4 border-warm-white bg-sand">
-          <img src="<?= base_url('assets/images/tiger-portrait.jpg') ?>" 
+        <!-- The Arch Frame Container with Luxury Double Border & Glow -->
+        <div class="relative w-full max-w-[290px] sm:max-w-sm arch-frame overflow-hidden shadow-2xl border-4 border-warm-white bg-sand ring-1 ring-[#D4B87C]/50 group">
+          <img src="<?= $resolveImg($content['safari_tiger_img'] ?? null, 'assets/images/tiger-portrait.jpg') ?>" 
                alt="Royal Bengal Tiger walking towards camera in Kanha forest" 
-               class="w-full h-[320px] sm:h-[420px] md:h-[500px] object-cover object-center transform hover:scale-105 transition-transform duration-700" />
+               class="w-full h-[340px] sm:h-[440px] md:h-[510px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700" />
+          <!-- Subtle Depth Vignette -->
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-950/65 via-transparent to-transparent pointer-events-none"></div>
+          <!-- Floating Museum Tag at Arch Base -->
+          <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 bg-forest-950/85 backdrop-blur-md border border-[#D4B87C]/50 text-warm-white px-4 py-1.5 rounded-full text-[11px] font-mono tracking-widest uppercase whitespace-nowrap shadow-xl flex items-center gap-2">
+            <span class="text-[#D4B87C]">✦</span>
+            <span>King of Kanha · Royal Bengal</span>
+          </div>
         </div>
 
         <!-- Editorial Script Quote -->
-        <div class="mt-4 sm:mt-6 text-center sm:text-left self-center sm:self-start pl-0 sm:pl-8">
-          <p class="font-script text-lg sm:text-2xl text-forest-800 leading-snug">
+        <div class="mt-5 sm:mt-7 text-center sm:text-left self-center sm:self-start pl-0 sm:pl-8">
+          <p class="font-script text-xl sm:text-3xl text-forest-800 leading-snug">
             <?= nl2br(esc($content['safari_quote'] ?? "More than a destination.\nA wilder you.")) ?>
           </p>
         </div>
@@ -394,19 +424,29 @@
         </div>
       </div>
 
-      <!-- Imagery: Large Forest Lodge Cottage & Veranda -->
-      <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center">
+      <!-- Imagery: Large Forest Lodge Cottage & Veranda (Architectural Spread) -->
+      <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6 items-center">
         <!-- Main Cottage Photo -->
-        <div class="sm:col-span-7 h-56 sm:h-80 md:h-96 rounded-2xl overflow-hidden shadow-lg border border-stone/30">
-          <img src="<?= base_url('assets/images/forest-lodge.jpg') ?>" 
-               alt="Peaceful boutique forest cottage near Kanha" 
-               class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" />
+        <div class="sm:col-span-7 h-64 sm:h-84 md:h-[410px] rounded-3xl overflow-hidden shadow-2xl border border-stone/30 relative group">
+          <img src="<?= $resolveImg($content['stay_cottage_img'] ?? null, 'assets/images/hotel/hotel-pool-aerial.jpg') ?>" 
+               alt="Peaceful boutique forest cottage and pool grounds near Kanha" 
+               class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-950/50 via-transparent to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-4 left-4 z-10 bg-forest-950/80 backdrop-blur-md border border-[#D4B87C]/40 text-warm-white px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-2 shadow-lg">
+            <span class="w-2 h-2 rounded-full bg-[#D4B87C]"></span>
+            <span>Resort Grounds &amp; Pool</span>
+          </div>
         </div>
-        <!-- Detail Veranda Photo -->
-        <div class="sm:col-span-5 h-48 sm:h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg border border-stone/30">
-          <img src="<?= base_url('assets/images/lodge-interior.jpg') ?>" 
-               alt="Peaceful veranda and interior comfort" 
-               class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" />
+        <!-- Detail Veranda Photo (Staggered Offset) -->
+        <div class="sm:col-span-5 h-52 sm:h-72 md:h-[330px] sm:-mt-8 rounded-3xl overflow-hidden shadow-2xl border border-stone/30 relative group">
+          <img src="<?= $resolveImg($content['stay_interior_img'] ?? null, 'assets/images/hotel/hotel-veranda-coffee.jpg') ?>" 
+               alt="Private cottage veranda and artisanal coffee" 
+               class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-950/50 via-transparent to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-4 left-4 z-10 bg-forest-950/80 backdrop-blur-md border border-[#D4B87C]/40 text-warm-white px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-2 shadow-lg">
+            <span class="text-[#D4B87C]">✦</span>
+            <span>Private Veranda</span>
+          </div>
         </div>
       </div>
 

@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <!-- INNER HERO (Breadcrumb Banner) -->
-<section class="relative bg-forest-950 text-warm-white min-h-[430px] sm:min-h-[470px] md:min-h-[520px] lg:min-h-[550px] flex items-center justify-center pt-40 sm:pt-44 md:pt-52 pb-16 md:pb-24 overflow-hidden">
+<section class="relative bg-forest-950 text-warm-white flex flex-col justify-start items-center pt-32 sm:pt-40 md:pt-52 lg:pt-56 pb-16 md:pb-24 overflow-hidden">
   <div class="absolute inset-0 z-0">
     <img src="<?= base_url('assets/images/safari-trail.jpg') ?>" 
          alt="Kanha trail" 
@@ -79,11 +79,16 @@
               </svg>
             </div>
             <div>
-              <h3 class="font-semibold text-ink text-sm sm:text-base">Phone & WhatsApp</h3>
-              <p class="text-body text-sm mt-0.5">
-                <a href="tel:<?= esc($content['phone_primary'] ?? $settings['helpline_phone'] ?? '+919425100000') ?>" class="hover:text-forest-700 transition-colors"><?= esc($content['phone_primary'] ?? $settings['helpline_phone'] ?? '+91 94251 00000') ?></a>
-                <?php if (!empty($content['phone_secondary'])): ?>
-                  / <a href="tel:<?= esc($content['phone_secondary']) ?>" class="hover:text-forest-700 transition-colors"><?= esc($content['phone_secondary']) ?></a>
+              <h3 class="font-semibold text-ink text-sm sm:text-base">Phone &amp; Mobile Contact</h3>
+              <p class="text-body text-sm mt-0.5 space-x-1">
+                <?php $primaryPhone = $content['phone_primary'] ?? $settings['helpline_phone'] ?? get_site_setting('helpline_phone'); ?>
+                <a href="tel:<?= preg_replace('/\s+/', '', $primaryPhone) ?>" class="hover:text-forest-700 transition-colors font-medium"><?= esc($primaryPhone) ?></a>
+                <?php 
+                  $secondaryPhone = $content['phone_owner'] ?? $settings['owner_phone'] ?? get_site_setting('owner_phone') ?: ($content['phone_secondary'] ?? '');
+                  if (!empty($secondaryPhone)): 
+                ?>
+                  <span class="text-stone-400">/</span>
+                  <a href="tel:<?= preg_replace('/\s+/', '', $secondaryPhone) ?>" class="hover:text-forest-700 transition-colors font-medium"><?= esc($secondaryPhone) ?></a>
                 <?php endif; ?>
               </p>
               <span class="text-xs text-muted"><?= esc($content['hours'] ?? 'Daily: 08:00 AM – 08:00 PM IST') ?></span>
@@ -105,133 +110,101 @@
 
         </div>
 
+        <!-- Quick Direct Actions (Call Now & WhatsApp Chat) -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="tel:<?= preg_replace('/\s+/', '', $primaryPhone) ?>" 
+             class="inline-flex items-center px-6 py-3 rounded-full bg-forest-900 hover:bg-forest-800 text-warm-white text-sm font-semibold transition-all duration-200 shadow-sm group">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span>Call Our Desk</span>
+          </a>
+
+          <?php $contactWa = $content['whatsapp'] ?? $settings['whatsapp_number'] ?? get_site_setting('whatsapp_number'); ?>
+          <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $contactWa) ?>" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="inline-flex items-center px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1EBE5B] text-white text-sm font-semibold transition-all duration-200 shadow-sm group">
+            <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span>WhatsApp Us</span>
+          </a>
+        </div>
+
       </div>
 
-      <!-- Right Column: Enquiry Form with Server Validation -->
-      <div class="lg:col-span-7 bg-ivory/60 border border-stone/50 rounded-3xl p-8 sm:p-12 shadow-sm">
+      <!-- Right Column: Interactive Google Maps Iframe -->
+      <div class="lg:col-span-7 bg-ivory/60 border border-stone/50 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
         
-        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-ink mb-2">Send an Enquiry</h3>
-        <p class="text-body text-sm mb-8">Fill in your details below and we will get back to you with custom safari and stay information.</p>
-
-        <!-- Display Validation Errors if any -->
-        <?php if (session()->getFlashdata('errors')): ?>
-          <div class="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm space-y-1">
-            <p class="font-semibold">Please check the following:</p>
-            <ul class="list-disc list-inside space-y-0.5">
-              <?php foreach (session()->getFlashdata('errors') as $error): ?>
-                <li><?= esc($error) ?></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        <?php endif; ?>
-
-        <!-- Form -->
-        <form action="<?= base_url('contact/enquiry') ?>" method="POST" class="space-y-6">
-          <?= csrf_field() ?>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            
-            <!-- Full Name -->
-            <div class="space-y-2">
-              <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
-                Full Name <span class="text-red-600">*</span>
-              </label>
-              <input type="text" 
-                     id="name" 
-                     name="name" 
-                     value="<?= old('name') ?>" 
-                     required 
-                     class="w-full px-4 py-3 rounded-xl bg-warm-white border border-stone/50 text-ink focus:border-forest-700 focus:ring-2 focus:ring-forest-700/20 outline-none transition-colors text-sm"
-                     placeholder="e.g. John Doe">
-            </div>
-
-            <!-- Phone / WhatsApp -->
-            <div class="space-y-2">
-              <label for="phone" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
-                Phone / WhatsApp <span class="text-red-600">*</span>
-              </label>
-              <input type="tel" 
-                     id="phone" 
-                     name="phone" 
-                     value="<?= old('phone') ?>" 
-                     required 
-                     class="w-full px-4 py-3 rounded-xl bg-warm-white border border-stone/50 text-ink focus:border-forest-700 focus:ring-2 focus:ring-forest-700/20 outline-none transition-colors text-sm"
-                     placeholder="+91 98765 43210">
-            </div>
-
+        <div>
+          <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+            <span class="text-xs font-semibold tracking-widest-plus uppercase text-forest-700">
+              Interactive Location Map
+            </span>
+            <span class="inline-flex items-center text-xs font-medium text-emerald-800 bg-emerald-100/80 px-3 py-1 rounded-full">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+              Live Location
+            </span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            
-            <!-- Email Address -->
-            <div class="space-y-2">
-              <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
-                Email Address <span class="text-red-600">*</span>
-              </label>
-              <input type="email" 
-                     id="email" 
-                     name="email" 
-                     value="<?= old('email') ?>" 
-                     required 
-                     class="w-full px-4 py-3 rounded-xl bg-warm-white border border-stone/50 text-ink focus:border-forest-700 focus:ring-2 focus:ring-forest-700/20 outline-none transition-colors text-sm"
-                     placeholder="you@example.com">
-            </div>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-ink mb-2">
+            Find Us at Kanha Tiger Reserve
+          </h3>
+          <p class="text-body text-sm leading-relaxed">
+            Conveniently situated near the Khatia and Kisli entrance gates. Use the interactive map below to explore our exact location and scenic approach routes.
+          </p>
+        </div>
 
-            <!-- Interested In -->
-            <div class="space-y-2">
-              <label for="interest" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
-                Interested In <span class="text-red-600">*</span>
-              </label>
-              <select id="interest" 
-                      name="interest" 
-                      required 
-                      class="w-full px-4 py-3 rounded-xl bg-warm-white border border-stone/50 text-ink focus:border-forest-700 focus:ring-2 focus:ring-forest-700/20 outline-none transition-colors text-sm">
-                <option value="safari" <?= old('interest') === 'safari' ? 'selected' : '' ?>>Kanha Safari Assistance</option>
-                <option value="stay" <?= old('interest') === 'stay' ? 'selected' : '' ?>>Forest Accommodation</option>
-                <option value="combo" <?= old('interest') === 'combo' ? 'selected' : '' ?>>Safari & Stay Combo</option>
-                <option value="general" <?= old('interest') === 'general' ? 'selected' : '' ?>>General Inquiry</option>
-              </select>
-            </div>
+        <?php 
+          $rawEmbed = $content['google_maps_embed'] ?? $settings['google_maps_embed'] ?? get_site_setting('google_maps_embed');
+          $mapUrl   = parse_map_embed_url($rawEmbed);
+        ?>
 
-          </div>
-
-          <!-- Travel Dates -->
-          <div class="space-y-2">
-            <label for="travel_date" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
-              Preferred Travel Dates or Season
-            </label>
-            <input type="text" 
-                   id="travel_date" 
-                   name="travel_date" 
-                   value="<?= old('travel_date') ?>" 
-                   class="w-full px-4 py-3 rounded-xl bg-warm-white border border-stone/50 text-ink focus:border-forest-700 focus:ring-2 focus:ring-forest-700/20 outline-none transition-colors text-sm"
-                   placeholder="e.g. Mid November, 2 Adults, 2 Safaris">
-          </div>
-
-          <!-- Message -->
-          <div class="space-y-2">
-            <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-forest-900">
-              Message or Specific Requests
-            </label>
-            <textarea id="message" 
-                      name="message" 
-                      rows="4" 
-                      class="w-full px-4 py-3 rounded-xl bg-warm-white border border-stone/50 text-ink focus:border-forest-700 focus:ring-2 focus:ring-forest-700/20 outline-none transition-colors text-sm"
-                      placeholder="Tell us about your trip plans, number of guests, or preferred zones..."><?= old('message') ?></textarea>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="pt-2">
-            <button type="submit" 
-                    class="w-full sm:w-auto inline-flex items-center justify-center px-9 py-4 rounded-full bg-forest-900 hover:bg-forest-800 text-warm-white font-medium text-base transition-all duration-200 shadow-md group">
-              <span>Send Safari Enquiry</span>
-              <svg class="w-4 h-4 ml-2.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        <!-- Google Maps Embed Container -->
+        <div class="relative w-full h-[380px] sm:h-[450px] md:h-[490px] rounded-2xl overflow-hidden shadow-inner border border-stone/40 bg-stone/20">
+          <?php if (!empty($mapUrl)): ?>
+            <iframe 
+              src="<?= esc($mapUrl) ?>" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Google Maps Location of Kanha Kisli Holiday Resort"
+              class="w-full h-full">
+            </iframe>
+          <?php else: ?>
+            <div class="w-full h-full flex flex-col items-center justify-center p-8 text-center text-stone-500 space-y-2">
+              <svg class="w-8 h-8 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-            </button>
+              <p class="text-sm font-medium">Google Maps link is being configured in the admin panel.</p>
+            </div>
+          <?php endif; ?>
+        </div>
+
+        <!-- Directions & Navigation Footer Info -->
+        <div class="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-stone/30 text-xs text-body">
+          <div class="flex items-center space-x-2 text-stone-600">
+            <svg class="w-4 h-4 text-forest-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Nearest Safari Gate: <strong>Khatia / Kisli Gate (approx. 5 mins drive)</strong></span>
           </div>
 
-        </form>
+          <a href="https://www.google.com/maps/search/?api=1&query=Kanha+Tiger+Reserve+Khatia+Gate" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="inline-flex items-center font-semibold text-forest-800 hover:text-forest-950 transition-colors group">
+            <span>Open in Google Maps App</span>
+            <svg class="w-3.5 h-3.5 ml-1.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
 
       </div>
 

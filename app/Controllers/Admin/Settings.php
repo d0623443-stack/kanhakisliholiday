@@ -29,7 +29,9 @@ class Settings extends AdminBaseController
             'notification_mail' => 'bookings@kanhakisliholiday.com',
             'whatsapp_number'   => '+91 94251 00000',
             'helpline_phone'    => '+91 94251 00000',
+            'owner_phone'       => '+91 75667 89123',
             'location_text'     => 'Near Khatia / Kisli Gate, Kanha Tiger Reserve, MP',
+            'google_maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58728.89240410408!2d80.57500355!3d22.2858145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2a68393693e507%3A0xc3d5d7e48ce19cf5!2sKanha%20Tiger%20Reserve%2C%20Khatia%20Gate!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',
             'status'            => 'live',
         ];
 
@@ -64,15 +66,30 @@ class Settings extends AdminBaseController
             'site_name',
             'site_tagline',
             'location_text',
+            'google_maps_embed',
             'notification_mail',
             'whatsapp_number',
             'helpline_phone',
+            'owner_phone',
         ];
 
         foreach ($settingsToUpdate as $key) {
             $val = $this->request->getPost($key);
             if ($val !== null) {
-                $this->settingModel->setSetting($key, trim((string)$val));
+                $trimmedVal = trim((string)$val);
+                if ($key === 'google_maps_embed') {
+                    $trimmedVal = parse_map_embed_url($trimmedVal);
+                }
+                $this->settingModel->setSetting($key, $trimmedVal);
+
+                // Keep site_content in sync
+                if ($key === 'owner_phone') {
+                    $contentModel = new \App\Models\ContentModel();
+                    $contentModel->setContent('contact', 'info', 'phone_owner', $trimmedVal);
+                } elseif ($key === 'google_maps_embed') {
+                    $contentModel = new \App\Models\ContentModel();
+                    $contentModel->setContent('contact', 'map', 'google_maps_embed', $trimmedVal);
+                }
             }
         }
 

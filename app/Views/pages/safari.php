@@ -40,7 +40,7 @@ $firstSlide = $safariSlides[0];
 ?>
 
 <!-- INNER HERO (Breadcrumb Banner) -->
-<section class="relative bg-forest-950 text-warm-white min-h-[300px] sm:min-h-[380px] md:min-h-[420px] flex items-center justify-center pt-28 sm:pt-36 pb-12 sm:pb-16 overflow-hidden">
+<section class="relative bg-forest-950 text-warm-white flex flex-col justify-start items-center pt-32 sm:pt-40 md:pt-52 lg:pt-56 pb-14 sm:pb-16 md:pb-20 overflow-hidden">
   <div class="absolute inset-0 z-0">
     <img src="<?= $resolveImg($content['hero_bg_image'] ?? null, 'assets/images/tiger-kanha-reserve.jpg') ?>" 
          alt="<?= esc($content['hero_title'] ?? 'Royal Bengal Tiger in Kanha Tiger Reserve') ?>" 
@@ -57,26 +57,21 @@ $firstSlide = $safariSlides[0];
     </nav>
 
     <div class="text-xs font-semibold tracking-widest-plus uppercase text-[#D4B87C] mb-2">
-      <?= esc($content['hero_eyebrow'] ?? 'Official Safari Booking · Kanha Tiger Reserve') ?>
+      <?= esc($content['hero_eyebrow'] ?? 'Wilderness Safaris · Kanha Kisli') ?>
     </div>
     <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-warm-white leading-tight">
       <?= esc($content['hero_title'] ?? 'Into the Heart of the Wild') ?>
     </h1>
-    <p class="mt-2.5 sm:mt-3 text-stone text-xs sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto">
-      <?= esc($content['hero_subtitle'] ?? "Open 4x4 Gypsy safaris, certified naturalist guides, and seamless forest permit bookings across Kanha's legendary core and buffer zones.") ?>
+    <p class="mt-2.5 sm:mt-3 text-stone text-xs sm:text-base md:text-lg font-normal leading-relaxed max-w-xl mx-auto">
+      <?= esc($content['hero_subtitle'] ?? "Guided open 4x4 Gypsy drives across Kanha's legendary forest trails.") ?>
     </p>
 
-    <!-- Quick Jump Buttons -->
-    <div class="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+    <!-- Quick CTA Button -->
+    <div class="mt-5 sm:mt-6 flex items-center justify-center">
       <a href="#safari-booking-form-card" 
-         class="inline-flex items-center justify-center px-5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[#D4B87C] hover:bg-[#c4a668] text-forest-950 font-semibold text-xs sm:text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5">
+         class="inline-flex items-center justify-center px-7 py-2.5 sm:py-3 rounded-full bg-[#D4B87C] hover:bg-[#c4a668] text-forest-950 font-semibold text-xs sm:text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group">
         <span>Book Safari</span>
-        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-      </a>
-      <a href="#safari-zones-overview" 
-         class="inline-flex items-center justify-center px-5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-forest-900/70 hover:bg-forest-900 text-warm-white border border-stone/30 font-medium text-xs sm:text-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5">
-        <span>Safari Zones & Gates</span>
-        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <svg class="w-4 h-4 ml-2 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
       </a>
     </div>
   </div>
@@ -515,14 +510,18 @@ $firstSlide = $safariSlides[0];
           </form>
 
           <!-- Direct Phone / WhatsApp Wildlife Desk Assistance inside sticky card -->
+          <?php 
+            $stickyDeskPhone = get_site_setting('owner_phone') ?: get_site_setting('helpline_phone', '+91 75667 89123'); 
+            $stickyWaPhone   = get_site_setting('whatsapp_number', '+91 94251 00000');
+          ?>
           <div class="mt-5 pt-4 border-t border-stone/20 flex items-center justify-between">
             <div class="text-[11px] text-stone">
               <span>Direct Wildlife Desk:</span>
-              <a href="tel:+917566789123" class="block font-bold text-[#D4B87C] hover:underline">+91 75667 89123</a>
+              <a href="tel:<?= preg_replace('/\s+/', '', $stickyDeskPhone) ?>" class="block font-bold text-[#D4B87C] hover:underline"><?= esc($stickyDeskPhone) ?></a>
             </div>
-            <a href="https://wa.me/917566789123?text=Hi%20Kisli%20Holiday,%20I%20want%20to%20inquire%20about%20Kanha%20Safari%20booking" 
+            <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $stickyWaPhone) ?>?text=Hi%20Kisli%20Holiday,%20I%20want%20to%20inquire%20about%20Kanha%20Safari%20booking" 
                target="_blank" 
-               rel="noopener"
+               rel="noopener" 
                class="px-3 py-1.5 rounded-lg bg-emerald-700/80 hover:bg-emerald-600 text-warm-white text-[11px] font-medium flex items-center gap-1.5 transition">
               <span>WhatsApp</span>
             </a>

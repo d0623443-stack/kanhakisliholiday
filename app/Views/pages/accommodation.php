@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <!-- INNER HERO (Breadcrumb Banner) -->
-<section class="relative bg-forest-950 text-warm-white min-h-[300px] sm:min-h-[380px] md:min-h-[420px] flex items-center justify-center pt-28 sm:pt-36 pb-12 sm:pb-16 overflow-hidden">
+<section class="relative bg-forest-950 text-warm-white flex flex-col justify-start items-center pt-32 sm:pt-40 md:pt-52 lg:pt-56 pb-14 sm:pb-16 md:pb-20 overflow-hidden">
   <div class="absolute inset-0 z-0">
     <img src="<?= base_url('assets/images/forest-lodge.jpg') ?>" 
          alt="Kanha Kisli Holiday Resort and cottages nestled under sal trees" 
@@ -60,8 +60,8 @@
           <!-- Main Hero Image Frame -->
           <div class="relative w-full h-[260px] sm:h-[380px] md:h-[480px] lg:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-forest-950 border border-stone/30 group">
             <img id="gallery-main-img" 
-                 src="<?= base_url('assets/images/forest-lodge.jpg') ?>" 
-                 alt="Forest cottages tucked beneath sal trees at Kanha Kisli Holiday" 
+                 src="<?= base_url('assets/images/hotel/hotel-pool-aerial.jpg') ?>" 
+                 alt="Aerial view of Kanha Kisli Holiday resort swimming pool and forest canopy" 
                  class="w-full h-full object-cover transition-opacity duration-300 transform group-hover:scale-105 transition-transform duration-700" />
             
             <!-- Dark Gradient Vignette for Text Contrast -->
@@ -71,10 +71,10 @@
             <div class="absolute bottom-3 sm:bottom-5 left-3 sm:left-5 right-3 sm:right-5 flex items-end justify-between pointer-events-none">
               <div class="space-y-0.5 sm:space-y-1">
                 <span id="gallery-tag" class="inline-block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-forest-900/90 text-[#D4B87C] border border-[#D4B87C]/40 backdrop-blur-md">
-                  Forest Living &middot; Khatia Gate
+                  Resort Grounds &middot; Nature Pool
                 </span>
                 <h3 id="gallery-caption" class="text-base sm:text-2xl font-serif font-bold text-warm-white drop-shadow">
-                  Private Cottages Tucked Under Ancient Sal Trees
+                  Serene Swimming Pool &amp; Elevated Canopy Huts Under Sal Trees
                 </h3>
               </div>
               <div id="gallery-counter" class="text-[11px] sm:text-xs font-mono px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-black/60 backdrop-blur-md text-warm-white border border-warm-white/20">
@@ -99,38 +99,38 @@
 
           <!-- Thumbnail Strip -->
           <div class="grid grid-cols-4 gap-2 sm:gap-4">
-            <!-- Thumb 1: Forest Lodge -->
+            <!-- Thumb 1: Pool & Aerial Grounds -->
             <button type="button" 
                     onclick="selectGallerySlide(0)" 
                     class="gallery-thumb group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video border-2 border-[#D4B87C] ring-2 ring-[#D4B87C]/50 shadow-md transition-all cursor-pointer">
-              <img src="<?= base_url('assets/images/forest-lodge.jpg') ?>" alt="Forest Cottages" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-              <div class="absolute inset-0 bg-forest-950/20 group-hover:bg-transparent transition-colors"></div>
-              <span class="absolute bottom-1.5 left-2 text-[10px] font-bold text-warm-white drop-shadow hidden sm:block">Cottages</span>
-            </button>
-
-            <!-- Thumb 2: Lodge Interior -->
-            <button type="button" 
-                    onclick="selectGallerySlide(1)" 
-                    class="gallery-thumb group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video border-2 border-transparent hover:border-[#D4B87C]/60 shadow-md transition-all cursor-pointer opacity-70 hover:opacity-100">
-              <img src="<?= base_url('assets/images/lodge-interior.jpg') ?>" alt="Cottage Interior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-              <div class="absolute inset-0 bg-forest-950/20 group-hover:bg-transparent transition-colors"></div>
-              <span class="absolute bottom-1.5 left-2 text-[10px] font-bold text-warm-white drop-shadow hidden sm:block">Interiors</span>
-            </button>
-
-            <!-- Thumb 3: Poolside & Dining Deck -->
-            <button type="button" 
-                    onclick="selectGallerySlide(2)" 
-                    class="gallery-thumb group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video border-2 border-transparent hover:border-[#D4B87C]/60 shadow-md transition-all cursor-pointer opacity-70 hover:opacity-100">
-              <img src="<?= base_url('assets/images/slider/1.webp') ?>" alt="Swimming Pool & Deck" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="<?= base_url('assets/images/hotel/hotel-pool-aerial.jpg') ?>" alt="Resort Swimming Pool" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
               <div class="absolute inset-0 bg-forest-950/20 group-hover:bg-transparent transition-colors"></div>
               <span class="absolute bottom-1.5 left-2 text-[10px] font-bold text-warm-white drop-shadow hidden sm:block">Pool Deck</span>
             </button>
 
-            <!-- Thumb 4: Candlelit Dining -->
+            <!-- Thumb 2: Deluxe Bedroom Interior -->
+            <button type="button" 
+                    onclick="selectGallerySlide(1)" 
+                    class="gallery-thumb group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video border-2 border-transparent hover:border-[#D4B87C]/60 shadow-md transition-all cursor-pointer opacity-70 hover:opacity-100">
+              <img src="<?= base_url('assets/images/hotel/hotel-room-interior.jpg') ?>" alt="Cottage Bedroom Interior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-forest-950/20 group-hover:bg-transparent transition-colors"></div>
+              <span class="absolute bottom-1.5 left-2 text-[10px] font-bold text-warm-white drop-shadow hidden sm:block">Bedroom</span>
+            </button>
+
+            <!-- Thumb 3: Private Veranda -->
+            <button type="button" 
+                    onclick="selectGallerySlide(2)" 
+                    class="gallery-thumb group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video border-2 border-transparent hover:border-[#D4B87C]/60 shadow-md transition-all cursor-pointer opacity-70 hover:opacity-100">
+              <img src="<?= base_url('assets/images/hotel/hotel-veranda-coffee.jpg') ?>" alt="Private Cottage Veranda" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <div class="absolute inset-0 bg-forest-950/20 group-hover:bg-transparent transition-colors"></div>
+              <span class="absolute bottom-1.5 left-2 text-[10px] font-bold text-warm-white drop-shadow hidden sm:block">Veranda</span>
+            </button>
+
+            <!-- Thumb 4: Open-Air Lounge & Dining -->
             <button type="button" 
                     onclick="selectGallerySlide(3)" 
                     class="gallery-thumb group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video border-2 border-transparent hover:border-[#D4B87C]/60 shadow-md transition-all cursor-pointer opacity-70 hover:opacity-100">
-              <img src="<?= base_url('assets/images/slider/2.jpg') ?>" alt="Evening Dining" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+              <img src="<?= base_url('assets/images/hotel/hotel-dining-pavilion.jpg') ?>" alt="Dining & Lounge Pavilion" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
               <div class="absolute inset-0 bg-forest-950/20 group-hover:bg-transparent transition-colors"></div>
               <span class="absolute bottom-1.5 left-2 text-[10px] font-bold text-warm-white drop-shadow hidden sm:block">Dining</span>
             </button>
@@ -180,62 +180,74 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             
             <!-- Category 1: Forest Cottage -->
-            <div class="p-6 rounded-2xl bg-ivory border border-stone/40 space-y-3 hover:border-[#D4B87C] transition-colors shadow-xs">
-              <div class="flex items-center justify-between">
-                <span class="font-serif text-xl font-bold text-ink"><?= esc($content['cottage1_title'] ?? 'Forest Cottages') ?></span>
-                <span class="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-forest-900/10 text-forest-800"><?= esc($content['cottage1_price'] ?? '₹5,500 / night') ?></span>
+            <div class="rounded-2xl bg-ivory border border-stone/40 overflow-hidden hover:border-[#D4B87C] transition-colors shadow-xs group">
+              <div class="h-44 sm:h-48 overflow-hidden relative">
+                <img src="<?= base_url('assets/images/hotel/hotel-room-interior.jpg') ?>" alt="Forest Cottage Bedroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-3 right-3 text-[11px] font-mono font-bold px-2.5 py-1 rounded-full bg-forest-950/80 text-[#D4B87C] border border-[#D4B87C]/40 backdrop-blur-md"><?= esc($content['cottage1_price'] ?? '₹5,500 / night') ?></span>
               </div>
-              <p class="text-body text-xs sm:text-sm leading-relaxed">
-                <?= esc($content['cottage1_desc'] ?? 'Independent stone and timber cottages surrounded by sal trees, offering private open verandas and modern ensuite baths.') ?>
-              </p>
-              <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
-                <div>&bull; King Bed &middot; Private Veranda &middot; En-suite Rain Shower</div>
-                <div>&bull; Max Occupancy: 2 Adults + 1 Child</div>
+              <div class="p-5 space-y-2.5">
+                <span class="font-serif text-xl font-bold text-ink block"><?= esc($content['cottage1_title'] ?? 'Forest Cottages') ?></span>
+                <p class="text-body text-xs sm:text-sm leading-relaxed">
+                  <?= esc($content['cottage1_desc'] ?? 'Independent stone and timber cottages surrounded by sal trees, offering private open verandas and modern ensuite baths.') ?>
+                </p>
+                <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
+                  <div>&bull; King Bed &middot; Private Veranda &middot; En-suite Rain Shower</div>
+                  <div>&bull; Max Occupancy: 2 Adults + 1 Child</div>
+                </div>
               </div>
             </div>
 
             <!-- Category 2: Deluxe Family Veranda Suite -->
-            <div class="p-6 rounded-2xl bg-ivory border border-stone/40 space-y-3 hover:border-[#D4B87C] transition-colors shadow-xs">
-              <div class="flex items-center justify-between">
-                <span class="font-serif text-xl font-bold text-ink"><?= esc($content['cottage2_title'] ?? 'Deluxe Family Veranda Suites') ?></span>
-                <span class="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-[#D4B87C]/20 text-forest-900"><?= esc($content['cottage2_price'] ?? '₹8,500 / night') ?></span>
+            <div class="rounded-2xl bg-ivory border border-stone/40 overflow-hidden hover:border-[#D4B87C] transition-colors shadow-xs group">
+              <div class="h-44 sm:h-48 overflow-hidden relative">
+                <img src="<?= base_url('assets/images/hotel/hotel-veranda-coffee.jpg') ?>" alt="Deluxe Family Veranda Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-3 right-3 text-[11px] font-mono font-bold px-2.5 py-1 rounded-full bg-forest-950/80 text-[#D4B87C] border border-[#D4B87C]/40 backdrop-blur-md"><?= esc($content['cottage2_price'] ?? '₹8,500 / night') ?></span>
               </div>
-              <p class="text-body text-xs sm:text-sm leading-relaxed">
-                <?= esc($content['cottage2_desc'] ?? 'Spacious dual-bedroom family retreat with extended viewing veranda facing the inner garden canopy.') ?>
-              </p>
-              <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
-                <div>&bull; Lounge Area &middot; Open Sky Shower &middot; Private Garden</div>
-                <div>&bull; Max Occupancy: 3 Adults or 2 Adults + 2 Children</div>
+              <div class="p-5 space-y-2.5">
+                <span class="font-serif text-xl font-bold text-ink block"><?= esc($content['cottage2_title'] ?? 'Deluxe Family Veranda Suites') ?></span>
+                <p class="text-body text-xs sm:text-sm leading-relaxed">
+                  <?= esc($content['cottage2_desc'] ?? 'Spacious dual-bedroom family retreat with extended viewing veranda facing the inner garden canopy.') ?>
+                </p>
+                <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
+                  <div>&bull; Lounge Area &middot; Open Sky Shower &middot; Private Garden</div>
+                  <div>&bull; Max Occupancy: 3 Adults or 2 Adults + 2 Children</div>
+                </div>
               </div>
             </div>
 
             <!-- Category 3: Machan Treehouse Villa -->
-            <div class="p-6 rounded-2xl bg-ivory border border-stone/40 space-y-3 hover:border-[#D4B87C] transition-colors shadow-xs">
-              <div class="flex items-center justify-between">
-                <span class="font-serif text-xl font-bold text-ink"><?= esc($content['cottage3_title'] ?? 'Machan Treehouse Villas') ?></span>
-                <span class="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-emerald-900/10 text-emerald-800"><?= esc($content['cottage3_price'] ?? '₹12,000 / night') ?></span>
+            <div class="rounded-2xl bg-ivory border border-stone/40 overflow-hidden hover:border-[#D4B87C] transition-colors shadow-xs group">
+              <div class="h-44 sm:h-48 overflow-hidden relative">
+                <img src="<?= base_url('assets/images/hotel/hotel-pool-aerial.jpg') ?>" alt="Machan Treehouse Villas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-3 right-3 text-[11px] font-mono font-bold px-2.5 py-1 rounded-full bg-forest-950/80 text-[#D4B87C] border border-[#D4B87C]/40 backdrop-blur-md"><?= esc($content['cottage3_price'] ?? '₹12,000 / night') ?></span>
               </div>
-              <p class="text-body text-xs sm:text-sm leading-relaxed">
-                <?= esc($content['cottage3_desc'] ?? 'Elevated wooden stilt hideaway nestled directly into the forest canopy with 360-degree wilderness outlooks.') ?>
-              </p>
-              <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
-                <div>&bull; Canopy Deck &middot; Stargazing Balcony &middot; Solar Powered</div>
-                <div>&bull; Max Occupancy: 2 Adults</div>
+              <div class="p-5 space-y-2.5">
+                <span class="font-serif text-xl font-bold text-ink block"><?= esc($content['cottage3_title'] ?? 'Machan Treehouse Villas') ?></span>
+                <p class="text-body text-xs sm:text-sm leading-relaxed">
+                  <?= esc($content['cottage3_desc'] ?? 'Elevated wooden stilt hideaway nestled directly into the forest canopy with 360-degree wilderness outlooks.') ?>
+                </p>
+                <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
+                  <div>&bull; Canopy Deck &middot; Stargazing Balcony &middot; Solar Powered</div>
+                  <div>&bull; Max Occupancy: 2 Adults</div>
+                </div>
               </div>
             </div>
 
             <!-- Category 4: Family Forest Suite -->
-            <div class="p-6 rounded-2xl bg-ivory border border-stone/40 space-y-3 hover:border-[#D4B87C] transition-colors shadow-xs">
-              <div class="flex items-center justify-between">
-                <span class="font-serif text-xl font-bold text-ink">Family Forest Suite</span>
-                <span class="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-forest-900/10 text-forest-800">Families & Groups</span>
+            <div class="rounded-2xl bg-ivory border border-stone/40 overflow-hidden hover:border-[#D4B87C] transition-colors shadow-xs group">
+              <div class="h-44 sm:h-48 overflow-hidden relative">
+                <img src="<?= base_url('assets/images/hotel/hotel-dining-pavilion.jpg') ?>" alt="Family Forest Suite" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-3 right-3 text-[11px] font-mono font-bold px-2.5 py-1 rounded-full bg-forest-950/80 text-[#D4B87C] border border-[#D4B87C]/40 backdrop-blur-md">Families &amp; Groups</span>
               </div>
-              <p class="text-body text-xs sm:text-sm leading-relaxed">
-                Two interconnected bedroom suites with shared living deck and courtyard. Perfectly tailored for families wanting privacy and togetherness.
-              </p>
-              <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
-                <div>&bull; 2 Bedrooms &middot; 2 Bathrooms &middot; Family Living Deck</div>
-                <div>&bull; Max Occupancy: 4-6 Guests</div>
+              <div class="p-5 space-y-2.5">
+                <span class="font-serif text-xl font-bold text-ink block">Family Forest Suite</span>
+                <p class="text-body text-xs sm:text-sm leading-relaxed">
+                  Two interconnected bedroom suites with shared living deck and courtyard. Perfectly tailored for families wanting privacy and togetherness.
+                </p>
+                <div class="pt-2 text-xs text-forest-800/80 space-y-1 border-t border-stone/30">
+                  <div>&bull; 2 Bedrooms &middot; 2 Bathrooms &middot; Family Living Deck</div>
+                  <div>&bull; Max Occupancy: 4-6 Guests</div>
+                </div>
               </div>
             </div>
 
@@ -495,14 +507,18 @@
           </form>
 
           <!-- Direct Phone / WhatsApp Wildlife Desk Assistance inside sticky card -->
+          <?php 
+            $stayDeskPhone = get_site_setting('owner_phone') ?: get_site_setting('helpline_phone', '+91 94251 00000'); 
+            $stayWaPhone   = get_site_setting('whatsapp_number', '+91 94251 00000');
+          ?>
           <div class="mt-5 pt-4 border-t border-stone/20 flex items-center justify-between">
             <div class="text-[11px] text-stone">
               <span>Direct Reservation Desk:</span>
-              <a href="tel:+919425100000" class="block font-bold text-[#D4B87C] hover:underline">+91 94251 00000</a>
+              <a href="tel:<?= preg_replace('/\s+/', '', $stayDeskPhone) ?>" class="block font-bold text-[#D4B87C] hover:underline"><?= esc($stayDeskPhone) ?></a>
             </div>
-            <a href="https://wa.me/919425100000?text=Hi%20Kanha%20Kisli%20Holiday,%20I%20want%20to%20inquire%20about%20cottage%20stay%20booking" 
+            <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $stayWaPhone) ?>?text=Hi%20Kanha%20Kisli%20Holiday,%20I%20want%20to%20inquire%20about%20cottage%20stay%20booking" 
                target="_blank" 
-               rel="noopener"
+               rel="noopener" 
                class="px-3 py-1.5 rounded-lg bg-emerald-700/80 hover:bg-emerald-600 text-warm-white text-[11px] font-medium flex items-center gap-1.5 transition">
               <span>WhatsApp</span>
             </a>
@@ -547,28 +563,28 @@
 <script>
   const galleryImages = [
     {
-      src: "<?= base_url('assets/images/forest-lodge.jpg') ?>",
-      alt: "Forest cottages tucked beneath sal trees at Kanha Kisli Holiday",
-      tag: "Forest Living · Khatia Gate",
-      caption: "Private Cottages Tucked Under Ancient Sal Trees"
+      src: "<?= base_url('assets/images/hotel/hotel-pool-aerial.jpg') ?>",
+      alt: "Aerial view of Kanha Kisli Holiday resort swimming pool and forest canopy",
+      tag: "Resort Grounds · Nature Pool",
+      caption: "Serene Swimming Pool & Elevated Canopy Huts Under Sal Trees"
     },
     {
-      src: "<?= base_url('assets/images/lodge-interior.jpg') ?>",
-      alt: "Warm wooden cottage bedroom and private veranda sit-out",
-      tag: "Rustic Comfort · Eco-Friendly",
-      caption: "Handcrafted Teakwood Interiors & Veranda Sit-out"
+      src: "<?= base_url('assets/images/hotel/hotel-room-interior.jpg') ?>",
+      alt: "Luxury twin cottage bedroom with handcrafted furniture and balcony view",
+      tag: "Cottage Bedroom · Forest View",
+      caption: "Handcrafted Teakwood Interiors & Forest Balcony Outlook"
     },
     {
-      src: "<?= base_url('assets/images/slider/1.webp') ?>",
-      alt: "Swimming pool and forest sundeck surrounded by trees",
-      tag: "Relaxation · Nature Pool",
-      caption: "Serene Swimming Pool & Sun Deck Beneath Sal Foliage"
+      src: "<?= base_url('assets/images/hotel/hotel-veranda-coffee.jpg') ?>",
+      alt: "Private wooden veranda sit-out with artisanal coffee and daybed lounger",
+      tag: "Private Veranda · Sal Forest",
+      caption: "Unhurried Morning Chai & Coffee on Your Private Veranda"
     },
     {
-      src: "<?= base_url('assets/images/slider/2.jpg') ?>",
-      alt: "Candlelit romantic dining under fairy lights by the pool",
-      tag: "Dining · Starlit Nights",
-      caption: "Candlelit Evening Dining & Warm Bonfire Evenings"
+      src: "<?= base_url('assets/images/hotel/hotel-dining-pavilion.jpg') ?>",
+      alt: "Open-air wooden lounge and dining pavilion with lanterns and forest panorama",
+      tag: "Dining & Lounge · Wilderness Deck",
+      caption: "Open-Air Forest Lounge Pavilion & Evening Fireside Gatherings"
     }
   ];
 

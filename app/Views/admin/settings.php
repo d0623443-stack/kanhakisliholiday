@@ -44,6 +44,20 @@
         <label class="block text-xs font-semibold text-ink">Location & Nearest Gate Notice</label>
         <input type="text" name="location_text" value="<?= esc($settings['location_text']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none">
       </div>
+
+      <div class="space-y-1">
+        <div class="flex items-center justify-between">
+          <label class="block text-xs font-semibold text-ink">Google Maps Embed Link (Iframe / URL)</label>
+          <?php if (!empty($settings['google_maps_embed'])): ?>
+            <a href="<?= esc(parse_map_embed_url($settings['google_maps_embed'])) ?>" target="_blank" rel="noopener noreferrer" class="text-[11px] text-forest-700 hover:underline inline-flex items-center">
+              <span>Preview Map</span>
+              <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          <?php endif; ?>
+        </div>
+        <textarea name="google_maps_embed" rows="3" placeholder="Paste Google Maps embed URL (https://www.google.com/maps/embed?pb=...) or entire iframe tag" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-xs font-mono focus:ring-2 focus:ring-forest-700/30 outline-none leading-relaxed"><?= esc($settings['google_maps_embed'] ?? '') ?></textarea>
+        <span class="text-[11px] text-muted">Paste your Google Maps embed URL or the full &lt;iframe&gt; code copied from Google Maps Share &gt; Embed a map. Dynamically rendered on the Contact page.</span>
+      </div>
     </div>
 
 
@@ -65,11 +79,16 @@
           <input type="text" name="whatsapp_number" value="<?= esc($settings['whatsapp_number']) ?>" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
           <span class="text-[11px] text-muted">Used for 1-click WhatsApp guest chats and website buttons</span>
         </div>
-      </div>
-
-      <div class="space-y-1">
-        <label class="block text-xs font-semibold text-ink">Helpline Phone Number</label>
-        <input type="text" name="helpline_phone" value="<?= esc($settings['helpline_phone'] ?? $settings['whatsapp_number']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-ink">Primary Mobile Number</label>
+          <input type="text" name="helpline_phone" value="<?= esc($settings['helpline_phone'] ?? $settings['whatsapp_number']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
+          <span class="text-[11px] text-muted">First mobile number displayed across header, footer &amp; contact</span>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-ink">Secondary Mobile Number</label>
+          <input type="text" name="owner_phone" value="<?= esc($settings['owner_phone'] ?? '+91 75667 89123') ?>" placeholder="e.g. +91 98260 12345" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
+          <span class="text-[11px] text-muted">Second mobile number displayed alongside primary number</span>
+        </div>
       </div>
     </div>
 
