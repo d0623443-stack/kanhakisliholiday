@@ -18,11 +18,9 @@ abstract class AdminBaseController extends BaseController
     ) {
         parent::initController($request, $response, $logger);
 
-        // Simulated session check: if not logged in, auto-seed demo session or redirect
-        if (!session()->get('admin_logged_in')) {
-            // For smooth development preview, if accessed directly, we can auto-seed demo session or check query param
-            // But let's check if the user asked "present with login redirect"
-            // So if not logged in, redirect to login!
+        // Enforce 404 if admin_enabled is not '1' in settings
+        if (function_exists('is_admin_link_enabled') && !is_admin_link_enabled()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('The requested page was not found.');
         }
 
         $this->adminData = [

@@ -19,19 +19,19 @@ if (! function_exists('get_mail_config')) {
     {
         return [
             'protocol'       => 'smtp',
-            'SMTPHost'       => 'mail.kanhawild.in',
-            'SMTPUser'       => 'noreply@kanhawild.in',
-            'SMTPPass'       => '5Bjp8@wiirw^^-a7',
+            'SMTPHost'       => 'mail.kanhakisliholiday.in',
+            'SMTPUser'       => 'noreply@kanhakisliholiday.in',
+            'SMTPPass'       => 'z@zHc*^uuymDGD7a',
             'SMTPPort'       => 587,
             'SMTPCrypto'     => 'tls',
             'SMTPAuth'       => true,
             'SMTPAutoTLS'    => true,
-            'fromEmail'      => 'noreply@kanhawild.in',
-            'fromName'       => 'Kanha Wild',
-            'receiverEmail'  => defined('RECIEVER_MAIL') ? RECIEVER_MAIL : 'danishkhan989@gmail.com',
+            'fromEmail'      => 'noreply@kanhakisliholiday.in',
+            'fromName'       => 'Kanha Kisli Holiday',
+            'receiverEmail'  => defined('RECIEVER_MAIL') ? RECIEVER_MAIL : (get_site_setting('notification_mail') ?: 'danishkhan989@gmail.com'),
             'mailType'       => 'html',
             'charset'        => 'UTF-8',
-            'timeout'        => 30,
+            'timeout'        => 15,
             'SMTPDebug'      => 0,
             'verifyPeer'     => false,
             'verifyPeerName' => false,
@@ -44,12 +44,16 @@ if (! function_exists('send_mail_notification')) {
     /**
      * Send email notification via SMTP with custom SSL/TLS context & AUTH PLAIN
      */
-    function send_mail_notification(string $subject, string $htmlBody, ?string $replyToEmail = null, ?string $replyToName = null): bool
+    function send_mail_notification(string $subject, string $htmlBody, ?string $replyToEmail = null, ?string $replyToName = null, bool $bypassSetting = false): bool
     {
+        if (! $bypassSetting && get_site_setting('auto_email_lead', '1') !== '1') {
+            log_message('info', 'send_mail_notification skipped: auto_email_lead is disabled in settings.');
+            return false;
+        }
+
         $config = get_mail_config();
-        $host = $config['SMTPHost'];
         $port = (int) $config['SMTPPort'];
-        $timeout = (int) ($config['timeout'] ?? 30);
+        $timeout = (int) ($config['timeout'] ?? 15);
 
         $context = stream_context_create([
             'ssl' => [
@@ -59,17 +63,33 @@ if (! function_exists('send_mail_notification')) {
             ],
         ]);
 
-        $socket = @stream_socket_client(
-            "tcp://{$host}:{$port}",
-            $errno,
-            $errstr,
-            $timeout,
-            STREAM_CLIENT_CONNECT,
-            $context
-        );
+        $candidateHosts = array_unique(array_filter([
+            $config['SMTPHost'] ?? 'mail.kanhakisliholiday.in',
+            'mail.kanhakisliholiday.in',
+            '127.0.0.1',
+        ]));
+
+        $socket = null;
+        $connectedHost = null;
+
+        foreach ($candidateHosts as $h) {
+            $sock = @stream_socket_client(
+                "tcp://{$h}:{$port}",
+                $errno,
+                $errstr,
+                $timeout,
+                STREAM_CLIENT_CONNECT,
+                $context
+            );
+            if ($sock) {
+                $socket = $sock;
+                $connectedHost = $h;
+                break;
+            }
+        }
 
         if (! $socket) {
-            log_message('error', "SMTP Connection failed to {$host}:{$port} - {$errstr} ({$errno})");
+            log_message('error', "SMTP Connection failed to candidate hosts on port {$port}");
             return false;
         }
 
@@ -187,6 +207,28 @@ if (! function_exists('parse_map_embed_url')) {
         }
         // Direct URL or already parsed
         return htmlspecialchars_decode($trimmed);
+    }
+}
+
+if (! function_exists('is_admin_link_enabled')) {
+    /**
+     * Checks if the admin portal / link is enabled in settings.
+     * When value is '1', admin routes work; otherwise returns false (triggering 404).
+     */
+    function is_admin_link_enabled(): bool
+    {
+        $val = get_site_setting('admin_enabled', '');
+        if ($val === '') {
+            $val = get_site_setting('admin_link', '');
+        }
+        if ($val === '') {
+            $val = get_site_setting('admin_status', '');
+        }
+        // If not explicitly set in database, default to enabled ('1')
+        if ($val === '') {
+            return true;
+        }
+        return trim((string)$val) === '1';
     }
 }
 

@@ -146,7 +146,7 @@ class Content extends AdminBaseController
                 'phone_secondary' => '+91 76422 00000',
                 'phone_owner'     => '+91 75667 89123',
                 'whatsapp'        => '+91 94251 00000',
-                'email'           => 'stay@kanhakisliholiday.com',
+                'email'           => 'bookings@kanhakisliholiday.in',
                 'address'         => 'Kanha Kisli Holiday, Near Khatia / Kisli Gate, Mandla District, Madhya Pradesh — 481768, India',
                 'hours'           => 'Daily: 08:00 AM – 08:00 PM IST',
                 'google_maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58728.89240410408!2d80.57500355!3d22.2858145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2a68393693e507%3A0xc3d5d7e48ce19cf5!2sKanha%20Tiger%20Reserve%2C%20Khatia%20Gate!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin',

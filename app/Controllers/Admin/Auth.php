@@ -7,6 +7,19 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class Auth extends BaseController
 {
+    public function initController(
+        \CodeIgniter\HTTP\RequestInterface $request,
+        \CodeIgniter\HTTP\ResponseInterface $response,
+        \Psr\Log\LoggerInterface $logger
+    ) {
+        parent::initController($request, $response, $logger);
+
+        // Enforce 404 if admin_enabled is not '1' in settings
+        if (function_exists('is_admin_link_enabled') && !is_admin_link_enabled()) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('The requested page was not found.');
+        }
+    }
+
     public function index(): RedirectResponse
     {
         if (session()->get('admin_logged_in')) {

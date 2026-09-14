@@ -167,6 +167,10 @@
         <a href="<?= base_url('contact') ?>" class="hover:text-warm-white transition-colors">Privacy Policy</a>
         <span class="text-forest-800">&middot;</span>
         <a href="<?= base_url('contact') ?>" class="hover:text-warm-white transition-colors">Safari Guidelines</a>
+        <?php if (function_exists('is_admin_link_enabled') && is_admin_link_enabled()): ?>
+          <span class="text-forest-800">&middot;</span>
+          <a href="<?= base_url('admin') ?>" class="hover:text-warm-white transition-colors">Admin</a>
+        <?php endif; ?>
       </div>
     </div>
 

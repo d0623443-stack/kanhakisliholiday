@@ -13,7 +13,7 @@ $routes->post('safari/book', 'Safari::book');
 $routes->post('accommodation/book', 'Accommodation::book');
 
 // Admin Panel Routes
-$routes->group('admin', function ($routes) {
+$routes->group('admin', ['filter' => 'adminAccess'], function ($routes) {
     $routes->get('/', 'Admin\Auth::index');
     $routes->get('login', 'Admin\Auth::login');
     $routes->post('login', 'Admin\Auth::authenticate');
@@ -46,5 +46,6 @@ $routes->group('admin', function ($routes) {
     // Settings
     $routes->get('settings', 'Admin\Settings::index');
     $routes->post('settings/update', 'Admin\Settings::update');
+    $routes->post('settings/test-email', 'Admin\Settings::testEmail');
 });
 

@@ -63,28 +63,58 @@
 
     <!-- Card 2: Notification & Booking Channels -->
     <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-5">
-      <div class="border-b border-stone/20 pb-3">
-        <h3 class="font-serif text-xl font-bold text-ink">Notification & Communication Channels</h3>
-        <p class="text-xs text-muted">Where guest inquiries from safari and stay forms are dispatched.</p>
+      <div class="border-b border-stone/20 pb-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h3 class="font-serif text-xl font-bold text-ink">Notification &amp; Communication Channels</h3>
+          <p class="text-xs text-muted">Where guest inquiries from safari, stay, and contact forms are dispatched.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-1 rounded-full text-[11px] font-mono <?= (($settings['auto_email_lead'] ?? '1') === '1') ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' ?>">
+            <?= (($settings['auto_email_lead'] ?? '1') === '1') ? '● Enquiry Email Active' : '○ Enquiry Email Disabled' ?>
+          </span>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Enquiry Email Sending Option -->
         <div class="space-y-1">
-          <label class="block text-xs font-semibold text-ink">Lead Notification Email</label>
-          <input type="email" name="notification_mail" value="<?= esc($settings['notification_mail']) ?>" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none">
-          <span class="text-[11px] text-muted">Receives instant copies of every booking request</span>
+          <label class="block text-xs font-semibold text-ink">Enquiry Email Sending (<code>auto_email_lead</code>)</label>
+          <select name="auto_email_lead" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none font-medium">
+            <option value="1" <?= (($settings['auto_email_lead'] ?? '1') === '1') ? 'selected' : '' ?>>1 — Enabled (Send instant notification email for every enquiry)</option>
+            <option value="0" <?= (($settings['auto_email_lead'] ?? '1') !== '1') ? 'selected' : '' ?>>0 — Disabled (Save leads to database only, pause email alerts)</option>
+          </select>
+          <span class="text-[11px] text-muted">Toggles automated email dispatch for Safari, Stay &amp; Contact forms</span>
         </div>
+
+        <!-- Lead Notification Email -->
+        <div class="space-y-1">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-semibold text-ink">Lead Notification Recipient Email</label>
+            <button type="submit" formaction="<?= base_url('admin/settings/test-email') ?>" class="text-[11px] text-forest-700 hover:text-forest-900 font-semibold underline decoration-dotted hover:decoration-solid inline-flex items-center gap-1 cursor-pointer">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>Send Test Email</span>
+            </button>
+          </div>
+          <input type="email" name="notification_mail" value="<?= esc($settings['notification_mail']) ?>" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none">
+          <span class="text-[11px] text-muted">Inbox address that receives instant copies of every guest enquiry</span>
+        </div>
+
+        <!-- WhatsApp Desk Direct Number -->
         <div class="space-y-1">
           <label class="block text-xs font-semibold text-ink">WhatsApp Desk Direct Number</label>
           <input type="text" name="whatsapp_number" value="<?= esc($settings['whatsapp_number']) ?>" required class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
           <span class="text-[11px] text-muted">Used for 1-click WhatsApp guest chats and website buttons</span>
         </div>
+
+        <!-- Primary Mobile Number -->
         <div class="space-y-1">
           <label class="block text-xs font-semibold text-ink">Primary Mobile Number</label>
           <input type="text" name="helpline_phone" value="<?= esc($settings['helpline_phone'] ?? $settings['whatsapp_number']) ?>" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
           <span class="text-[11px] text-muted">First mobile number displayed across header, footer &amp; contact</span>
         </div>
-        <div class="space-y-1">
+
+        <!-- Secondary Mobile Number -->
+        <div class="space-y-1 sm:col-span-2">
           <label class="block text-xs font-semibold text-ink">Secondary Mobile Number</label>
           <input type="text" name="owner_phone" value="<?= esc($settings['owner_phone'] ?? '+91 75667 89123') ?>" placeholder="e.g. +91 98260 12345" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm font-mono focus:ring-2 focus:ring-forest-700/30 outline-none">
           <span class="text-[11px] text-muted">Second mobile number displayed alongside primary number</span>
@@ -119,6 +149,41 @@
         <div class="space-y-1">
           <label class="block text-xs font-semibold text-ink">Confirm New Password</label>
           <input type="password" name="confirm_password" placeholder="Confirm new password" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Card 4: Admin Portal Access & Visibility -->
+    <div class="bg-warm-white rounded-3xl border border-stone/40 p-6 sm:p-8 shadow-xs space-y-5">
+      <div class="border-b border-stone/20 pb-3 flex items-center justify-between">
+        <div>
+          <h3 class="font-serif text-xl font-bold text-ink">Admin Portal Access &amp; Visibility</h3>
+          <p class="text-xs text-muted">Controls whether the admin link in footer and the <code>/admin</code> routes are active or return a 404 Page Not Found error.</p>
+        </div>
+        <span class="px-2.5 py-1 rounded-full text-[11px] font-mono <?= (($settings['admin_enabled'] ?? '1') === '1') ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800' ?>">
+          <?= (($settings['admin_enabled'] ?? '1') === '1') ? '● Active' : '○ Disabled (404)' ?>
+        </span>
+      </div>
+
+      <div class="space-y-3">
+        <div class="max-w-md space-y-1">
+          <label class="block text-xs font-semibold text-ink">Admin Access State (<code>admin_enabled</code>)</label>
+          <select name="admin_enabled" class="w-full px-3.5 py-2.5 rounded-xl border border-stone/50 bg-white text-sm focus:ring-2 focus:ring-forest-700/30 outline-none">
+            <option value="1" <?= (($settings['admin_enabled'] ?? '1') === '1') ? 'selected' : '' ?>>1 — Enabled (Admin link visible, /admin routes work)</option>
+            <option value="0" <?= (($settings['admin_enabled'] ?? '1') !== '1') ? 'selected' : '' ?>>0 — Disabled (Admin link hidden, /admin returns 404 Not Found)</option>
+          </select>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-forest-900/5 border border-forest-900/10 text-xs text-body space-y-1">
+          <div class="font-semibold text-forest-900 flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-forest-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Direct Database Control</span>
+          </div>
+          <p class="text-[12px] text-muted">
+            You can change this directly in MySQL (e.g. phpMyAdmin):<br>
+            <code class="font-mono bg-white px-2 py-0.5 rounded border border-stone/30 text-ink">UPDATE settings SET value_content = '1' WHERE key_name = 'admin_enabled';</code> to enable.<br>
+            <code class="font-mono bg-white px-2 py-0.5 rounded border border-stone/30 text-ink">UPDATE settings SET value_content = '0' WHERE key_name = 'admin_enabled';</code> to disable &amp; show 404.
+          </p>
         </div>
       </div>
     </div>

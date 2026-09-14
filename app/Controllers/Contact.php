@@ -123,7 +123,7 @@ class Contact extends BaseController
         <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;'>
             <div style='background-color: #234B35; color: #fff; padding: 18px 24px;'>
                 <h2 style='margin: 0; font-size: 20px;'>New Website Enquiry [{$enquiryCode}]</h2>
-                <p style='margin: 4px 0 0; font-size: 13px; opacity: 0.85;'>Kanha Kisli Holiday / Kanha Wild</p>
+                <p style='margin: 4px 0 0; font-size: 13px; opacity: 0.85;'>Kanha Kisli Holiday Desk</p>
             </div>
             <div style='padding: 24px;'>
                 <table style='width: 100%; border-collapse: collapse; font-size: 14px;'>

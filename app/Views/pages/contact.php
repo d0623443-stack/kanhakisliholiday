@@ -104,7 +104,7 @@
             </div>
             <div>
               <h3 class="font-semibold text-ink text-sm sm:text-base">Email Enquiry</h3>
-              <p class="text-body text-sm mt-0.5"><a href="mailto:<?= esc($content['email'] ?? $settings['admin_email'] ?? 'stay@kanhakisliholiday.com') ?>" class="hover:text-forest-700 transition-colors"><?= esc($content['email'] ?? $settings['admin_email'] ?? 'stay@kanhakisliholiday.com') ?></a></p>
+              <p class="text-body text-sm mt-0.5"><a href="mailto:<?= esc($content['email'] ?? $settings['notification_mail'] ?? 'bookings@kanhakisliholiday.in') ?>" class="hover:text-forest-700 transition-colors"><?= esc($content['email'] ?? $settings['notification_mail'] ?? 'bookings@kanhakisliholiday.in') ?></a></p>
             </div>
           </div>
 

@@ -26,7 +26,9 @@ class Settings extends AdminBaseController
             'site_name'         => 'Kanha Kisli Holiday Resort',
             'site_tagline'      => 'Discover the wild. Feel closer to nature.',
             'admin_email'       => 'admin@kanhakisli.com',
-            'notification_mail' => 'bookings@kanhakisliholiday.com',
+            'admin_enabled'     => '1',
+            'auto_email_lead'   => '1',
+            'notification_mail' => 'bookings@kanhakisliholiday.in',
             'whatsapp_number'   => '+91 94251 00000',
             'helpline_phone'    => '+91 94251 00000',
             'owner_phone'       => '+91 75667 89123',
@@ -67,10 +69,12 @@ class Settings extends AdminBaseController
             'site_tagline',
             'location_text',
             'google_maps_embed',
+            'auto_email_lead',
             'notification_mail',
             'whatsapp_number',
             'helpline_phone',
             'owner_phone',
+            'admin_enabled',
         ];
 
         foreach ($settingsToUpdate as $key) {
@@ -135,6 +139,44 @@ class Settings extends AdminBaseController
         }
 
         session()->setFlashdata('success', 'All system settings and administrator profile updated successfully!');
+        return redirect()->to(base_url('admin/settings'));
+    }
+
+    public function testEmail()
+    {
+        if ($redirect = $this->checkAuth()) {
+            return $redirect;
+        }
+
+        $recipient = get_site_setting('notification_mail', 'bookings@kanhakisliholiday.in');
+        $subject   = 'Test Email Notification — Kanha Kisli Holiday Admin';
+        $body      = "<div style='font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden;'>
+            <div style='background: #234B35; color: #ffffff; padding: 20px 24px;'>
+                <h2 style='margin: 0; font-size: 18px;'>SMTP Test Email</h2>
+                <p style='margin: 4px 0 0; font-size: 12px; opacity: 0.85;'>Kanha Kisli Holiday Portal Verification</p>
+            </div>
+            <div style='padding: 24px; font-size: 14px; line-height: 1.6; color: #333;'>
+                <p>Hello Administrator,</p>
+                <p>This is a test notification confirming that your email configuration and SMTP communication channels are working properly.</p>
+                <div style='background: #f4f6f4; border-left: 4px solid #234B35; padding: 12px 16px; margin: 16px 0; font-size: 13px;'>
+                    <strong>Target Recipient:</strong> {$recipient}<br>
+                    <strong>Timestamp:</strong> " . date('Y-m-d H:i:s T') . "
+                </div>
+                <p style='color: #666; font-size: 12px; margin-top: 24px;'>Dispatched from Admin Panel &middot; Kanha Kisli Holiday Resort</p>
+            </div>
+        </div>";
+
+        if (function_exists('send_mail_notification')) {
+            $sent = send_mail_notification($subject, $body, null, null, true);
+            if ($sent) {
+                session()->setFlashdata('success', "Test email sent successfully to {$recipient}!");
+            } else {
+                session()->setFlashdata('error', "Could not send test email to {$recipient}. Please check SMTP configuration in app/Config/Email.php or mail server status.");
+            }
+        } else {
+            session()->setFlashdata('error', 'Email notification service is not available.');
+        }
+
         return redirect()->to(base_url('admin/settings'));
     }
 }

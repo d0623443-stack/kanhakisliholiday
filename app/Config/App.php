@@ -29,7 +29,13 @@ class App extends BaseConfig
      *
      * @var list<string>
      */
-    public array $allowedHostnames = ['localhost', '127.0.0.1', 'localhost:8080'];
+    public array $allowedHostnames = [
+        'kanhakisliholiday.in',
+        'www.kanhakisliholiday.in',
+        'localhost',
+        '127.0.0.1',
+        'localhost:8080',
+    ];
 
     public function __construct()
     {
@@ -38,10 +44,12 @@ class App extends BaseConfig
         if (isset($_SERVER['HTTP_HOST'])) {
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
             $host = $_SERVER['HTTP_HOST'];
-            if (str_contains($host, '8080')) {
+            if ($host === 'localhost' || $host === '127.0.0.1') {
+                $this->baseURL = $protocol . $host . '/kanhakisliholiday/';
+            } elseif (str_contains($host, '8080')) {
                 $this->baseURL = $protocol . $host . '/';
             } else {
-                $this->baseURL = $protocol . $host . '/kanhakisliholiday/';
+                $this->baseURL = $protocol . $host . '/';
             }
         }
     }
