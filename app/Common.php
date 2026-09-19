@@ -17,6 +17,10 @@
 if (! function_exists('get_mail_config')) {
     function get_mail_config(): array
     {
+        $adminMail = (function_exists('get_site_setting') && ! empty(get_site_setting('notification_mail')))
+            ? get_site_setting('notification_mail')
+            : (defined('RECIEVER_MAIL') ? RECIEVER_MAIL : 'danishkhan989@gmail.com');
+
         return [
             'protocol'       => 'smtp',
             'SMTPHost'       => 'mail.kanhakisliholiday.in',
@@ -28,7 +32,7 @@ if (! function_exists('get_mail_config')) {
             'SMTPAutoTLS'    => true,
             'fromEmail'      => 'noreply@kanhakisliholiday.in',
             'fromName'       => 'Kanha Kisli Holiday',
-            'receiverEmail'  => defined('RECIEVER_MAIL') ? RECIEVER_MAIL : (get_site_setting('notification_mail') ?: 'danishkhan989@gmail.com'),
+            'receiverEmail'  => $adminMail,
             'mailType'       => 'html',
             'charset'        => 'UTF-8',
             'timeout'        => 15,
@@ -44,7 +48,7 @@ if (! function_exists('send_mail_notification')) {
     /**
      * Send email notification via SMTP with custom SSL/TLS context & AUTH PLAIN
      */
-    function send_mail_notification(string $subject, string $htmlBody, ?string $replyToEmail = null, ?string $replyToName = null, bool $bypassSetting = false): bool
+    function send_mail_notification(string $subject, string $htmlBody, ?string $replyToEmail = null, ?string $replyToName = null, bool $bypassSetting = false, ?string $toOverride = null): bool
     {
         if (! $bypassSetting && get_site_setting('auto_email_lead', '1') !== '1') {
             log_message('info', 'send_mail_notification skipped: auto_email_lead is disabled in settings.');
@@ -141,16 +145,23 @@ if (! function_exists('send_mail_notification')) {
         }
 
         $from = $config['fromEmail'];
-        $to = $config['receiverEmail'];
+        $rawTo = $toOverride ?: $config['receiverEmail'];
+        $toEmails = array_map('trim', preg_split('/[,;]+/', $rawTo));
+        $toEmails = array_filter($toEmails, fn($e) => filter_var($e, FILTER_VALIDATE_EMAIL));
+        if (empty($toEmails)) {
+            $toEmails = [$config['receiverEmail']];
+        }
 
         $sendCmd($socket, "MAIL FROM:<{$from}>");
-        $sendCmd($socket, "RCPT TO:<{$to}>");
+        foreach ($toEmails as $recipient) {
+            $sendCmd($socket, "RCPT TO:<{$recipient}>");
+        }
         $sendCmd($socket, 'DATA');
 
         $headers = [
             'Date: ' . date('r'),
             'From: ' . '=?UTF-8?B?' . base64_encode($config['fromName']) . "?= <{$from}>",
-            'To: <' . $to . '>',
+            'To: ' . implode(', ', array_map(fn($r) => "<{$r}>", $toEmails)),
             'Subject: ' . '=?UTF-8?B?' . base64_encode($subject) . '?=',
             'MIME-Version: 1.0',
             'Content-Type: text/html; charset=UTF-8',

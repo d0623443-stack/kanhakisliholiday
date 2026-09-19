@@ -11,6 +11,7 @@ $routes->get('contact', 'Contact::index');
 $routes->post('contact/enquiry', 'Contact::enquiry');
 $routes->post('safari/book', 'Safari::book');
 $routes->post('accommodation/book', 'Accommodation::book');
+$routes->post('taxi/enquiry', 'Contact::taxiEnquiry');
 
 // Admin Panel Routes
 $routes->group('admin', ['filter' => 'adminAccess'], function ($routes) {

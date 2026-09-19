@@ -377,6 +377,202 @@ $resolveImg = function(?string $path, string $fallback): string {
 </section>
 
 
+<!-- SECTION 3.5: TAXI & TRANSFERS (Taxi Image with Short Form) -->
+<section id="taxi-transfers" class="py-12 sm:py-16 md:py-24 bg-ivory/60 border-t border-b border-stone/30 relative overflow-hidden scroll-mt-24" aria-label="Taxi and Airport Transfers">
+  
+  <!-- Subtle Botanical Etching Accent in Background -->
+  <div class="absolute -bottom-10 -right-10 w-48 sm:w-64 pointer-events-none opacity-15 text-moss">
+    <img src="<?= base_url('assets/icons/leaf-branch.svg') ?>" alt="" class="w-full h-auto" />
+  </div>
+
+  <div class="max-w-site mx-auto px-5 sm:px-8 md:px-12 relative z-10">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: stretch;">
+      
+      <!-- Left Column: Taxi Image (Perfectly Aligned with Form) -->
+      <div class="w-full flex flex-col h-full" style="min-height: 360px;">
+        <div class="relative rounded-3xl overflow-hidden shadow-xl border border-stone/40 bg-sand group w-full h-full flex-1" style="height: 100%;">
+          <img src="<?= base_url('assets/images/kanha-taxi-transfer.jpg') ?>" 
+               alt="Private taxi and cab transfers to Kanha National Park" 
+               class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700" 
+               style="width: 100%; height: 100%; object-fit: cover;" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-950/65 via-transparent to-transparent pointer-events-none"></div>
+          
+          <!-- Bottom Overlay Tag -->
+          <div class="absolute bottom-4 left-4 right-4 bg-forest-950/85 backdrop-blur-md border border-[#D4B87C]/40 text-warm-white p-3 sm:p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-lg z-10">
+            <div>
+              <div class="text-[11px] font-mono text-[#D4B87C] uppercase tracking-wider">Jabalpur · Nagpur · Raipur · Gondia</div>
+              <div class="text-xs font-medium text-warm-white">Direct resort pickup &amp; gate drops</div>
+            </div>
+            <span class="inline-flex px-2.5 py-1 rounded-full bg-[#D4B87C]/20 border border-[#D4B87C]/50 text-[#D4B87C] text-[10px] font-mono uppercase tracking-wider shrink-0">
+              AC Fleet
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Minimized Short Form (Matching Height) -->
+      <div class="w-full h-full flex flex-col justify-between bg-warm-white p-6 sm:p-7 md:p-8 rounded-3xl border border-stone/40 shadow-lg" style="height: 100%;">
+        
+        <div class="space-y-1 mb-4">
+          <div class="text-[11px] font-semibold tracking-widest-plus uppercase text-forest-700">
+            Taxi &amp; Airport Transfers
+          </div>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
+            Book Your Cab to Kanha
+          </h2>
+          <p class="text-body text-xs sm:text-sm">
+            Sanitized AC door-to-door cab transfers from Jabalpur, Nagpur, Raipur &amp; Gondia.
+          </p>
+        </div>
+
+        <!-- Flash Success / Error message in card -->
+        <?php if (session()->getFlashdata('taxi_success')): ?>
+          <div class="mb-3 p-3.5 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs sm:text-sm flex items-start gap-2 shadow-sm">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <div>
+              <div class="font-semibold">Enquiry Sent!</div>
+              <div class="text-xs text-emerald-800 mt-0.5"><?= esc(session()->getFlashdata('taxi_success')) ?></div>
+            </div>
+          </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('taxi_errors')): ?>
+          <div class="mb-3 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs">
+            <ul class="list-disc list-inside space-y-0.5">
+              <?php foreach (session()->getFlashdata('taxi_errors') as $err): ?>
+                <li><?= esc($err) ?></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        <?php endif; ?>
+
+        <!-- Minimized Short Form (Name, Phone, Pickup, Drop, Date) -->
+        <form action="<?= base_url('taxi/enquiry') ?>" method="POST" class="space-y-3">
+          <?= csrf_field() ?>
+
+          <!-- Row 1: Name & Phone -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="taxi-short-name" class="block text-xs font-semibold text-ink mb-1">
+                Your Name <span class="text-forest-700">*</span>
+              </label>
+              <input type="text" 
+                     id="taxi-short-name" 
+                     name="name" 
+                     required 
+                     value="<?= old('name') ?>" 
+                     placeholder="e.g. Vikram Malhotra" 
+                     class="w-full px-3 py-2 rounded-xl border border-stone/50 bg-white text-xs sm:text-sm text-ink placeholder-muted focus:outline-none focus:border-forest-800" />
+            </div>
+
+            <div>
+              <label for="taxi-short-phone" class="block text-xs font-semibold text-ink mb-1">
+                Phone / WhatsApp <span class="text-forest-700">*</span>
+              </label>
+              <input type="tel" 
+                     id="taxi-short-phone" 
+                     name="phone" 
+                     required 
+                     value="<?= old('phone') ?>" 
+                     placeholder="e.g. +91 98765 43210" 
+                     class="w-full px-3 py-2 rounded-xl border border-stone/50 bg-white text-xs sm:text-sm text-ink placeholder-muted focus:outline-none focus:border-forest-800" />
+            </div>
+          </div>
+
+          <!-- Row 2: Pickup & Drop Locations -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="taxi-short-pickup" class="block text-xs font-semibold text-ink mb-1">
+                Pick-up Location <span class="text-forest-700">*</span>
+              </label>
+              <select id="taxi-short-pickup" 
+                      name="pickup_location" 
+                      required 
+                      class="w-full px-3 py-2 rounded-xl border border-stone/50 bg-white text-xs sm:text-sm text-ink focus:outline-none focus:border-forest-800">
+                <option value="Jabalpur Airport (JLR)">Jabalpur Airport (JLR)</option>
+                <option value="Jabalpur Railway Station">Jabalpur Railway Station</option>
+                <option value="Nagpur Airport (NAG)">Nagpur Airport (NAG)</option>
+                <option value="Nagpur Railway Station">Nagpur Railway Station</option>
+                <option value="Raipur Airport (RPR)">Raipur Airport (RPR)</option>
+                <option value="Gondia Railway Station">Gondia Railway Station</option>
+                <option value="Kanha Resort / Lodge">Kanha Resort (Departure)</option>
+                <option value="Bandhavgarh / Pench">Bandhavgarh / Pench</option>
+                <option value="Other Location">Other City / Location</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="taxi-short-drop" class="block text-xs font-semibold text-ink mb-1">
+                Drop Destination <span class="text-forest-700">*</span>
+              </label>
+              <select id="taxi-short-drop" 
+                      name="drop_location" 
+                      required 
+                      class="w-full px-3 py-2 rounded-xl border border-stone/50 bg-white text-xs sm:text-sm text-ink focus:outline-none focus:border-forest-800">
+                <option value="Kanha Mukki Gate" selected>Kanha Mukki Gate</option>
+                <option value="Kanha Khatia / Kisli Gate">Kanha Khatia / Kisli Gate</option>
+                <option value="Kanha Sarhi Gate">Kanha Sarhi Gate</option>
+                <option value="Jabalpur Airport / Station">Jabalpur Airport / Station</option>
+                <option value="Nagpur Airport / Station">Nagpur Airport / Station</option>
+                <option value="Raipur Airport">Raipur Airport</option>
+                <option value="Gondia Railway Station">Gondia Railway Station</option>
+                <option value="Other Destination">Other Destination</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 3: Travel Date & Submit Button -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end pt-1">
+            <div>
+              <label for="taxi-short-date" class="block text-xs font-semibold text-ink mb-1">
+                Travel Date <span class="text-forest-700">*</span>
+              </label>
+              <input type="date" 
+                     id="taxi-short-date" 
+                     name="travel_date" 
+                     required 
+                     min="<?= date('Y-m-d') ?>" 
+                     value="<?= old('travel_date') ?>" 
+                     class="w-full px-3 py-2 rounded-xl border border-stone/50 bg-white text-xs sm:text-sm text-ink focus:outline-none focus:border-forest-800" />
+            </div>
+
+            <div>
+              <button type="submit" 
+                      class="w-full py-2 px-5 rounded-xl bg-forest-900 hover:bg-forest-800 text-warm-white font-semibold text-xs sm:text-sm transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer h-[38px]">
+                <span>Submit Cab Enquiry</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick WhatsApp Link & Reassurance -->
+          <div class="pt-2 flex items-center justify-between gap-3 text-xs border-t border-stone/30">
+            <span class="text-[11px] text-muted flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Fast confirmation via phone / WhatsApp
+            </span>
+
+            <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['helpline_phone'] ?? '+916267801254') ?>?text=Hi%20Kanha%20Kisli%20Holiday,%20I%20would%20like%20to%20enquire%20about%20a%20taxi%20transfer%20to%20Kanha." 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="inline-flex items-center gap-1.5 text-forest-900 hover:text-forest-950 font-medium text-xs shrink-0"
+               style="white-space: nowrap;">
+              <span class="w-2 h-2 rounded-full bg-[#25D366]"></span>
+              <span>WhatsApp Chat</span>
+            </a>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
 <!-- SECTION 4: ACCOMMODATION PREVIEW (Required Upgrade per spec) -->
 <section class="py-14 sm:py-20 md:py-32 bg-warm-white" aria-label="Accommodation Preview">
   <div class="max-w-site mx-auto px-5 sm:px-8 md:px-12">

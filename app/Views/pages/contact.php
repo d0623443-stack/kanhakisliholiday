@@ -67,7 +67,7 @@
             </div>
             <div>
               <h3 class="font-semibold text-ink text-sm sm:text-base">Location & Gate</h3>
-              <p class="text-body text-sm mt-0.5"><?= esc($content['address'] ?? $settings['location_text'] ?? 'Kanha Kisli Holiday, Near Khatia / Kisli Gate, Mandla District, Madhya Pradesh, India') ?></p>
+              <p class="text-body text-sm mt-0.5"><?= esc($content['address'] ?? $settings['location_text'] ?? 'Mukki Gate, Kanha National Park, Madhya Pradesh, India') ?></p>
             </div>
           </div>
 
@@ -152,7 +152,7 @@
             Find Us at Kanha Tiger Reserve
           </h3>
           <p class="text-body text-sm leading-relaxed">
-            Conveniently situated near the Khatia and Kisli entrance gates. Use the interactive map below to explore our exact location and scenic approach routes.
+            Conveniently situated near the Mukki entrance gate. Use the interactive map below to explore our exact location and scenic approach routes.
           </p>
         </div>
 
@@ -192,10 +192,10 @@
             <svg class="w-4 h-4 text-forest-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>Nearest Safari Gate: <strong>Khatia / Kisli Gate (approx. 5 mins drive)</strong></span>
+            <span>Nearest Safari Gate: <strong>Mukki Gate (approx. 5 mins drive)</strong></span>
           </div>
 
-          <a href="https://www.google.com/maps/search/?api=1&query=Kanha+Tiger+Reserve+Khatia+Gate" 
+          <a href="https://www.google.com/maps/search/?api=1&query=Mukki+Gate+Kanha+National+Park" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="inline-flex items-center font-semibold text-forest-800 hover:text-forest-950 transition-colors group">

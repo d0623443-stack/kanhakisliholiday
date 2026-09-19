@@ -53,6 +53,10 @@
          class="block text-2xl font-serif italic py-2 px-3 rounded-lg transition-colors <?= ($activeNav ?? '') === 'accommodation' ? 'text-warm-white bg-forest-900 font-semibold' : 'text-stone hover:text-warm-white hover:bg-forest-900/50' ?>">
         Accommodation
       </a>
+      <a href="<?= base_url('/#taxi-transfers') ?>" 
+         class="block text-2xl font-serif italic py-2 px-3 rounded-lg transition-colors text-stone hover:text-warm-white hover:bg-forest-900/50">
+        Taxi &amp; Transfers
+      </a>
       <a href="<?= base_url('gallery') ?>" 
          class="block text-2xl font-serif italic py-2 px-3 rounded-lg transition-colors <?= ($activeNav ?? '') === 'gallery' ? 'text-warm-white bg-forest-900 font-semibold' : 'text-stone hover:text-warm-white hover:bg-forest-900/50' ?>">
         Gallery

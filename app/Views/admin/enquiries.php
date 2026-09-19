@@ -45,6 +45,10 @@
          class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors <?= ($typeFilter ?? '') === 'stay' ? 'bg-forest-900 text-[#D4B87C]' : 'bg-ivory text-body hover:bg-stone/30' ?>">
         Cottage Stays (<?= $counts['stay'] ?? 0 ?>)
       </a>
+      <a href="<?= base_url('admin/enquiries?type=taxi' . ($searchQuery ? '&q=' . urlencode($searchQuery) : '')) ?>" 
+         class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors <?= ($typeFilter ?? '') === 'taxi' ? 'bg-forest-900 text-[#D4B87C]' : 'bg-ivory text-body hover:bg-stone/30' ?>">
+        Taxi Transfers (<?= $counts['taxi'] ?? 0 ?>)
+      </a>
       <a href="<?= base_url('admin/enquiries?type=general' . ($searchQuery ? '&q=' . urlencode($searchQuery) : '')) ?>" 
          class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors <?= ($typeFilter ?? '') === 'general' ? 'bg-forest-900 text-[#D4B87C]' : 'bg-ivory text-body hover:bg-stone/30' ?>">
         General (<?= $counts['general'] ?? 0 ?>)
@@ -64,37 +68,41 @@
                class="w-full pl-8 pr-3 py-1.5 rounded-xl border border-stone/50 bg-white text-xs focus:ring-2 focus:ring-forest-800 outline-none">
         <svg class="w-3.5 h-3.5 text-stone absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
       </div>
-      <button type="submit" class="px-3.5 py-1.5 rounded-xl bg-forest-900 text-warm-white text-xs font-semibold hover:bg-forest-800 transition-colors cursor-pointer">
+      <button type="submit" class="px-3 py-1.5 rounded-xl bg-forest-900 text-warm-white text-xs font-medium hover:bg-forest-800 transition-colors">
         Search
       </button>
-      <?php if ($searchQuery !== ''): ?>
-        <a href="<?= base_url('admin/enquiries') ?>" class="text-xs text-muted hover:text-ink">Reset</a>
+      <?php if ($searchQuery): ?>
+        <a href="<?= base_url('admin/enquiries' . ($typeFilter !== 'all' ? '?type=' . esc($typeFilter) : '')) ?>" class="text-xs text-rose-600 hover:underline">Clear</a>
       <?php endif; ?>
     </form>
 
   </div>
 
 
-  <!-- ENQUIRIES TABLE -->
-  <div class="bg-warm-white rounded-3xl border border-stone/40 shadow-xs overflow-hidden">
+  <!-- ENQUIRIES DATA TABLE -->
+  <div class="bg-warm-white rounded-2xl border border-stone/40 shadow-xs overflow-hidden">
     <div class="overflow-x-auto">
-      <table class="w-full text-left text-xs sm:text-sm">
-        <thead class="bg-ivory/60 text-[11px] font-mono uppercase tracking-wider text-muted border-b border-stone/30">
-          <tr>
-            <th class="py-3 px-4 sm:px-6">ID & Guest</th>
-            <th class="py-3 px-4">Contact</th>
-            <th class="py-3 px-4">Service Type</th>
-            <th class="py-3 px-4">Dates & Preferences</th>
-            <th class="py-3 px-4">Status</th>
-            <th class="py-3 px-4 sm:px-6 text-right">Actions</th>
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b border-stone/30 bg-sand/35 text-[11px] font-mono uppercase tracking-wider text-forest-900/80">
+            <th class="py-3.5 px-4 sm:px-6">Enquiry ID &amp; Guest</th>
+            <th class="py-3.5 px-4">Contact</th>
+            <th class="py-3.5 px-4">Service</th>
+            <th class="py-3.5 px-4">Dates &amp; Details</th>
+            <th class="py-3.5 px-4">Status</th>
+            <th class="py-3.5 px-4 sm:px-6 text-right">Actions</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-stone/20 text-ink">
+        <tbody class="divide-y divide-stone/20 text-xs text-body">
+          
           <?php if (empty($enquiries)): ?>
             <tr>
               <td colspan="6" class="py-12 text-center text-muted">
-                <p class="font-serif text-base text-ink mb-1">No Enquiries Found</p>
-                <p class="text-xs">No guest bookings match the selected filters or search keywords.</p>
+                <div class="max-w-xs mx-auto space-y-2">
+                  <svg class="w-10 h-10 mx-auto text-stone" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                  <p class="font-medium text-ink">No inquiries found matching criteria</p>
+                  <p class="text-[11px] text-muted">Try resetting search filters or check back when new inquiries arrive.</p>
+                </div>
               </td>
             </tr>
           <?php endif; ?>
@@ -132,6 +140,10 @@
                 <?php elseif ($item['type'] === 'stay'): ?>
                   <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-800">
                     Cottage Stay
+                  </span>
+                <?php elseif ($item['type'] === 'taxi'): ?>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-900">
+                    🚕 Taxi &amp; Transfer
                   </span>
                 <?php else: ?>
                   <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold bg-stone/40 text-ink">

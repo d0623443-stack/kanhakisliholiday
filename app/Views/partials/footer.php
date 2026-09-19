@@ -80,6 +80,11 @@
             </a>
           </li>
           <li>
+            <a href="<?= base_url('/#taxi-transfers') ?>" class="group flex items-center text-stone hover:text-warm-white transition-colors">
+              <span class="group-hover:translate-x-1 transition-transform duration-200">Taxi &amp; Airport Transfers</span>
+            </a>
+          </li>
+          <li>
             <a href="<?= base_url('gallery') ?>" class="group flex items-center text-stone hover:text-warm-white transition-colors">
               <span class="group-hover:translate-x-1 transition-transform duration-200">Photo Gallery</span>
             </a>
@@ -105,7 +110,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
-            <span class="leading-relaxed text-stone/90"><?= esc(get_site_setting('location_text', 'Kanha National Park, Kisli / Khatia Gate, Mandla District, Madhya Pradesh, India')) ?></span>
+            <span class="leading-relaxed text-stone/90"><?= esc(get_site_setting('location_text', 'Mukki Gate, Kanha National Park, Madhya Pradesh, India')) ?></span>
           </div>
 
           <!-- Phone & Call -->

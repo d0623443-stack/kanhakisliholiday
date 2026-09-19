@@ -29,6 +29,7 @@ class Enquiries extends AdminBaseController
         $typeLabels = [
             'safari'  => 'Safari Booking',
             'stay'    => 'Cottage Stay',
+            'taxi'    => 'Taxi & Transfers',
             'general' => 'General Enquiry',
         ];
 
@@ -62,6 +63,7 @@ class Enquiries extends AdminBaseController
             'all'     => $db->table('enquiries')->countAllResults(),
             'safari'  => $db->table('enquiries')->where('type', 'safari')->countAllResults(),
             'stay'    => $db->table('enquiries')->where('type', 'stay')->countAllResults(),
+            'taxi'    => $db->table('enquiries')->where('type', 'taxi')->countAllResults(),
             'general' => $db->table('enquiries')->where('type', 'general')->countAllResults(),
         ];
 

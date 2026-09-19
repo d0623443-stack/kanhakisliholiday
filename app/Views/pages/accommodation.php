@@ -156,13 +156,13 @@
         <!-- Title & Introduction -->
         <div class="pt-2">
           <div class="text-xs font-semibold tracking-widest-plus uppercase text-forest-700 mb-2">
-            Kanha National Park &middot; Khatia / Kisli Gate Border
+            Kanha National Park &middot; Mukki Gate
           </div>
           <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-ink leading-tight mb-4">
             Where Nature Remains the Central Guest
           </h2>
           <p class="text-body text-base sm:text-lg leading-relaxed">
-            Our resort cottages are built using earthy stone, warm seasoned wood, and terracotta tiles, blending harmoniously into the surrounding Sal forest. Located just moments from the Khatia and Kisli safari gates, your mornings begin unhurried with birdsong, steaming chai on private verandas, and swift access to your 4x4 Gypsy safari.
+            Our resort cottages are built using earthy stone, warm seasoned wood, and terracotta tiles, blending harmoniously into the surrounding Sal forest. Located just moments from Mukki Gate, your mornings begin unhurried with birdsong, steaming chai on private verandas, and swift access to your 4x4 Gypsy safari.
           </p>
         </div>
 
@@ -271,7 +271,7 @@
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
             <div class="bg-warm-white p-4 rounded-2xl border border-stone/30 text-center shadow-xs">
               <span class="block font-serif text-xl sm:text-2xl font-bold text-forest-900">5 Mins</span>
-              <span class="text-xs text-forest-700/80 font-medium">To Khatia Gate</span>
+              <span class="text-xs text-forest-700/80 font-medium">To Mukki Gate</span>
             </div>
             <div class="bg-warm-white p-4 rounded-2xl border border-stone/30 text-center shadow-xs">
               <span class="block font-serif text-xl sm:text-2xl font-bold text-forest-900">100%</span>
