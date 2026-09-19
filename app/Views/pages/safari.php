@@ -511,15 +511,15 @@ $firstSlide = $safariSlides[0];
 
           <!-- Direct Phone / WhatsApp Wildlife Desk Assistance inside sticky card -->
           <?php 
-            $stickyDeskPhone = get_site_setting('owner_phone') ?: get_site_setting('helpline_phone', '+91 75667 89123'); 
-            $stickyWaPhone   = get_site_setting('whatsapp_number', '+91 94251 00000');
+            $stickyDeskPhone = get_owner_phone() ?: get_helpline_phone(); 
+            $stickyWaPhone   = get_whatsapp_number();
           ?>
           <div class="mt-5 pt-4 border-t border-stone/20 flex items-center justify-between">
             <div class="text-[11px] text-stone">
               <span>Direct Wildlife Desk:</span>
-              <a href="tel:<?= preg_replace('/\s+/', '', $stickyDeskPhone) ?>" class="block font-bold text-[#D4B87C] hover:underline"><?= esc($stickyDeskPhone) ?></a>
+              <a href="tel:<?= get_clean_phone($stickyDeskPhone) ?>" class="block font-bold text-[#D4B87C] hover:underline"><?= esc($stickyDeskPhone) ?></a>
             </div>
-            <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $stickyWaPhone) ?>?text=Hi%20Kisli%20Holiday,%20I%20want%20to%20inquire%20about%20Kanha%20Safari%20booking" 
+            <a href="<?= esc(get_whatsapp_link($stickyWaPhone, 'Hi Kisli Holiday, I want to inquire about Kanha Safari booking')) ?>" 
                target="_blank" 
                rel="noopener" 
                class="px-3 py-1.5 rounded-lg bg-emerald-700/80 hover:bg-emerald-600 text-warm-white text-[11px] font-medium flex items-center gap-1.5 transition">

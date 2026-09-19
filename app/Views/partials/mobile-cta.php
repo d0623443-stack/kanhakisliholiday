@@ -1,8 +1,8 @@
 <?php
-$callPhone = get_site_setting('helpline_phone', '+91 6267801254');
-$waNumber  = get_site_setting('whatsapp_number', '+91 94251 00000');
-$waClean   = preg_replace('/[^0-9]/', '', $waNumber);
-$telClean  = preg_replace('/\s+/', '', $callPhone);
+$callPhone = get_helpline_phone();
+$waNumber  = get_whatsapp_number();
+$waClean   = get_clean_whatsapp($waNumber);
+$telClean  = get_clean_phone($callPhone);
 ?>
 <!-- Fixed Mobile Bottom CTA Bar (Call & WhatsApp) for Higher Conversion -->
 <aside id="mobile-sticky-cta" 
@@ -29,7 +29,7 @@ $telClean  = preg_replace('/\s+/', '', $callPhone);
       </a>
 
       <!-- 2. Direct WhatsApp CTA Button -->
-      <a href="https://wa.me/<?= esc($waClean) ?>?text=Hello%20Kanha%20Kisli%20Holiday,%20I%20am%20interested%20in%20safari%20booking%20and%20resort%20stay" 
+      <a href="<?= esc(get_whatsapp_link($waNumber, 'Hello Kanha Kisli Holiday, I am interested in safari booking and resort stay')) ?>" 
          target="_blank" 
          rel="noopener noreferrer" 
          id="mobile-cta-whatsapp"

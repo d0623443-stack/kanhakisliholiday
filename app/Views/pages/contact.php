@@ -67,7 +67,7 @@
             </div>
             <div>
               <h3 class="font-semibold text-ink text-sm sm:text-base">Location & Gate</h3>
-              <p class="text-body text-sm mt-0.5"><?= esc($content['address'] ?? $settings['location_text'] ?? 'Mukki Gate, Kanha National Park, Madhya Pradesh, India') ?></p>
+              <p class="text-body text-sm mt-0.5"><?= esc(get_resort_address()) ?></p>
             </div>
           </div>
 
@@ -81,14 +81,14 @@
             <div>
               <h3 class="font-semibold text-ink text-sm sm:text-base">Phone &amp; Mobile Contact</h3>
               <p class="text-body text-sm mt-0.5 space-x-1">
-                <?php $primaryPhone = $content['phone_primary'] ?? $settings['helpline_phone'] ?? get_site_setting('helpline_phone'); ?>
-                <a href="tel:<?= preg_replace('/\s+/', '', $primaryPhone) ?>" class="hover:text-forest-700 transition-colors font-medium"><?= esc($primaryPhone) ?></a>
                 <?php 
-                  $secondaryPhone = $content['phone_owner'] ?? $settings['owner_phone'] ?? get_site_setting('owner_phone') ?: ($content['phone_secondary'] ?? '');
-                  if (!empty($secondaryPhone)): 
+                  $primaryPhone   = get_helpline_phone(); 
+                  $secondaryPhone = get_owner_phone('');
                 ?>
+                <a href="tel:<?= get_clean_phone($primaryPhone) ?>" class="hover:text-forest-700 transition-colors font-medium"><?= esc($primaryPhone) ?></a>
+                <?php if (!empty($secondaryPhone)): ?>
                   <span class="text-stone-400">/</span>
-                  <a href="tel:<?= preg_replace('/\s+/', '', $secondaryPhone) ?>" class="hover:text-forest-700 transition-colors font-medium"><?= esc($secondaryPhone) ?></a>
+                  <a href="tel:<?= get_clean_phone($secondaryPhone) ?>" class="hover:text-forest-700 transition-colors font-medium"><?= esc($secondaryPhone) ?></a>
                 <?php endif; ?>
               </p>
               <span class="text-xs text-muted"><?= esc($content['hours'] ?? 'Daily: 08:00 AM – 08:00 PM IST') ?></span>
@@ -112,7 +112,7 @@
 
         <!-- Quick Direct Actions (Call Now & WhatsApp Chat) -->
         <div class="flex flex-wrap gap-3 pt-2">
-          <a href="tel:<?= preg_replace('/\s+/', '', $primaryPhone) ?>" 
+          <a href="tel:<?= get_clean_phone($primaryPhone) ?>" 
              class="inline-flex items-center px-6 py-3 rounded-full bg-forest-900 hover:bg-forest-800 text-warm-white text-sm font-semibold transition-all duration-200 shadow-sm group">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -120,8 +120,8 @@
             <span>Call Our Desk</span>
           </a>
 
-          <?php $contactWa = $content['whatsapp'] ?? $settings['whatsapp_number'] ?? get_site_setting('whatsapp_number'); ?>
-          <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $contactWa) ?>" 
+          <?php $contactWa = get_whatsapp_number(); ?>
+          <a href="<?= esc(get_whatsapp_link($contactWa, 'Hello Kanha Kisli Holiday, I would like to contact your safari desk.')) ?>" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="inline-flex items-center px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1EBE5B] text-white text-sm font-semibold transition-all duration-200 shadow-sm group">

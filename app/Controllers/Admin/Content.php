@@ -310,12 +310,17 @@ class Content extends AdminBaseController
                             $trimmedVal
                         );
 
-                        // If owner phone was updated in content editor, sync to global site settings
-                        if ($contentKey === 'phone_owner' || $contentKey === 'phone_secondary') {
-                            $settingModel = new \App\Models\SettingModel();
+                        // Sync contact details from content editor to global site settings
+                        $settingModel = new \App\Models\SettingModel();
+                        if ($contentKey === 'phone_primary') {
+                            $settingModel->setSetting('helpline_phone', $trimmedVal);
+                        } elseif ($contentKey === 'phone_owner' || $contentKey === 'phone_secondary') {
                             $settingModel->setSetting('owner_phone', $trimmedVal);
+                        } elseif ($contentKey === 'whatsapp') {
+                            $settingModel->setSetting('whatsapp_number', $trimmedVal);
+                        } elseif ($contentKey === 'address') {
+                            $settingModel->setSetting('location_text', $trimmedVal);
                         } elseif ($contentKey === 'google_maps_embed') {
-                            $settingModel = new \App\Models\SettingModel();
                             $settingModel->setSetting('google_maps_embed', $trimmedVal);
                         }
                     }

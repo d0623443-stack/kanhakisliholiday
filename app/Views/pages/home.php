@@ -63,9 +63,18 @@ $resolveImg = function(?string $path, string $fallback): string {
       <!-- Hero Action Buttons with WhatsApp & Call -->
       <div class="space-y-4 pt-2">
         <div class="flex flex-wrap items-center gap-3">
+          <?php
+            $heroWaLink = (!empty($slides[0]['btn1_link']) && strpos($slides[0]['btn1_link'], 'wa.me') !== false)
+              ? get_whatsapp_link(null, 'Hi Kanha Kisli Holiday, I would like to inquire about stay and safari booking')
+              : ($slides[0]['btn1_link'] ?? get_whatsapp_link(null, 'Hi Kanha Kisli Holiday, I would like to inquire about stay and safari booking'));
+            $heroCallLink = (!empty($slides[0]['btn2_link']) && strpos($slides[0]['btn2_link'], 'tel:') !== false)
+              ? 'tel:' . get_clean_phone(get_helpline_phone())
+              : ($slides[0]['btn2_link'] ?? 'tel:' . get_clean_phone(get_helpline_phone()));
+            $heroPhoneDisplay = get_helpline_phone();
+          ?>
           <!-- WhatsApp Button -->
           <a id="hero-btn-wa" 
-             href="<?= esc($slides[0]['btn1_link'] ?? 'https://wa.me/919425100000') ?>" 
+             href="<?= esc($heroWaLink) ?>" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="inline-flex items-center justify-center px-5 py-3 sm:px-6 sm:py-3.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-xs sm:text-base transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group cursor-pointer">
@@ -77,7 +86,7 @@ $resolveImg = function(?string $path, string $fallback): string {
 
           <!-- Call Button -->
           <a id="hero-btn-call" 
-             href="<?= esc($slides[0]['btn2_link'] ?? 'tel:+919425100000') ?>" 
+             href="<?= esc($heroCallLink) ?>" 
              class="inline-flex items-center justify-center px-5 py-3 sm:px-6 sm:py-3.5 rounded-full bg-[#D4B87C] hover:bg-[#c4a668] text-forest-950 font-semibold text-xs sm:text-base transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group cursor-pointer">
             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 text-forest-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -92,7 +101,7 @@ $resolveImg = function(?string $path, string $fallback): string {
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             Direct Assistance:
           </span>
-          <a href="tel:<?= esc($settings['helpline_phone'] ?? '+919425100000') ?>" class="hover:text-warm-white transition-colors underline decoration-stone/40"><?= esc($settings['helpline_phone'] ?? '+91 94251 00000') ?></a>
+          <a href="tel:<?= get_clean_phone($heroPhoneDisplay) ?>" class="hover:text-warm-white transition-colors underline decoration-stone/40"><?= esc($heroPhoneDisplay) ?></a>
           <span class="text-stone/40 hidden sm:inline">&middot;</span>
           <span class="text-[11px] sm:text-xs">Kanha Wildlife Desk</span>
         </div>
@@ -553,7 +562,7 @@ $resolveImg = function(?string $path, string $fallback): string {
               Fast confirmation via phone / WhatsApp
             </span>
 
-            <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['helpline_phone'] ?? '+916267801254') ?>?text=Hi%20Kanha%20Kisli%20Holiday,%20I%20would%20like%20to%20enquire%20about%20a%20taxi%20transfer%20to%20Kanha." 
+            <a href="<?= esc(get_whatsapp_link(null, 'Hi Kanha Kisli Holiday, I would like to enquire about a taxi transfer to Kanha.')) ?>" 
                target="_blank" 
                rel="noopener noreferrer" 
                class="inline-flex items-center gap-1.5 text-forest-900 hover:text-forest-950 font-medium text-xs shrink-0"

@@ -191,7 +191,7 @@
         </div>
 
         <!-- Direct WhatsApp Safari Desk Quick Link -->
-        <a href="https://wa.me/919425100000" 
+        <a href="<?= esc(get_whatsapp_link()) ?>" 
            target="_blank" 
            class="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-[#25D366]/10 text-[#1b803f] border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-colors text-xs font-semibold">
           <span>WhatsApp Desk</span>

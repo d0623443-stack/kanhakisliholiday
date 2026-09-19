@@ -86,12 +86,17 @@ class Settings extends AdminBaseController
                 }
                 $this->settingModel->setSetting($key, $trimmedVal);
 
-                // Keep site_content in sync
-                if ($key === 'owner_phone') {
-                    $contentModel = new \App\Models\ContentModel();
+                // Keep site_content in full sync
+                $contentModel = new \App\Models\ContentModel();
+                if ($key === 'helpline_phone') {
+                    $contentModel->setContent('contact', 'info', 'phone_primary', $trimmedVal);
+                } elseif ($key === 'owner_phone') {
                     $contentModel->setContent('contact', 'info', 'phone_owner', $trimmedVal);
+                } elseif ($key === 'whatsapp_number') {
+                    $contentModel->setContent('contact', 'info', 'whatsapp', $trimmedVal);
+                } elseif ($key === 'location_text') {
+                    $contentModel->setContent('contact', 'info', 'address', $trimmedVal);
                 } elseif ($key === 'google_maps_embed') {
-                    $contentModel = new \App\Models\ContentModel();
                     $contentModel->setContent('contact', 'map', 'google_maps_embed', $trimmedVal);
                 }
             }

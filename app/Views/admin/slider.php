@@ -308,9 +308,9 @@
     document.getElementById('modal-image-status').innerHTML = '<span class="text-forest-800">Current image shown &middot; Click to choose new from computer</span>';
 
     document.getElementById('modal-btn1').value = slide.btn1_text || 'WhatsApp';
-    document.getElementById('modal-btn1-link').value = slide.btn1_link || 'https://wa.me/919425100000';
+    document.getElementById('modal-btn1-link').value = slide.btn1_link || '<?= esc(get_whatsapp_link(null, "Hi Kanha Kisli Holiday, I would like to inquire about stay and safari booking")) ?>';
     document.getElementById('modal-btn2').value = slide.btn2_text || 'Call Now';
-    document.getElementById('modal-btn2-link').value = slide.btn2_link || 'tel:+919425100000';
+    document.getElementById('modal-btn2-link').value = slide.btn2_link || 'tel:<?= esc(get_clean_phone()) ?>';
     document.getElementById('edit-modal-heading').innerText = 'Edit Slide #' + slide.order;
     document.getElementById('edit-slide-modal').classList.remove('hidden');
   }
@@ -329,9 +329,9 @@
     document.getElementById('modal-image-status').innerHTML = '<span class="text-forest-800">Click box to choose photo from computer</span>';
 
     document.getElementById('modal-btn1').value = 'WhatsApp';
-    document.getElementById('modal-btn1-link').value = 'https://wa.me/919425100000';
+    document.getElementById('modal-btn1-link').value = '<?= esc(get_whatsapp_link(null, "Hi Kanha Kisli Holiday, I would like to inquire about stay and safari booking")) ?>';
     document.getElementById('modal-btn2').value = 'Call Now';
-    document.getElementById('modal-btn2-link').value = 'tel:+919425100000';
+    document.getElementById('modal-btn2-link').value = 'tel:<?= esc(get_clean_phone()) ?>';
     document.getElementById('edit-modal-heading').innerText = 'Add New Hero Slide';
     document.getElementById('edit-slide-modal').classList.remove('hidden');
   }

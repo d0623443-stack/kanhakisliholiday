@@ -243,4 +243,113 @@ if (! function_exists('is_admin_link_enabled')) {
     }
 }
 
+if (! function_exists('get_helpline_phone')) {
+    /**
+     * Get dynamic primary mobile / helpline phone number
+     */
+    function get_helpline_phone(?string $default = null): string
+    {
+        $val = trim(get_site_setting('helpline_phone', ''));
+        if ($val === '') {
+            $val = trim(get_site_setting('phone_primary', ''));
+        }
+        if ($val === '') {
+            $val = $default ?? '+91 6267801254';
+        }
+        return $val;
+    }
+}
+
+if (! function_exists('get_owner_phone')) {
+    /**
+     * Get dynamic secondary mobile / owner phone number
+     */
+    function get_owner_phone(?string $default = null): string
+    {
+        $val = trim(get_site_setting('owner_phone', ''));
+        if ($val === '') {
+            $val = trim(get_site_setting('phone_owner', ''));
+        }
+        if ($val === '') {
+            $val = trim(get_site_setting('phone_secondary', ''));
+        }
+        if ($val === '') {
+            $val = $default ?? '+91 7999214395';
+        }
+        return $val;
+    }
+}
+
+if (! function_exists('get_whatsapp_number')) {
+    /**
+     * Get dynamic WhatsApp desk number
+     */
+    function get_whatsapp_number(?string $default = null): string
+    {
+        $val = trim(get_site_setting('whatsapp_number', ''));
+        if ($val === '') {
+            $val = trim(get_site_setting('whatsapp', ''));
+        }
+        if ($val === '') {
+            $val = $default ?? '+91 94251 00000';
+        }
+        return $val;
+    }
+}
+
+if (! function_exists('get_resort_address')) {
+    /**
+     * Get dynamic resort address / location text
+     */
+    function get_resort_address(?string $default = null): string
+    {
+        $val = trim(get_site_setting('location_text', ''));
+        if ($val === '') {
+            $val = trim(get_site_setting('address', ''));
+        }
+        if ($val === '') {
+            $val = $default ?? 'Mukki Gate, Kanha National Park, Madhya Pradesh, India';
+        }
+        return $val;
+    }
+}
+
+if (! function_exists('get_clean_phone')) {
+    /**
+     * Format a phone number for tel: link (strips spaces, dashes, brackets)
+     */
+    function get_clean_phone(?string $phone = null): string
+    {
+        $num = $phone !== null ? $phone : get_helpline_phone();
+        return preg_replace('/[^\+0-9]/', '', $num);
+    }
+}
+
+if (! function_exists('get_clean_whatsapp')) {
+    /**
+     * Format a number for WhatsApp wa.me link (digits only)
+     */
+    function get_clean_whatsapp(?string $phone = null): string
+    {
+        $num = $phone !== null ? $phone : get_whatsapp_number();
+        return preg_replace('/[^0-9]/', '', $num);
+    }
+}
+
+if (! function_exists('get_whatsapp_link')) {
+    /**
+     * Build dynamic WhatsApp chat URL with optional prefilled message
+     */
+    function get_whatsapp_link(?string $number = null, string $message = ''): string
+    {
+        $clean = get_clean_whatsapp($number);
+        $url = "https://wa.me/{$clean}";
+        if ($message !== '') {
+            $url .= '?text=' . rawurlencode($message);
+        }
+        return $url;
+    }
+}
+
+
 

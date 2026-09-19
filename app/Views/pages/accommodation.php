@@ -508,15 +508,15 @@
 
           <!-- Direct Phone / WhatsApp Wildlife Desk Assistance inside sticky card -->
           <?php 
-            $stayDeskPhone = get_site_setting('owner_phone') ?: get_site_setting('helpline_phone', '+91 94251 00000'); 
-            $stayWaPhone   = get_site_setting('whatsapp_number', '+91 94251 00000');
+            $stayDeskPhone = get_owner_phone() ?: get_helpline_phone(); 
+            $stayWaPhone   = get_whatsapp_number();
           ?>
           <div class="mt-5 pt-4 border-t border-stone/20 flex items-center justify-between">
             <div class="text-[11px] text-stone">
               <span>Direct Reservation Desk:</span>
-              <a href="tel:<?= preg_replace('/\s+/', '', $stayDeskPhone) ?>" class="block font-bold text-[#D4B87C] hover:underline"><?= esc($stayDeskPhone) ?></a>
+              <a href="tel:<?= get_clean_phone($stayDeskPhone) ?>" class="block font-bold text-[#D4B87C] hover:underline"><?= esc($stayDeskPhone) ?></a>
             </div>
-            <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $stayWaPhone) ?>?text=Hi%20Kanha%20Kisli%20Holiday,%20I%20want%20to%20inquire%20about%20cottage%20stay%20booking" 
+            <a href="<?= esc(get_whatsapp_link($stayWaPhone, 'Hi Kanha Kisli Holiday, I want to inquire about cottage stay booking')) ?>" 
                target="_blank" 
                rel="noopener" 
                class="px-3 py-1.5 rounded-lg bg-emerald-700/80 hover:bg-emerald-600 text-warm-white text-[11px] font-medium flex items-center gap-1.5 transition">

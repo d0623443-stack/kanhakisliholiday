@@ -1,9 +1,9 @@
 <?php
 $isTransparent = !empty($isTransparentHeader);
-$helplinePhone = get_site_setting('helpline_phone', '+91 94251 00000');
-$ownerPhone    = get_site_setting('owner_phone', '');
+$helplinePhone = get_helpline_phone();
+$ownerPhone    = get_owner_phone('');
 $topEmail      = get_site_setting('notification_mail', 'bookings@kanhakisliholiday.in');
-$topWa         = get_site_setting('whatsapp_number', '+91 94251 00000');
+$topWa         = get_whatsapp_number();
 ?>
 <header id="site-header" 
         class="header-wrapper fixed top-0 left-0 right-0 z-40 w-full pt-2 pb-2 md:pt-2.5 md:pb-4 <?= $isTransparent ? 'bg-transparent text-warm-white' : 'bg-forest-950/90 text-warm-white backdrop-blur-md' ?>"
@@ -119,7 +119,7 @@ $topWa         = get_site_setting('whatsapp_number', '+91 94251 00000');
         <!-- WhatsApp Chat Desk -->
         <?php if (!empty($topWa)): ?>
           <span class="text-white/25 hidden md:inline">&vert;</span>
-          <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $topWa) ?>?text=Hello%20Kanha%20Kisli%20Holiday,%20I%20am%20interested%20in%20safari%20booking" 
+          <a href="<?= esc(get_whatsapp_link($topWa, 'Hello Kanha Kisli Holiday, I am interested in safari booking')) ?>" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="hidden md:inline-flex items-center gap-1.5 text-warm-white hover:text-[#25D366] transition-colors font-medium"
