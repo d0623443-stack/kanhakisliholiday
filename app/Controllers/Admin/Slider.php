@@ -69,11 +69,11 @@ class Slider extends AdminBaseController
             'subtitle_italic' => trim((string)$this->request->getPost('subtitle_italic')),
             'description'     => trim((string)$this->request->getPost('description')),
             'image'           => $imagePath,
-            'btn1_text'       => trim((string)($this->request->getPost('btn1_text') ?? 'WhatsApp')),
-            'btn1_link'       => trim((string)($this->request->getPost('btn1_link') ?? 'https://wa.me/919425100000')),
+            'btn1_text'       => trim((string)($this->request->getPost('btn1_text') ?? 'WhatsApp: 919425100000')),
+            'btn1_link'       => trim((string)($this->request->getPost('btn1_link') ?? 'https://wa.me/919425100000?text=Hi%20Kanha%20Kisli%20Holiday,%20I%20would%20like%20to%20inquire%20about%20stay%20and%20safari%20booking')),
             'btn2_text'       => trim((string)($this->request->getPost('btn2_text') ?? 'Call Now')),
-            'btn2_link'       => trim((string)($this->request->getPost('btn2_link') ?? 'tel:+919425100000')),
-            'phone_text'      => trim((string)($this->request->getPost('phone_text') ?? '+91 94251 00000')),
+            'btn2_link'       => trim((string)($this->request->getPost('btn2_link') ?? 'tel:+916267801254')),
+            'phone_text'      => trim((string)($this->request->getPost('phone_text') ?? '+91 6267801254')),
         ];
 
         if (empty($id)) {

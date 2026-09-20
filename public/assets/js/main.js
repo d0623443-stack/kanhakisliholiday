@@ -137,14 +137,18 @@ function initHeroSlider() {
       const subtitleEl = document.getElementById('hero-subtitle');
       const descEl = document.getElementById('hero-desc');
       const btnWaEl = document.getElementById('hero-btn-wa');
+      const btnWaTextEl = document.getElementById('hero-btn-wa-text') || (btnWaEl ? btnWaEl.querySelector('span') : null);
       const btnCallEl = document.getElementById('hero-btn-call');
+      const btnCallTextEl = btnCallEl ? btnCallEl.querySelector('span') : null;
 
       if (eyebrowEl && activeSlide.dataset.eyebrow) eyebrowEl.textContent = activeSlide.dataset.eyebrow;
       if (titleEl && activeSlide.dataset.title) titleEl.textContent = activeSlide.dataset.title;
       if (subtitleEl && activeSlide.dataset.subtitle) subtitleEl.textContent = activeSlide.dataset.subtitle;
       if (descEl && activeSlide.dataset.description) descEl.textContent = activeSlide.dataset.description;
       if (btnWaEl && activeSlide.dataset.btn1Link) btnWaEl.href = activeSlide.dataset.btn1Link;
+      if (btnWaTextEl && activeSlide.dataset.btn1Text) btnWaTextEl.textContent = activeSlide.dataset.btn1Text;
       if (btnCallEl && activeSlide.dataset.btn2Link) btnCallEl.href = activeSlide.dataset.btn2Link;
+      if (btnCallTextEl && activeSlide.dataset.btn2Text) btnCallTextEl.textContent = activeSlide.dataset.btn2Text;
     }
   };
 
