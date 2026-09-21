@@ -320,6 +320,8 @@ class Content extends AdminBaseController
                             $settingModel->setSetting('whatsapp_number', $trimmedVal);
                         } elseif ($contentKey === 'address') {
                             $settingModel->setSetting('location_text', $trimmedVal);
+                        } elseif ($contentKey === 'email') {
+                            $settingModel->setSetting('notification_mail', $trimmedVal);
                         } elseif ($contentKey === 'google_maps_embed') {
                             $settingModel->setSetting('google_maps_embed', $trimmedVal);
                         }

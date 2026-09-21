@@ -96,6 +96,8 @@ class Settings extends AdminBaseController
                     $contentModel->setContent('contact', 'info', 'whatsapp', $trimmedVal);
                 } elseif ($key === 'location_text') {
                     $contentModel->setContent('contact', 'info', 'address', $trimmedVal);
+                } elseif ($key === 'notification_mail') {
+                    $contentModel->setContent('contact', 'info', 'email', $trimmedVal);
                 } elseif ($key === 'google_maps_embed') {
                     $contentModel->setContent('contact', 'map', 'google_maps_embed', $trimmedVal);
                 }

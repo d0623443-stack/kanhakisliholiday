@@ -314,6 +314,23 @@ if (! function_exists('get_resort_address')) {
     }
 }
 
+if (! function_exists('get_site_email')) {
+    /**
+     * Get dynamic booking / notification contact email
+     */
+    function get_site_email(?string $default = null): string
+    {
+        $val = trim(get_site_setting('notification_mail', ''));
+        if ($val === '') {
+            $val = trim(get_site_setting('email', ''));
+        }
+        if ($val === '') {
+            $val = $default ?? 'bookings@kanhakisliholiday.in';
+        }
+        return $val;
+    }
+}
+
 if (! function_exists('get_clean_phone')) {
     /**
      * Format a phone number for tel: link (strips spaces, dashes, brackets)

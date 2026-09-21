@@ -2,7 +2,7 @@
 $isTransparent = !empty($isTransparentHeader);
 $helplinePhone = get_helpline_phone();
 $ownerPhone    = get_owner_phone('');
-$topEmail      = get_site_setting('notification_mail', 'bookings@kanhakisliholiday.in');
+$topEmail      = get_site_email();
 $topWa         = get_whatsapp_number();
 ?>
 <header id="site-header" 
